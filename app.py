@@ -12,7 +12,7 @@ def hello():
 
 @app.route("/Kenobi")
 def kenobi():
-    return "General Kenobi"
+    return render_template("bold_one.html")
 
 if __name__ == '__main__':
     import os
