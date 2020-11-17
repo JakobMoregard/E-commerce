@@ -3,7 +3,15 @@ This script runs the application using a development server.
 It contains the definition of routes and views for the application.
 """
 
-from flask import Flask, render_template
+from flask import Flask, request,render_template
+import psycopg2
+try: 
+    conn = psycopg2.connect(database="D0018E", user="bersim-8",  
+    password="Norrviken123", host="localhost")
+    print("connected")
+except:
+    print ("I am unable to connect to the database")
+mycursor = conn.cursor()
 app = Flask(__name__)
 
 @app.route("/")
