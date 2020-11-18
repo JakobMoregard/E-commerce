@@ -1,5 +1,5 @@
 from flask import Flask, request,render_template
-import pymysql.cursors
+import pymysql.cursor
 
 def execute(sql, isSelect = True):
     conn = pymysql.connect(host='127.0.0.1',
