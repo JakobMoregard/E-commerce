@@ -46,6 +46,13 @@ def data():
     print(data)
     return render_template("table.html", data = data)
 
+@app.route("/readTable")
+def readTable():
+    sql = "SELECT CID, CFName FROM D0018E.Customer WHERE CID = '11223344';"
+    table = execute(sql)
+    print(table)
+    return render_template("readTable.html", table = table)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
