@@ -17,7 +17,7 @@ def query(q):
                                   user="bersim-8",
                                   host="localhost",
                                   port=server.local_bind_port, 
-                                  password="Norrviken123")
+                                  password=" *210490214DCFD2AB2F8FD675AFBDE761AF56E941")
           return "yup"
 test = query('select * from test')
 app = Flask(__name__)
