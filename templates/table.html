@@ -13,20 +13,24 @@
             padding: 5px;
         }
     </style>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for id, salary in data.iteritems() %}
-            <tr>
-                <td>{{ id, salary}}</td>
-            </tr>
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
+
+            <th> ID </th>
+            <th> Salary </th>
+
+        </tr>
+
+        <!-- table rows -->
+        {% for dict_item in data %}
+        <tr>
+            {% for  in dict_item.values() %}
+            <td> {{ id }} </td>
+            <td> {{ salary }} </td>
             {% endfor %}
-        </tbody>
+        </tr>
+        {% endfor %}
     </table>
 </body>
 </html>
