@@ -15,7 +15,7 @@ def execute(sql, isSelect = True):
             if isSelect:
                 cursor.execute(sql)
                 result = cursor.fetchall()
-                print(f"result = {result}")
+                #print(f"result = {result}")
             else:
                 cursor.execute(sql)
                 result = conn.insert_id()
@@ -38,7 +38,7 @@ def kenobi():
 def data():
     sql = "Select * from D0018E.test"
     data = execute(sql)
-    return data
+    return str(data)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
