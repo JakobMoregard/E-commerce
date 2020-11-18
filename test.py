@@ -2,7 +2,7 @@ from flask import Flask, request,render_template
 import psycopg2
 try: 
     conn = psycopg2.connect(database="D0018E", user="bersim-8",  
-    password="Norrviken123", host="localhost")
+    password="Norrviken123", host="127.0.0.1", port = "3306")
     print("connected")
 except:
     print ("I am unable to connect to the database")
