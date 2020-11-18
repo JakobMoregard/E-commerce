@@ -1,8 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\webb-handelenv"
+    "\\env\\Lib",
+    "\\templates",
+    "\\webb-handelenv",
+    "\\webb-handelenv\\lib\\python3.6"
   ],
-  "SelectedNode": "\\test.py",
+  "SelectedNode": "\\app.py",
   "PreviewInSolutionExplorer": false
 }
