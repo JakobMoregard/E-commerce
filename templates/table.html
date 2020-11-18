@@ -16,16 +16,14 @@
     <table>
         <thead>
             <tr>
-                <th>vehicle ID</th>
-                <th>current timestamp</th>
+                <th>ID</th>
+                <th>Salary</th>
             </tr>
         </thead>
         <tbody>
-            {% for row in data %}
+            {% for id, salary in result.iteritems() %}
             <tr>
-                <td>{{row[0]['id']}}</td>
-                <td>{{row[1]['id']}}</td>
-                <td>{{row[2]['id']}}</td>
+                <td>{{ id, salary}}</td>
             </tr>
             {% endfor %}
         </tbody>
