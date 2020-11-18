@@ -48,8 +48,8 @@ def data():
 
 @app.route("/readTable")
 def readTable():
-    sql = "SELECT CID, CFName FROM D0018E.Customer WHERE CID = '11223344';"
-    table = execute(sql)
+    sql1 = "SELECT CID, CFName FROM D0018E.Customer WHERE CID = '11223344';"
+    table = execute(sql1)
     print(table)
     return render_template("readTable.html", table = table)
 
