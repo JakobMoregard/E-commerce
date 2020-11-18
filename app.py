@@ -4,22 +4,31 @@ It contains the definition of routes and views for the application.
 """
 
 from flask import Flask, request,render_template
-import psycopg2
-from sshtunnel import SSHTunnelForwarder
-def query(q):
-     with SSHTunnelForwarder(
-          ("130.240.200.30", 22),
-          ssh_username="bersim-8",
-          ssh_private_key ='C:/users/Simon/id_rsa',
-          remote_bind_address=("127.0.0.1", 3306)
-     ) as server:
-          conn = psycopg2.connect(database="D0018E", 
-                                  user="bersim-8",
-                                  host="localhost",
-                                  port=server.local_bind_port, 
-                                  password=" *210490214DCFD2AB2F8FD675AFBDE761AF56E941")
-          return "yup"
-test = query('select * from test')
+import pymysql.cursors
+
+def execute(sql, isSelect = True):
+    conn = pymysql.connect(host='127.0.0.1',
+                           port=3306,
+                           user='bersim-8',
+                           password='SecretPassword',
+                           db ='D0018E',
+                           charset='utf8mb4',
+                           cursorclass=pymysql.cursors.DictCursor)
+    result = None
+    try:
+        with conn.cursor() as cursor:
+            if isSelect:
+                cursor.execute(sql)
+                result = cursor.fetchall()
+                #print(f"result = {result}")
+            else:
+                cursor.execute(sql)
+                result = conn.insert_id()
+                conn.commit()
+    finally:
+        conn.close()
+    return result
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -30,11 +39,13 @@ def hello():
 def kenobi():
     return render_template("bold_one.html")
 
-if __name__ == '__main__':
-    import os
-    HOST = os.environ.get('SERVER_HOST', 'localhost')
-    try:
-        PORT = int(os.environ.get('SERVER_PORT', '5555'))
-    except ValueError:
-        PORT = 5555
-    app.run(HOST, PORT)
+@app.route("/data")
+def data():
+    sql = "Select * from D0018E.test"
+    data = execute(sql)
+    print(data)
+    return render_template("table.html", data = data)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
