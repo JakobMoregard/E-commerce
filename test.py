@@ -5,7 +5,7 @@ def execute(sql, isSelect = True):
     conn = pymysql.connect(host='127.0.0.1',
                            port=3306,
                            user='bersim-8',
-                           password='*210490214DCFD2AB2F8FD675AFBDE761AF56E941',
+                           password='Norrviken123',
                            db ='D0018E',
                            charset='utf8mb4',
                            cursorclass=pymysql.cursors.DictCursor)
@@ -38,6 +38,7 @@ def kenobi():
 def data():
     sql = "Select * from D0018E.test"
     data = execute(sql)
+    print(data)
     return str(data)
 
 if __name__ == "__main__":
