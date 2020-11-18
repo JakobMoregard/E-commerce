@@ -18,15 +18,14 @@
             <tr>
                 <th>vehicle ID</th>
                 <th>current timestamp</th>
-                <th>expiry timestamp</th>
             </tr>
         </thead>
         <tbody>
             {% for row in data %}
             <tr>
-                <td>{{row[0]}}</td>
-                <td>{{row[1]}}</td>
-                <td>{{row[2]}}</td>
+                <td>{{row[0][id]}}</td>
+                <td>{{row[1][id]}}</td>
+                <td>{{row[2][id]}}</td>
             </tr>
             {% endfor %}
         </tbody>
