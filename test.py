@@ -34,6 +34,11 @@ def hello():
 def kenobi():
     return render_template("bold_one.html")
 
+@app.route("/data")
+def data():
+    sql = "Select * from D0018E.test"
+    data = execute(sql)
+    return data
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
