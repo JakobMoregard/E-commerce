@@ -25,9 +25,9 @@
         <!-- table rows -->
         {% for dict_item in data %}
         <tr>
-            {% for id,salary in dict_item.values() %}
-            <td> {{ id }} </td>
-            <td> {{ salary }} </td>
+            {% for ID, Salary in dict_item.values() %}
+            <td> {{ ID }} </td>
+            <td> {{ Salary }} </td>
             {% endfor %}
         </tr>
         {% endfor %}
