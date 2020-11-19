@@ -58,7 +58,7 @@ def readTable():
 
 @app.route("/admin")
 def admin():
-    sql = "SELECT * FROM D0018E.Administrator;"
+    sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
     adminTable = execute(sql)
     print(adminTable)
     return render_template("Admin.html", adminTable = adminTable)
