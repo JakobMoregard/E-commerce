@@ -6,28 +6,28 @@
     <title>test</title>
 </head>
 <body>
-    <h1 style='color:red'>Hello There!</h1>
+    <!-- <h1 style='color:red'>Hello There!</h1>
     <img src="https://i.kym-cdn.com/photos/images/facebook/001/475/422/473.jpg" alt="Trulli" width="500" height="333">
     <a href="/Kenobi"> click pls </a>
-    <a href="/readTable"> read table </a><br>
+    <a href="/readTable"> read table </a><br> -->
 
     <table style="width:100%">
         <!-- table header -->
-        <tr>
+    <tr>
 
-            <th> Name </th>
-            <th> Price </th>
+        <th> Name </th>
+        <th> Price </th>
 
-        </tr>
+    </tr>
 
-        <!-- table rows -->
-        {% for dict_item in data %}
-        <tr>
-            {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
-            {% endfor %}
-        </tr>
+    <!-- table rows -->
+    {% for dict_item in data %}
+    <tr>
+        {% for item in dict_item.items() %}
+        <td> {{ item[1] }} </td>
         {% endfor %}
+    </tr>
+    {% endfor %}
     </table>
 </body>
 </html>
