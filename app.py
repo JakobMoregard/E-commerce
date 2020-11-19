@@ -33,7 +33,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return render_template("test.html")
+    sql = "Select * from D0018E.Product"
+    data = execute(sql)
+    print(data)
+    return render_template("test.html", data = data)
 
 @app.route("/Kenobi")
 def kenobi():

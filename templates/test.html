@@ -10,5 +10,26 @@
     <img src="https://i.kym-cdn.com/photos/images/facebook/001/475/422/473.jpg" alt="Trulli" width="500" height="333">
     <a href="/Kenobi"> click pls </a>
     <a href="/readTable"> read table </a>
+
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
+
+            <th> ID </th>
+            <th> Salary </th>
+
+        </tr>
+
+        <!-- table rows -->
+        {% for dict_item in data %}
+        <tr>
+            {% for ID in dict_item.items() %}
+            <td> {{ ID[1] }} </td>
+            <td> {{ ID[2] }} </td>
+
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
