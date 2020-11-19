@@ -56,6 +56,13 @@ def readTable():
     print(table)
     return render_template("readTable.html", table = table)
 
+@app.route("/admin")
+def admin():
+    sql = "SELECT * FROM D0018E.Administrator;"
+    adminTable = execute(sql)
+    print(adminTable)
+    return render_template("Admin.html", adminTable = adminTable)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
