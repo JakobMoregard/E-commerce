@@ -42,7 +42,7 @@ def my_form_post():
 
     req = request.form
     print(req)
-    if Insert in req:
+    if 'Insert' in req:
         insert = request.form['Insert']
         print(insert)
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
@@ -50,7 +50,7 @@ def my_form_post():
         insert = execute(sql, False)
         print(insert)
     
-    elif Update in req:
+    elif 'Update' in req:
         update = request.form['Update']
         print(update)
         print("x")
