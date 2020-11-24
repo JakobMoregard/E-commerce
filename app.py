@@ -41,9 +41,9 @@ def hello():
 def my_form_post():
     print(request.form)
     insert = request.form['Insert']
-    print("2")
+    print(insert)
     update = request.form['Update']
-    print("3")
+    print(update)
     if text != "":
         print(text)
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
