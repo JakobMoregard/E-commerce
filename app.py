@@ -39,7 +39,7 @@ def hello():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    print("1")
+    print(request.form)
     insert = request.form['Insert']
     print("2")
     update = request.form['Update']
