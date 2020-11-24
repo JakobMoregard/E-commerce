@@ -41,24 +41,18 @@ def hello():
 def my_form_post():
 
     req = request.form
-    print(req)
     if 'Insert' in req:
+
         insert = request.form['Insert']
-        print(insert)
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
-        print(sql)
         res = execute(sql, False)
-        print(insert)
     
     elif 'Update' in req:
+        
         update = request.form['Update']
-        print(update)
         update = tuple(update.split(", "))
-        print("0 = ", update[0],"1 = ", update[1], "2 = ", update[2])
         sql = ("UPDATE D0018E.Product SET PPrice = " + update[1] + " WHERE PID = " + update[0]) 
-        print(sql)
         res = execute(sql, False)
-        print("x")
         
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
