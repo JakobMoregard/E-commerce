@@ -40,14 +40,18 @@ def hello():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    text = request.form['text']
-    if text == "":
-        print("hell nah")
-    print(text)
-    sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(text))
-    print(sql)
-    insert = execute(sql, False)
-    print(insert)
+    insert = request.form['insert']
+    update = request.form['update']
+    if text != "":
+        print(text)
+        sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
+        print(sql)
+        insert = execute(sql, False)
+        print(insert)
+    
+    elif update != "":
+        print("x")
+        
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
     return render_template("test.html", data = data)
