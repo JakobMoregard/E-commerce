@@ -22,7 +22,7 @@ def execute(sql, isSelect = True):
                 result = cursor.fetchall()
                 #print(f"result = {result}")
             else:
-                cursor.execute(sql, t)
+                cursor.execute(sql)
                 result = conn.insert_id()
                 conn.commit()
     finally:
