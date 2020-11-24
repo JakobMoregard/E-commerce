@@ -42,7 +42,11 @@ def hello():
 def my_form_post():
     text = request.form['text']
     processed_text = text.upper()
-    return processed_text
+    sql = ("INSERT INTO D0018E.Product (PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES", text)
+    execute(sql, false)
+    sql = "Select PName, PPrice from D0018E.Product"
+    data = execute(sql)
+    return render_template("test.html", data = data)
 
 @app.route("/Kenobi")
 def kenobi():
