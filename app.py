@@ -55,7 +55,7 @@ def my_form_post():
         print(update)
         update = tuple(update.split(", "))
         print("0 = ", update[0],"1 = ", update[1], "2 = ", update[2])
-        sql = ("UPDATE D0018E.Product SET PPrice = {1}, PStock= {2} WHERE PID = {0}".format(update)) 
+        sql = ("UPDATE D0018E.Product SET PPrice = {1} WHERE PID = {0}".format(update)) 
         res = execute(sql, False)
         print("x")
         
