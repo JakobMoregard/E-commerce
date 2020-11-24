@@ -6,7 +6,7 @@ It contains the definition of routes and views for the application.
 from flask import Flask, request,render_template
 import pymysql.cursors
 
-def execute(sql, isSelect = True):
+def execute(sql, isSelect = True, t = None):
     conn = pymysql.connect(host='127.0.0.1',
                            port=3306,
                            user='bersim-8',
@@ -22,7 +22,7 @@ def execute(sql, isSelect = True):
                 result = cursor.fetchall()
                 #print(f"result = {result}")
             else:
-                cursor.execute(sql)
+                cursor.execute(sql, t)
                 result = conn.insert_id()
                 conn.commit()
     finally:
@@ -43,8 +43,8 @@ def my_form_post():
     text = request.form['text']
     print(text)
     processed_text = text.upper()
-    sql = ("INSERT INTO D0018E.Product (PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES", text)
-    insert = execute(sql, False)
+    sql = ("INSERT INTO D0018E.Product (PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES")
+    insert = execute(sql, False, text)
     print(insert)
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
