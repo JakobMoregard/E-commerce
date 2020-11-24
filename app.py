@@ -35,13 +35,15 @@ app = Flask(__name__)
 def hello():
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
-    print(data)
     return render_template("test.html", data = data)
 
 @app.route('/', methods=['POST'])
 def my_form_post():
+    print("1")
     insert = request.form['Insert']
+    print("2")
     update = request.form['Update']
+    print("3")
     if text != "":
         print(text)
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
