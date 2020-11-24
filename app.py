@@ -41,7 +41,7 @@ def hello():
 def my_form_post():
 
     req = request.form
-
+    print(req)
     if Insert in req:
         insert = request.form['Insert']
         print(insert)
@@ -50,7 +50,7 @@ def my_form_post():
         insert = execute(sql, False)
         print(insert)
     
-    elif update in req:
+    elif Update in req:
         update = request.form['Update']
         print(update)
         print("x")
