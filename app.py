@@ -40,9 +40,9 @@ def hello():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    text = (request.form['text'])
+    text = ( request.form['text'] )
     print(text)
-    sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES {}".format(text))
+    sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(text))
     print(sql)
     insert = execute(sql, False)
     print(insert)
