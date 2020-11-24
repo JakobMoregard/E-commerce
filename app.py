@@ -44,7 +44,7 @@ def my_form_post():
     #processed_text = text.upper()
     text = (4, 'EPA4', 5555, 7, "SAAB", "EngammalEPA", 4)
     print(text)
-    sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES (%d, %s, %d, %d, %s, %s, %d)" % text)
+    sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(text))
     print(sql)
     insert = execute(sql, False)
     print(insert)
