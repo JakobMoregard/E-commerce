@@ -46,7 +46,7 @@ def my_form_post():
     print(text)
     print(type(text))
     sql = ("INSERT INTO D0018E.Product (PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES (%s, %s, %s, %s, %s, %s, %s")
-    insert = execute(sql, False, (text))
+    insert = execute(sql, False, text)
     print(insert)
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
