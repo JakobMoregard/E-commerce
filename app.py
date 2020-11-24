@@ -42,7 +42,7 @@ def hello():
 def my_form_post():
     #text = request.form['text']
     #processed_text = text.upper()
-    text = (4, "EPA4", 5555, 7, "SAAB", "En gammal EPA", 4)
+    text = (4, "EPA4", 5555, 7, "SAAB", "EngammalEPA", 4)
     print(text)
     print(type(text))
     sql = ("INSERT INTO `D0018E.Product` (`PID`, `PName`, `PPrice`, `PStock`, `PColor`, `PDescript`, `PRating`) VALUES (%d, %s, %d, %d, %s, %s, %d)" % text)
