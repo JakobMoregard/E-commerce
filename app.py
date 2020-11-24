@@ -53,8 +53,8 @@ def my_form_post():
     elif 'Update' in req:
         update = request.form['Update']
         print(update)
-        print("0= ", update[0],"1= ", update[1], "2= ", update[2])
-        update = update.split(", ") 
+        update = update.split(", ")
+        print("0 = ", update[0],"1 = ", update[1], "2 = ", update[2])
         sql = ("UPDATE D0018E.Product SET PPrice = {1}, PStock= {2} WHERE PID = {0}".format(update)) 
         res = execute(sql, False)
         print("x")
