@@ -44,7 +44,7 @@ def my_form_post():
     print(req)
     if 'Insert' in req:
         insert = request.form['Insert']
-        print(insert)
+        print(type(insert[0]))
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
         print(sql)
         insert = execute(sql, False)
