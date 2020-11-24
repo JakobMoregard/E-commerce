@@ -41,10 +41,10 @@ def hello():
 @app.route('/', methods=['POST'])
 def my_form_post():
     text = request.form['text']
-    print(text)
+    print((text))
     processed_text = text.upper()
     sql = ("INSERT INTO D0018E.Product (PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES")
-    insert = execute(sql, False, [text])
+    insert = execute(sql, False, (text))
     print(insert)
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
