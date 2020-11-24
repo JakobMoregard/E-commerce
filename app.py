@@ -39,19 +39,20 @@ def hello():
 
 @app.route('/', methods=['POST'])
 def my_form_post():
-    print(request.form)
-    insert = request.form['Insert']
-    print(insert)
-    update = request.form['Update']
-    print(update)
-    if text != "":
-        print(text)
+
+    req = request.form
+
+    if Insert in req:
+        insert = request.form['Insert']
+        print(insert)
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
         print(sql)
         insert = execute(sql, False)
         print(insert)
     
-    elif update != "":
+    elif update in req:
+        update = request.form['Update']
+        print(update)
         print("x")
         
     sql = "Select PName, PPrice from D0018E.Product"
