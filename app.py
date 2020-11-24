@@ -38,6 +38,12 @@ def hello():
     print(data)
     return render_template("test.html", data = data)
 
+@app.route('/', methods=['POST'])
+def my_form_post():
+    text = request.form['text']
+    processed_text = text.upper()
+    return processed_text
+
 @app.route("/Kenobi")
 def kenobi():
     return render_template("bold_one.html")
