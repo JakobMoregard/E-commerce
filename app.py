@@ -51,14 +51,17 @@ def parse_product_data(data, keys):
 
 def parse_update_string(data, keys):
 
-    parse_string = []
+    parse_string = "("
 
     print(keys)
 
     for i in range(1, len(keys)):
         print("key = " + keys[i] + " data = " + data[i])
-        parse_string.append(keys[i] + ' = ' + data[i])
-
+        parse_string += keys[i] + " = '" + data[i] + "'")
+        if i > 1:
+            parse_string += ","
+    
+    parse_string += ")"
     print(parse_string)
     return parse_string
 
