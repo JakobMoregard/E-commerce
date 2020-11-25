@@ -101,6 +101,7 @@ def my_form_post():
         print(keys)
         parse_string = parse_update_string(data, keys)
         sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data[0]) 
+        print(sql)
         res = execute(sql, False)
         
     sql = "Select PName, PPrice from D0018E.Product"
