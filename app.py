@@ -42,7 +42,6 @@ def parse_product_data(data, keys):
 
     print("hm")
     new_data = [(keys), (data_content)]
-    print(new_data)
     return new_data
 
 app = Flask(__name__)
@@ -64,6 +63,7 @@ def my_form_post():
         
         data = parse_product_data(req, keys)
         print(data)
+        print(data[0])
         sql = ("INSERT INTO D0018E.Product({0}) VALUES ({1})".format(data))
         print(sql)
         res = execute(sql, False)
