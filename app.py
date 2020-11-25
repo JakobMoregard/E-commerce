@@ -33,7 +33,7 @@ def parse_product_data(data, keys):
 
     data_content = []
 
-    for i in range(1, len(data)-1):
+    for i in range(0, len(data)-1):
         if data[keys[i]] != "":
             data_content.append(data[keys[i]])
         else:
@@ -60,13 +60,11 @@ def my_form_post():
     keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
     
     if 'Insert' in req:
-
-        
-        data = parse_product_data(req, keys)
-        print(data)
-        print(insert)
-        sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
-        res = execute(sql, False)
+        try:
+            data = parse_product_data(req, keys)
+            print(data)
+            sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
+            res = execute(sql, False)
     
     elif 'Update' in req:
         
