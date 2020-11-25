@@ -30,13 +30,6 @@ def execute(sql, isSelect = True):
 
 
 def parse_product_data(data, keys):
-    print("yep")
-    data_content = []
-
-    keys[0] = ["PID"]
-    print(data_fields)
-    data_content.append(data['Insert'])
-    print(data_content)
 
     for i in range(1, len(data)-1):
         if data[keys[i]] != "":
@@ -62,20 +55,21 @@ def my_form_post():
 
     req = request.form
     print(req)
-    test = req.iterlists()
-    print(test)
-    data = parse_product_data(req,keys)
-    print(data)
+    keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
+    
     if 'Insert' in req:
 
-        data = parse_data(req)
+        
+        data = parse_data(req, keys)
+        print(data)
         print(insert)
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
         res = execute(sql, False)
     
     elif 'Update' in req:
         
-        update = request.form['Update']
+        data = parse_data(req, keys)
+        print(data)
         update = tuple(update.split(", "))
         sql = ("UPDATE D0018E.Product SET PPrice = " + update[1] + " WHERE PID = " + update[0]) 
         res = execute(sql, False)
