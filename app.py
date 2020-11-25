@@ -29,25 +29,23 @@ def execute(sql, isSelect = True):
     return result
 
 
-def parse_data(data):
+def parse_product_data(data, keys):
     print("yep")
-    data_fields = [] 
     data_content = []
 
-    data_fields.append("PID")
+    keys[0] = ["PID"]
     print(data_fields)
     data_content.append(data['Insert'])
     print(data_content)
 
     for i in range(1, len(data)-1):
-        if data[i][1] != "":
-            data_fields.append(data[i][0])
-            data_content.append(data[i][1])
+        if data[keys[i]] != "":
+            data_content.append(data[keys[i]])
         else:
             continue
 
     print("hm")
-    new_data = (data_fields, data_content)
+    new_data = (keys, data_content)
     print(new_data)
     return new_data
 
@@ -64,7 +62,9 @@ def my_form_post():
 
     req = request.form
     print(req)
-    data = parse_data(req)
+    test = req.iteritems()
+    print(test)
+    data = parse_product_data(req,keys)
     print(data)
     if 'Insert' in req:
 
