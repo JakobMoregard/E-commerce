@@ -65,7 +65,8 @@ def my_form_post():
             print(data)
             sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
             res = execute(sql, False)
-    
+        except:
+            print("Unexpected error")
     elif 'Update' in req:
         
         data = parse_product_data(req, keys)
