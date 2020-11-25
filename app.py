@@ -51,7 +51,7 @@ def parse_product_data(data, keys):
 
 def parse_update_string(data, keys):
 
-    parse_string = "("
+    parse_string = ""
 
     print(keys)
 
@@ -61,7 +61,6 @@ def parse_update_string(data, keys):
         if i > 1:
             parse_string += ","
     
-    parse_string += ")"
     print(parse_string)
     return parse_string
 
