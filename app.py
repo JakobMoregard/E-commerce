@@ -35,10 +35,11 @@ def parse_product_data(data, keys):
 
     for i in range(1, len(keys)):
         print(data[keys[i]])
-        if data[keys[i]] != "":
+        if data[keys[i]] != '':
             data_content.append(data[keys[i]])
         else:
             keys.remove(keys[i])
+
             continue
 
     #new_data = [tuple(keys), tuple(data_content)]
