@@ -1,5 +1,5 @@
 from flask import Flask, request,render_template
-import pymysql.cursors
+import pymysql.cursor
 
 def execute(sql, isSelect = True):
     conn = pymysql.connect(host='127.0.0.1',
@@ -30,22 +30,16 @@ app = Flask(__name__)
 def hello():
     return render_template("test.html")
 
-@app.route('/', methods=['POST'])
-def my_form_post():
-    text = request.form['text']
-    processed_text = text.upper()
-    return text
-
 @app.route("/Kenobi")
 def kenobi():
     return render_template("bold_one.html")
 
-#@app.route("/data")
-#def data():
-#    sql = "Select * from D0018E.test"
-#    data = execute(sql)
-#    print(data)
-#    return str(data)
+@app.route("/data")
+def data():
+    sql = "Select * from D0018E.test"
+    data = execute(sql)
+    print(data)
+    return str(data)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

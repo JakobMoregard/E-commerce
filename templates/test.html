@@ -9,62 +9,6 @@
     <h1 style='color:red'>Hello There!</h1>
     <img src="https://i.kym-cdn.com/photos/images/facebook/001/475/422/473.jpg" alt="Trulli" width="500" height="333">
     <a href="/Kenobi"> click pls </a>
-    <a href="/readTable"> read table </a><br>
-
-    <p> Add product</p>
-
-    <form method="POST">
-        Id*: <input name="Insert"><br>
-        Name*: <input name="PName"><br>
-        Price*: <input name="PPrice"><br>
-        Stock*: <input name="PStock"><br>
-        Color*: <input name="PColor"><br>
-        Description*: <input name="PDescript"><br>
-        Rating: <input name="PRating">
-        <input type="submit">
-    </form><br>
-    <i> Fields marked with * are mandatory </i><br>
-
-    <p> Update product</p>
-
-    <form method="POST">
-        Id*: <input name="Update"><br>
-        Name: <input name="PName"><br>
-        Price: <input name="PPrice"><br>
-        Stock: <input name="PStock"><br>
-        Color: <input name="PColor"><br>
-        Description: <input name="PDescript"><br>
-        Rating: <input name="PRating">
-        <input type="submit">
-    </form><br>
-    <i> Fields marked with * are mandatory </i><br>
-
-    <style>
-
-        td {
-            width: 150px;
-            text-align: center;
-            border: 1px solid black;
-            padding: 5px;
-        }
-    </style>
-    <table style="width:100%">
-        <!-- table header -->
-        <tr>
-
-            <th> Name </th>
-            <th> Price </th>
-
-        </tr>
-
-        <!-- table rows -->
-        {% for dict_item in data %}
-        <tr>
-            {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+    <a href="/readTable"> read table </a>
 </body>
 </html>
