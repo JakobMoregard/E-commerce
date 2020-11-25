@@ -46,6 +46,21 @@ def parse_product_data(data, keys):
     keys = used_keys
     return data_content
 
+
+def parse_update_string(data, keys):
+
+    parse_string = []
+
+    for i in range(1, len(keys)):
+        if data[keys[i]] != '':
+            string.append(keys[i] + ' = ' + data[keys[i]])
+
+    print(parse_string)
+    return parse_string
+
+
+
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -76,13 +91,13 @@ def my_form_post():
         
         data = parse_product_data(req, keys)
         print(data)
-        sql = ("UPDATE D0018E.Product SET PPrice = " + data[1] + " WHERE PID = " + data[0]) 
+        parse_string = parse_update_string()
+        sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data['PID']) 
         res = execute(sql, False)
         
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
     return render_template("test.html", data = data)
-
 @app.route("/Kenobi")
 def kenobi():
     return render_template("bold_one.html")
