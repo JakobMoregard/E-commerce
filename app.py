@@ -31,7 +31,7 @@ def execute(sql, isSelect = True):
 
 def parse_product_data(data, keys):
 
-    data_content = [data['Insert']]
+    data_content = []
 
     for i in range(1, len(keys)):
         print(data[keys[i]])
@@ -39,7 +39,6 @@ def parse_product_data(data, keys):
             data_content.append(data[keys[i]])
         else:
             keys.remove(keys[i])
-
             continue
 
     #new_data = [tuple(keys), tuple(data_content)]
@@ -60,7 +59,7 @@ def my_form_post():
     print(req)
     keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
     
-    if 'Insert' in req:
+    if req['form_id'] == 1:
         
         data = parse_product_data(req, keys)
         print(data)
@@ -71,7 +70,7 @@ def my_form_post():
         print(sql)
         res = execute(sql, False)
             
-    elif 'Update' in req:
+    elif req['form_id'] == 2:
         
         data = parse_product_data(req, keys)
         print(data)

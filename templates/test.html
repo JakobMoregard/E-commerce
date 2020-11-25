@@ -15,7 +15,8 @@
     <p> Add product</p>
 
     <form method="POST">
-        Id*: <input name="Insert"><br>
+        <input value="1" type="hidden" name="form_id">
+        Id*: <input name="PID"><br>
         Name*: <input name="PName"><br>
         Price*: <input name="PPrice"><br>
         Stock*: <input name="PStock"><br>
@@ -23,13 +24,14 @@
         Description*: <input name="PDescript"><br>
         Rating: <input name="PRating">
         <input type="submit">
-    </form><br>
+    </form>
     <i> Fields marked with * are mandatory </i><br>
 
     <p> Update product</p>
 
     <form method="POST">
-        Id*: <input name="Update"><br>
+        <input value="2" type="hidden" name="form_id">
+        Id*: <input name="PID"><br>
         Name: <input name="PName"><br>
         Price: <input name="PPrice"><br>
         Stock: <input name="PStock"><br>
@@ -37,7 +39,7 @@
         Description: <input name="PDescript"><br>
         Rating: <input name="PRating">
         <input type="submit">
-    </form><br>
+    </form>
     <i> Fields marked with * are mandatory </i><br>
 
     <style>
