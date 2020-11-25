@@ -40,6 +40,7 @@ def parse_data(data):
         data_content.append(data[0][1])
 
     new_data = (data_fields, data_content)
+    print(new_data)
     return new_data
 
 app = Flask(__name__)
