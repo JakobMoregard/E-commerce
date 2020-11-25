@@ -111,6 +111,8 @@ def my_form_post():
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
     return render_template("test.html", data = data)
+
+
 @app.route("/Kenobi")
 def kenobi():
     return render_template("bold_one.html")
@@ -151,13 +153,18 @@ def adminForm():
         print(form[0])
         keys = ", ".join(map(str, keys))
         query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
-        print(query1)
         res = execute(query1, False)
 
-    query2 = "Select PName, PPrice from D0018E.Product"
-    product = execute(query2)
-    print(product)
+    query2 = "Select PName, PPrice from D0018E.Product;"
+    product = execute(query2, True)
     return render_template("admin.html", product = product, adminTable = adminTable)
+
+
+@app.route("/products")
+def product():
+    query = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
+    prodTable = execute(query)
+    return render_template("products.html", prodTable = prodTable)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
