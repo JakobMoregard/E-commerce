@@ -43,7 +43,8 @@ def parse_product_data(data, keys):
             continue
 
     #new_data = [tuple(keys), tuple(data_content)]
-    keys = used_keys
+    for j in range(0, len(used_keys))    
+        keys.remove(used_keys[j])
     print("parse ",  keys)
     return data_content
 
