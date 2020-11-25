@@ -107,6 +107,7 @@ def my_form_post():
     elif req['form_id'] == '3':
 
         sql = "DELETE FROM D0018E.Product WHERE PID = " + req['PID']
+        print(sql)
         res = execute(sql, False)
 
     sql = "Select PName, PPrice from D0018E.Product"
