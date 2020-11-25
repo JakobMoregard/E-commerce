@@ -32,9 +32,9 @@ def execute(sql, isSelect = True):
 def parse_product_data(data, keys):
 
     data_content = []
-    print(len(data))
+    print(len(keys))
 
-    for i in range(0, len(data)-1):
+    for i in range(0, len(keys)-1):
         print(data[i])
         if data[keys[i]] != "":
             data_content.append(data[keys[i]])
