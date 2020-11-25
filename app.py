@@ -29,6 +29,25 @@ def execute(sql, isSelect = True):
         conn.close()
     return result
 
+<<<<<<< HEAD
+=======
+
+def parse_product_data(data, keys):
+
+    data_content = [data['Insert']]
+
+    for i in range(1, len(keys)):
+        print(data[keys[i]])
+        if data[keys[i]] != "":
+            data_content.append(data[keys[i]])
+        else:
+            keys.remove(keys[i])
+            continue
+
+    #new_data = [tuple(keys), tuple(data_content)]
+    return data_content
+
+>>>>>>> parent of ea4ca28... testing multiple inputs 42
 app = Flask(__name__)
 
 @app.route("/")
