@@ -39,7 +39,6 @@ def parse_product_data(data, keys):
             data_content.append(data[keys[i]])
         else:
             keys.remove(keys[i])
-
             continue
 
     #new_data = [tuple(keys), tuple(data_content)]
