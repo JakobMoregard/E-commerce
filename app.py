@@ -30,12 +30,11 @@ def execute(sql, isSelect = True):
 
 
 def parse_data(data):
-    print(data)
+    print("yep")
     data_fields = [] 
     data_content = []
 
-    print(data[0][1])
-    data_fields.append('PID')
+    data_fields.append("PID")
     print(data_fields)
     data_content.append(data['Insert'])
     print(data_content)
