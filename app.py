@@ -137,8 +137,11 @@ def readTable():
 def admin():
     query = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
     adminTable = execute(query)
-    print(adminTable)
-    return render_template("admin.html", adminTable = adminTable)
+
+    query2 = "Select PName, PPrice from D0018E.Product;"
+    product = execute(query2)
+
+    return render_template("admin.html", product = product, adminTable = adminTable)
 
    
 @app.route("/admin", methods=['POST'])
@@ -146,7 +149,7 @@ def adminForm():
 
     req = request.form
     print(req)
-    keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript']
+    keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
 
     if req['form_id'] == '1':
         
@@ -157,9 +160,9 @@ def adminForm():
         query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
         res = execute(query1, False)
 
-    query2 = "Select PName, PPrice from D0018E.Product;"
-    product = execute(query2, True)
-    return render_template("admin.html", product = product, adminTable = adminTable)
+    query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
+    table = execute(query2)
+    return render_template("admin.html", table = table)
 
 
 @app.route("/products")

@@ -48,6 +48,7 @@
         Stock*: <input name="PStock"><br>
         Color*: <input name="PColor"><br>
         Description*: <input name="PDescript"><br>
+        Rating: <input name="PRating">
         <input type="submit">
     </form>
     <i> Fields marked with * are mandatory </i><br>
@@ -56,13 +57,15 @@
         <!-- table header -->
         <tr>
 
+            <th> ID </th>
             <th> Name </th>
-            <th> Price </th>
+            <th> Stock </th>
+            <th> Rating </th>
 
         </tr>
 
         <!-- table rows -->
-        {% for dict_item in product %}
+        {% for dict_item in table %}
         <tr>
             {% for item in dict_item.items() %}
             <td> {{ item[1] }} </td>
