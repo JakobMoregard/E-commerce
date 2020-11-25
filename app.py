@@ -35,6 +35,7 @@ def parse_product_data(data, keys):
     print("yo")
 
     for i in range(0, len(data)-1):
+        print(data[i])
         if data[keys[i]] != "":
             data_content.append(data[keys[i]])
         else:
