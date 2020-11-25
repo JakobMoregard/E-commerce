@@ -40,8 +40,8 @@ def parse_product_data(data, keys):
         else:
             continue
 
-    new_data = [tuple(keys), tuple(data_content)]
-    return new_data
+    #new_data = [tuple(keys), tuple(data_content)]
+    return data_content
 
 app = Flask(__name__)
 
@@ -63,7 +63,8 @@ def my_form_post():
         data = parse_product_data(req, keys)
         print(data)
         print(data[0])
-        sql = ("INSERT INTO D0018E.Product (" + (', '.join(map(str, data[0]))) + ") VALUES " + str(data[1])) 
+        #sql = ("INSERT INTO D0018E.Product (" + (', '.join(map(str, data[0]))) + ") VALUES " + str(data[1]))
+        sql = ("INSERT INTO D0018E.Product ({0}) VALUES ({1})".format()) 
         print(sql)
         res = execute(sql, False)
             
