@@ -37,7 +37,7 @@ def parse_data(data):
     print(data[0][1])
     data_fields.append('PID')
     print(data_fields)
-    data_content.append(data[0][1])
+    data_content.append(data['Insert'])
     print(data_content)
 
     for i in range(1, len(data)-1):
