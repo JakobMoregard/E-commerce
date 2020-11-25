@@ -76,8 +76,7 @@ def my_form_post():
         
         data = parse_product_data(req, keys)
         print(data)
-        data = tuple(data.split(", "))
-        sql = ("UPDATE D0018E.Product SET PPrice = " + update[1] + " WHERE PID = " + update[0]) 
+        sql = ("UPDATE D0018E.Product SET PPrice = " + data[1] + " WHERE PID = " + data[0]) 
         res = execute(sql, False)
         
     sql = "Select PName, PPrice from D0018E.Product"
