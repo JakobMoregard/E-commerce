@@ -33,7 +33,7 @@ def parse_product_data(data, keys):
 
     data_content = []
 
-    for i in range(1, len(keys)):
+    for i in range(1, len(keys)+1):
         print(data[keys[i]])
         if data[keys[i]] != '':
             data_content.append(data[keys[i]])
@@ -59,7 +59,7 @@ def my_form_post():
     print(req)
     keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
     
-    if req['form_id'] == 1:
+    if req['form_id'] == '1':
         
         data = parse_product_data(req, keys)
         print(data)
@@ -70,7 +70,7 @@ def my_form_post():
         print(sql)
         res = execute(sql, False)
             
-    elif req['form_id'] == 2:
+    elif req['form_id'] == '2':
         
         data = parse_product_data(req, keys)
         print(data)
