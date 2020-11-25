@@ -20,7 +20,6 @@ def execute(sql, isSelect = True):
             if isSelect:
                 cursor.execute(sql)
                 result = cursor.fetchall()
-                #print(f"result = {result}")
             else:
                 cursor.execute(sql)
                 result = conn.insert_id()
