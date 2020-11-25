@@ -55,7 +55,7 @@ def parse_update_string(data, keys):
 
     print(keys)
 
-    for i in range(0, len(keys)):
+    for i in range(1, len(keys)):
         print("key = " + keys[i] + " data = " + data[i])
         parse_string.append(keys[i] + ' = ' + data[i])
 
@@ -97,7 +97,7 @@ def my_form_post():
         print(data)
         print(keys)
         parse_string = parse_update_string(data, keys)
-        sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data['PID']) 
+        sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data[0]) 
         res = execute(sql, False)
         
     sql = "Select PName, PPrice from D0018E.Product"
