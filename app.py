@@ -32,7 +32,7 @@ def execute(sql, isSelect = True):
 def parse_product_data(data, keys):
 
     data_content = []
-    print("yo")
+    print(len(data))
 
     for i in range(0, len(data)-1):
         print(data[i])
@@ -62,13 +62,12 @@ def my_form_post():
     keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
     
     if 'Insert' in req:
-        try:
-            data = parse_product_data(req, keys)
-            print(data)
-            sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(data))
-            res = execute(sql, False)
-        except:
-            print("Unexpected error")
+        
+        data = parse_product_data(req, keys)
+        print(data)
+        sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(data))
+        res = execute(sql, False)
+            
     elif 'Update' in req:
         
         data = parse_product_data(req, keys)
