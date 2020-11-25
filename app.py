@@ -144,7 +144,7 @@ def adminForm():
     query2 = "Select PName, PPrice from D0018E.Product"
     product = execute(query2)
     print(product)
-    return render_template("admin.html", product = product)
+    return render_template("admin.html", product = product, adminTable = adminTable)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
