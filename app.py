@@ -46,6 +46,21 @@ def parse_product_data(data, keys):
     keys = used_keys
     return data_content
 
+
+def parse_update_string(data, keys):
+
+    parse_string = []
+
+    for i in range(1, len(keys)):
+        if data[keys[i]] != '':
+            string.append(keys[i] + ' = ' + data[keys[i]])
+
+    print(parse_string)
+    return parse_string
+
+
+
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -76,7 +91,8 @@ def my_form_post():
         
         data = parse_product_data(req, keys)
         print(data)
-        sql = ("UPDATE D0018E.Product SET PPrice = " + data[1] + " WHERE PID = " + data[0]) 
+        parse_string = parse_update_string()
+        sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data['PID']) 
         res = execute(sql, False)
         
     sql = "Select PName, PPrice from D0018E.Product"
@@ -101,33 +117,12 @@ def readTable():
     print(table)
     return render_template("readTable.html", table = table)
 
-@app.route("/admin", methods=['POST'])
+@app.route("/admin")
 def admin():
-
-    req = request.form
-    print(req)
-    keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript']
-
-    if req['form_id'] == '1':
-        
-        form = parse_product_data(req, keys)
-        print(form)
-        print(form[0])
-        keys = ", ".join(map(str, keys))
-        query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
-        print(query1)
-        res = execute(query1, False)
-
-    query2 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
-    adminTable = execute(query2)
+    sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
+    adminTable = execute(sql)
     print(adminTable)
-
-    query3 = "Select PName, PPrice from D0018E.Product"
-    product = execute(query3)
-    print(product)
-    return render_template("admin.html", product = product, adminTable = adminTable)
-
-   
+    return render_template("Admin.html", adminTable = adminTable)
 
 
 if __name__ == "__main__":
