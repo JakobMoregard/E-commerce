@@ -51,7 +51,7 @@ def parse_update_string(data, keys):
 
     parse_string = []
 
-    for i in range(1, len(keys)):
+    for i in range(0, len(keys)):
         print("key = " + keys[i] + " data = " + data[i])
         parse_string.append(keys[i] + ' = ' + data[i])
 
