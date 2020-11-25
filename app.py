@@ -103,6 +103,14 @@ def readTable():
 
 @app.route("/admin", methods=['POST'])
 def admin():
+    query = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
+    adminTable = execute(query)
+    print(adminTable)
+    return render_template("admin.html", adminTable = adminTable)
+
+   
+@app.route("/admin", methods=['POST'])
+def adminForm():
 
     req = request.form
     print(req)
@@ -118,17 +126,10 @@ def admin():
         print(query1)
         res = execute(query1, False)
 
-    query2 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
-    adminTable = execute(query2)
-    print(adminTable)
-
-    query3 = "Select PName, PPrice from D0018E.Product"
-    product = execute(query3)
+    query2 = "Select PName, PPrice from D0018E.Product"
+    product = execute(query2)
     print(product)
-    return render_template("admin.html", product = product, adminTable = adminTable)
-
-   
-
+    return render_template("admin.html", product = product)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
