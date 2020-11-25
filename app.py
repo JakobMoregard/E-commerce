@@ -20,7 +20,6 @@ def execute(sql, isSelect = True):
             if isSelect:
                 cursor.execute(sql)
                 result = cursor.fetchall()
-                #print(f"result = {result}")
             else:
                 cursor.execute(sql)
                 result = conn.insert_id()
@@ -29,8 +28,6 @@ def execute(sql, isSelect = True):
         conn.close()
     return result
 
-<<<<<<< HEAD
-=======
 
 def parse_product_data(data, keys):
 
@@ -38,21 +35,53 @@ def parse_product_data(data, keys):
 
     for i in range(1, len(keys)):
         print(data[keys[i]])
-        if data[keys[i]] != "":
+        if data[keys[i]] != '':
             data_content.append(data[keys[i]])
         else:
             keys.remove(keys[i])
+
             continue
 
     #new_data = [tuple(keys), tuple(data_content)]
     return data_content
 
->>>>>>> parent of ea4ca28... testing multiple inputs 42
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return render_template("test.html")
+    sql = "Select PName, PPrice from D0018E.Product"
+    data = execute(sql)
+    return render_template("test.html", data = data)
+
+@app.route('/', methods=['POST'])
+def my_form_post():
+
+    req = request.form
+    print(req)
+    keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
+    
+    if 'Insert' in req:
+        
+        data = parse_product_data(req, keys)
+        print(data)
+        print(data[0])
+        #sql = ("INSERT INTO D0018E.Product (" + (', '.join(map(str, data[0]))) + ") VALUES " + str(data[1]))
+        keys = ", ".join(map(str, keys))
+        sql = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(data))) 
+        print(sql)
+        res = execute(sql, False)
+            
+    elif 'Update' in req:
+        
+        data = parse_product_data(req, keys)
+        print(data)
+        update = tuple(update.split(", "))
+        sql = ("UPDATE D0018E.Product SET PPrice = " + update[1] + " WHERE PID = " + update[0]) 
+        res = execute(sql, False)
+        
+    sql = "Select PName, PPrice from D0018E.Product"
+    data = execute(sql)
+    return render_template("test.html", data = data)
 
 @app.route("/Kenobi")
 def kenobi():
@@ -67,10 +96,17 @@ def data():
 
 @app.route("/readTable")
 def readTable():
-    sql1 = "SELECT CID, CFName FROM D0018E.Customer WHERE CID = '11223344';"
-    table = execute(sql1)
+    sql = "SELECT CID, CFName FROM D0018E.Customer WHERE CID = '11223344';"
+    table = execute(sql)
     print(table)
     return render_template("readTable.html", table = table)
+
+@app.route("/admin")
+def admin():
+    sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
+    adminTable = execute(sql)
+    print(adminTable)
+    return render_template("Admin.html", adminTable = adminTable)
 
 
 if __name__ == "__main__":
