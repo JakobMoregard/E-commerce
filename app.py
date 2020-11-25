@@ -60,7 +60,7 @@ def my_form_post():
     if 'Insert' in req:
 
         
-        data = parse_data(req, keys)
+        data = parse_product_data(req, keys)
         print(data)
         print(insert)
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
@@ -68,7 +68,7 @@ def my_form_post():
     
     elif 'Update' in req:
         
-        data = parse_data(req, keys)
+        data = parse_product_data(req, keys)
         print(data)
         update = tuple(update.split(", "))
         sql = ("UPDATE D0018E.Product SET PPrice = " + update[1] + " WHERE PID = " + update[0]) 
