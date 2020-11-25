@@ -104,6 +104,10 @@ def my_form_post():
         print(sql)
         res = execute(sql, False)
         
+    elif req['form_id'] == '3':
+
+        sql = "DELETE FROM D0018E.Product WHERE PID = " + req['PID']
+
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
     return render_template("test.html", data = data)
