@@ -63,7 +63,7 @@ def my_form_post():
         data = parse_product_data(req, keys)
         print(data)
         print(data[0])
-        sql = ("INSERT INTO D0018E.Product" + str(data[0]) + " VALUES " + str(data[1])) 
+        sql = ("INSERT INTO D0018E.Product" + (', '.join(map(str, data[0]))) + " VALUES " + str(data[1])) 
         print(sql)
         res = execute(sql, False)
             
