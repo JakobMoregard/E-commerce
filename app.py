@@ -36,10 +36,12 @@ def parse_data(data):
     data_fields.append('PID')
     data_content.append(data[0][1])
 
+    print("cool")
     for i in range(1, len(data)-1):
         data_fields.append(data[0][0])
         data_content.append(data[0][1])
 
+    print("hm")
     new_data = (data_fields, data_content)
     print(new_data)
     return new_data
