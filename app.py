@@ -41,7 +41,7 @@ def parse_product_data(data, keys):
             continue
 
     print("hm")
-    new_data = (keys, data_content)
+    new_data = [keys, data_content]
     print(new_data)
     return new_data
 
