@@ -41,6 +41,7 @@ def hello():
 def my_form_post():
 
     req = request.form
+    print(req)
     if 'Insert' in req:
 
         insert = request.form['Insert']
