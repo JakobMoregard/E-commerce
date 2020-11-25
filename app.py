@@ -101,7 +101,7 @@ def readTable():
     print(table)
     return render_template("readTable.html", table = table)
 
-@app.route("/admin", methods=['POST'])
+@app.route("/admin")
 def admin():
     query = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
     adminTable = execute(query)
