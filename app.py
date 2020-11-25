@@ -33,7 +33,7 @@ def parse_product_data(data, keys):
 
     data_content = [data['Insert']]
 
-    for i in range(1, len(keys)-1):
+    for i in range(1, len(keys)):
         print(data[keys[i]])
         if data[keys[i]] != "":
             data_content.append(data[keys[i]])
@@ -41,7 +41,7 @@ def parse_product_data(data, keys):
             continue
 
     print("hm")
-    new_data = [keys, data_content]
+    new_data = [(keys), (data_content)]
     print(new_data)
     return new_data
 
