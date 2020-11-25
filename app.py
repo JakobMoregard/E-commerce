@@ -160,7 +160,6 @@ def adminForm():
 def product():
     query = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     prodTable = execute(query)
-    print(prodTable)
     return render_template("products.html", prodTable = prodTable)
 
 if __name__ == "__main__":
