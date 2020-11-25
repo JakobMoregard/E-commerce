@@ -107,6 +107,8 @@ def my_form_post():
     sql = "Select PName, PPrice from D0018E.Product"
     data = execute(sql)
     return render_template("test.html", data = data)
+
+
 @app.route("/Kenobi")
 def kenobi():
     return render_template("bold_one.html")
@@ -147,12 +149,10 @@ def adminForm():
         print(form[0])
         keys = ", ".join(map(str, keys))
         query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
-        print(query1)
         res = execute(query1, False)
 
     query2 = "Select PName, PPrice from D0018E.Product;"
-    product = execute(query2)
-    print(product)
+    product = execute(query2, True)
     return render_template("admin.html", product = product, adminTable = adminTable)
 
 
