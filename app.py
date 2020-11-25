@@ -62,7 +62,7 @@ def my_form_post():
 
     req = request.form
     print(req)
-    test = req.iteritems()
+    test = req.iterlists()
     print(test)
     data = parse_product_data(req,keys)
     print(data)
