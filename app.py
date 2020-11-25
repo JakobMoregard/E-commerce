@@ -138,10 +138,10 @@ def admin():
     query = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
     adminTable = execute(query)
 
-    query2 = "Select PName, PPrice from D0018E.Product;"
-    product = execute(query2)
+    query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
+    table = execute(query2)
 
-    return render_template("admin.html", product = product, adminTable = adminTable)
+    return render_template("admin.html", table = table, adminTable = adminTable)
 
    
 @app.route("/admin", methods=['POST'])
