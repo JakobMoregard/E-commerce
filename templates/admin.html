@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
+
+            <th> AID </th>
+            <th> First Name </th>
+            <th> Last Name </th>
+            <th> Mail </th>
+
+        </tr>
+
+        <!-- table rows -->
+        {% for dict_item in adminTable %}
+        <tr>
+            {% for item in dict_item.items() %}
+            <td> {{ item[1] }} </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table><br>
+
+    <p> Add product</p>
+
+    <form method="POST">
+        <input value="1" type="hidden" name="form_id">
+        Id*: <input name="PID"><br>
+        Name*: <input name="PName"><br>
+        Price*: <input name="PPrice"><br>
+        Stock*: <input name="PStock"><br>
+        Color*: <input name="PColor"><br>
+        Description*: <input name="PDescript"><br>
+        <input type="submit">
+    </form>
+    <i> Fields marked with * are mandatory </i><br>
+
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
+
+            <th> Name </th>
+            <th> Price </th>
+
+        </tr>
+
+        <!-- table rows -->
+        {% for dict_item in data %}
+        <tr>
+            {% for item in dict_item.items() %}
+            <td> {{ item[1] }} </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

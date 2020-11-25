@@ -101,12 +101,33 @@ def readTable():
     print(table)
     return render_template("readTable.html", table = table)
 
-@app.route("/admin")
+@app.route("/admin", methods=['POST'])
 def admin():
-    sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
-    adminTable = execute(sql)
+
+    req = request.form
+    print(req)
+    keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript']
+
+    if req['form_id'] == '1':
+        
+        form = parse_product_data(req, keys)
+        print(form)
+        print(form[0])
+        keys = ", ".join(map(str, keys))
+        query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
+        print(query1)
+        res = execute(query1, False)
+
+    query2 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
+    adminTable = execute(query2)
     print(adminTable)
-    return render_template("Admin.html", adminTable = adminTable)
+
+    query3 = "Select PName, PPrice from D0018E.Product"
+    product = execute(query3)
+    print(product)
+    return render_template("admin.html", product = product, adminTable = adminTable)
+
+   
 
 
 if __name__ == "__main__":
