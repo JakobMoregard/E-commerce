@@ -28,6 +28,20 @@ def execute(sql, isSelect = True):
         conn.close()
     return result
 
+
+def parse_data(data):
+    data_fields = data_content = []
+
+    data_fields.append('PID')
+    data_content.append(data[0][1])
+
+    for i in range(1, len(data)-1):
+        data_fields.append(data[0][0])
+        data_content.append(data[0][1])
+
+    new_data = (data_fields, data_content)
+    return new_data
+
 app = Flask(__name__)
 
 @app.route("/")
@@ -41,9 +55,11 @@ def my_form_post():
 
     req = request.form
     print(req)
+    data = parse_data(req)
+    print(data)
     if 'Insert' in req:
 
-        insert = request.form['Insert', 'Price']
+        data = parse_data(req)
         print(insert)
         sql = ("INSERT INTO D0018E.Product(PID, PName, PPrice, PStock, PColor, PDescript, PRating) VALUES ({})".format(insert))
         res = execute(sql, False)
