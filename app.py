@@ -33,7 +33,7 @@ def parse_product_data(data, keys):
 
     data_content = []
 
-    for i in range(1, len(keys)+1):
+    for i in range(0, len(keys)):
         print(data[keys[i]])
         if data[keys[i]] != '':
             data_content.append(data[keys[i]])
