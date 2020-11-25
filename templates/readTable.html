@@ -25,9 +25,8 @@
         <!-- table rows -->
         {% for dict_item in table %}
         <tr>
-            {% for CID in dict_item.items() %}
-            <td> {{ CID[1] }} </td>
-            <td> {{ CFName[1] }} </td>
+            {% for item in dict_item.items() %}
+            <td> {{ item[1] }} </td>
 
             {% endfor %}
         </tr>
