@@ -32,16 +32,18 @@ def execute(sql, isSelect = True):
 def parse_product_data(data, keys):
 
     data_content = []
+    used_keys = []
 
     for i in range(0, len(keys)):
         print(data[keys[i]])
         if data[keys[i]] != '':
             data_content.append(data[keys[i]])
         else:
-            keys.remove(keys[i])
+            used_keys.append(keys[i])
             continue
 
     #new_data = [tuple(keys), tuple(data_content)]
+    keys = used_keys
     return data_content
 
 app = Flask(__name__)
