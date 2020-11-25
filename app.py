@@ -30,19 +30,22 @@ def execute(sql, isSelect = True):
 
 
 def parse_data(data):
-    print("yep")
+    print(data)
     data_fields = [] 
     data_content = []
 
-    print("jaha")
+    print(data[0][1])
     data_fields.append('PID')
     print(data_fields)
     data_content.append(data[0][1])
     print(data_content)
 
     for i in range(1, len(data)-1):
-        data_fields.append(data[0][0])
-        data_content.append(data[0][1])
+        if data[i][1] != "":
+            data_fields.append(data[i][0])
+            data_content.append(data[i][1])
+        else:
+            continue
 
     print("hm")
     new_data = (data_fields, data_content)
