@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    {% for dict_item in prodTable %}
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
+
+            <th> Name </th>
+            <th> Price </th>
+            <th> Stock </th>
+            <th> Color </th>
+            <th> Description </th>
+
+        </tr>
+
+        <!-- table rows -->
+        <tr>
+            {% for item in dict_item.items() %}
+            <td> {{ item[1] }} </td>
+            {% endfor %}
+        </tr>
+
+    </table><br>
+    {% endfor %}
+</body>
+</html>

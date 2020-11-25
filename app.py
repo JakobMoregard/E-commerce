@@ -150,10 +150,18 @@ def adminForm():
         print(query1)
         res = execute(query1, False)
 
-    query2 = "Select PName, PPrice from D0018E.Product"
+    query2 = "Select PName, PPrice from D0018E.Product;"
     product = execute(query2)
     print(product)
     return render_template("admin.html", product = product, adminTable = adminTable)
+
+
+@app.route("/products")
+def product():
+    query = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
+    prodTable = execute(query)
+    print(prodTable)
+    return render_template("products.html", prodTable = prodTable)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
