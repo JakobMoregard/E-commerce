@@ -44,7 +44,7 @@ def parse_product_data(data, keys):
 
     #new_data = [tuple(keys), tuple(data_content)]
     keys = used_keys
-    print("parse " + keys)
+    print("parse ",  keys)
     return data_content
 
 
