@@ -44,6 +44,7 @@ def parse_product_data(data, keys):
 
     #new_data = [tuple(keys), tuple(data_content)]
     keys = used_keys
+    print("parse " + keys)
     return data_content
 
 
@@ -93,6 +94,7 @@ def my_form_post():
         
         data = parse_product_data(req, keys)
         print(data)
+        print(keys)
         parse_string = parse_update_string(data, keys)
         sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data['PID']) 
         res = execute(sql, False)
