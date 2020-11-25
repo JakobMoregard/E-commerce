@@ -52,6 +52,7 @@ def parse_update_string(data, keys):
     parse_string = []
 
     for i in range(1, len(keys)):
+        print(data[keys[i]] )
         if data[keys[i]] != '':
             string.append(keys[i] + ' = ' + data[keys[i]])
 
