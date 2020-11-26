@@ -118,6 +118,7 @@ def adminForm():
         query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
         res = execute(query1, False)
 
+
     elif req['form_id'] == '2':
         
         data = parse_product_data(req, keys)
@@ -134,9 +135,11 @@ def adminForm():
         print(sql)
         res = execute(sql, False)
 
+    query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
+    adminTable = execute(query3)
     query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
     table = execute(query2)
-    return render_template("admin.html", table = table)
+    return render_template("admin.html", table = table, adminTable = adminTable)
 
 
 @app.route("/products")
