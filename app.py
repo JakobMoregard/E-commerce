@@ -76,44 +76,6 @@ def hello():
     data = execute(sql)
     return render_template("test.html", data = data)
 
-@app.route('/', methods=['POST'])
-def my_form_post():
-
-    req = request.form
-    print(req)
-    keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
-    
-    if req['form_id'] == '1':
-        
-        data = parse_product_data(req, keys)
-        print(data)
-        print(data[0])
-        #sql = ("INSERT INTO D0018E.Product (" + (', '.join(map(str, data[0]))) + ") VALUES " + str(data[1]))
-        keys = ", ".join(map(str, keys))
-        sql = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(data))) 
-        print(sql)
-        res = execute(sql, False)
-            
-    elif req['form_id'] == '2':
-        
-        data = parse_product_data(req, keys)
-        print(data)
-        print(keys)
-        parse_string = parse_update_string(data, keys)
-        sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data[0]) 
-        print(sql)
-        res = execute(sql, False)
-        
-    elif req['form_id'] == '3':
-
-        sql = "DELETE FROM D0018E.Product WHERE PID = '{}'".format(req['PID'])
-        print(sql)
-        res = execute(sql, False)
-
-    sql = "Select PName, PPrice from D0018E.Product"
-    data = execute(sql)
-    return render_template("test.html", data = data)
-
 
 @app.route("/Kenobi")
 def kenobi():
