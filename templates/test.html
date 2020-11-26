@@ -17,31 +17,51 @@
 
     <style>
 
-        td {
-            width: 150px;
+        table {
+            margin-left: auto;
+            margin-right: auto;
             text-align: center;
             border: 1px solid black;
             padding: 5px;
+            padding-bottom: 50px;
+            width: 85%;
+        }
+
+        tr {
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        td {
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+            width: 17%
         }
     </style>
-    <table style="width:100%">
+
+    {% for dict_item in prodTable %}
+    <table>
         <!-- table header -->
         <tr>
 
             <th> Name </th>
             <th> Price </th>
+            <th> Stock </th>
+            <th> Color </th>
+            <th> Description </th>
 
         </tr>
 
         <!-- table rows -->
-        {% for dict_item in data %}
         <tr>
             {% for item in dict_item.items() %}
             <td> {{ item[1] }} </td>
             {% endfor %}
         </tr>
-        {% endfor %}
-    </table>
+
+    </table><br>
+    {% endfor %}
 
     <a href="/admin"> secret </a><br>
 </body>
