@@ -53,6 +53,30 @@
     </form>
     <i> Fields marked with * are mandatory </i><br>
 
+    <p> Update product</p>
+
+    <form method="POST">
+        <input value="2" type="hidden" name="form_id">
+        Id*: <input name="PID"><br>
+        Name: <input name="PName"><br>
+        Price: <input name="PPrice"><br>
+        Stock: <input name="PStock"><br>
+        Color: <input name="PColor"><br>
+        Description: <input name="PDescript"><br>
+        Rating: <input name="PRating">
+        <input type="submit">
+    </form>
+    <i> Fields marked with * are mandatory </i><br>
+
+    <p> Remove product</p>
+
+    <form method="POST">
+        <input value="3" type="hidden" name="form_id">
+        Id*: <input name="PID">
+        <input type="submit">
+    </form>
+    <i> Fields marked with * are mandatory </i><br>
+
     <table style="width:100%">
         <!-- table header -->
         <tr>

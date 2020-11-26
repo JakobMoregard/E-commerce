@@ -159,6 +159,22 @@ def adminForm():
         query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
         res = execute(query1, False)
 
+    elif req['form_id'] == '2':
+        
+        data = parse_product_data(req, keys)
+        print(data)
+        print(keys)
+        parse_string = parse_update_string(data, keys)
+        sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data[0]) 
+        print(sql)
+        res = execute(sql, False)
+        
+    elif req['form_id'] == '3':
+
+        sql = "DELETE FROM D0018E.Product WHERE PID = '{}'".format(req['PID'])
+        print(sql)
+        res = execute(sql, False)
+
     query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
     table = execute(query2)
     return render_template("admin.html", table = table)
