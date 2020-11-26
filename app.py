@@ -65,16 +65,13 @@ def parse_update_string(data, keys):
     print(parse_string)
     return parse_string
 
-
-
-
 app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    sql = "Select PName, PPrice from D0018E.Product"
+    sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
-    return render_template("test.html", data = data)
+    return render_template("test.html", prodTable = data)
 
 
 @app.route("/Kenobi")
