@@ -111,12 +111,6 @@ def loginForm():
         print(admins[i]['AID'])
 
         if int(req['ID']) == admins[i]['AID'] and req['Password'] == admins[i]['APassword']:
-        
-            query_admin = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
-            adminTable = execute(query_admin)
-            query_products = "Select PID, PName, PStock, PRating from D0018E.Product"
-            table = execute(query_products)
-            res = make_response(render_template("admin.html", table = table, adminTable = adminTable))
             return redirect("/admin")
     
     return render_template("login.html")
