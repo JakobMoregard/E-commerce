@@ -75,7 +75,7 @@ def hello():
     res = make_response("Setting a cookie")
     res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
 
-    name = request.cookies.get('userID')
+    name = request.cookies.get('SID')
     print(name)
 
     sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
