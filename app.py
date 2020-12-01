@@ -108,6 +108,7 @@ def loginForm():
     print(admins)
     
     for i in range(len(admins)):
+        print(admins[i]['AID'])
 
         if req['ID'] in admins[i]['AID'] and req['Password'] in admins[i]['APassword']:
         
