@@ -80,7 +80,7 @@ def login_status():
     if status == None:
         return "Not currently logged in"
     elif status == 'admin':
-        sql = "SELECT AFName FROM D0018E.Adminstrator WHERE AID = {}".format(request.cookies.get('SID'))
+        sql = "SELECT AFName FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'))
         res = execute(sql)
         return "{} is logged in as admin".format(res)
 
