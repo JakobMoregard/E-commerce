@@ -71,7 +71,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
 
-    session = randint(0, 10000)
+    session = random.randint(0, 10000)
     res = make_response("Setting a cookie")
     res.set_cookie('SID', session)
 
