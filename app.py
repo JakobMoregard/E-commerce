@@ -82,7 +82,7 @@ def login_status():
     elif status == 'admin':
         sql = "SELECT AFName FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'))
         res = execute(sql)
-        return "{} is logged in as admin".format(res)
+        return "{} is logged in as admin".format(res['AFName'])
 
 
 app = Flask(__name__)
