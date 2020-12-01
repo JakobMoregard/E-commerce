@@ -91,7 +91,7 @@ app = Flask(__name__)
 def hello():
     sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
-    login_status = login_status()
+    login = login_status()
 
     if not request.cookies.get('SID'):
         sql = "SELECT AID FROM D0018E.Administrator"
@@ -101,13 +101,13 @@ def hello():
         print("admins: ", admins, " customers: ", customers)
 
         session = valid_id(admins, customers)
-        res = make_response(render_template("test.html", prodTable = data, login_status = login_status))
+        res = make_response(render_template("test.html", prodTable = data, login = login))
         print(session, str(session))
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
     else:
         name = request.cookies.get('SID')
         print(name)
-        res = make_response(render_template("test.html", prodTable = data, login_status = login_status))
+        res = make_response(render_template("test.html", prodTable = data, login = login))
  
     return res
 
