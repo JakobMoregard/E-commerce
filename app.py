@@ -3,7 +3,7 @@ This script runs the application using a development server.
 It contains the definition of routes and views for the application.
 """
 
-from flask import Flask, request,render_template, make_response
+from flask import Flask, request,render_template, make_response, redirect
 import pymysql.cursors
 import random
 
@@ -117,7 +117,7 @@ def loginForm():
             query_products = "Select PID, PName, PStock, PRating from D0018E.Product"
             table = execute(query_products)
             res = make_response(render_template("admin.html", table = table, adminTable = adminTable))
-            return res
+            return redirect("/admin")
     
     return render_template("login.html")
 
