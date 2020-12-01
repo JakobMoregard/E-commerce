@@ -3,7 +3,7 @@ This script runs the application using a development server.
 It contains the definition of routes and views for the application.
 """
 
-from flask import Flask, request,render_template
+from flask import Flask, request,render_template, make_response
 import pymysql.cursors
 import random
 
