@@ -82,8 +82,7 @@ def login_status():
     elif status == 'admin':
         sql = "SELECT AFName FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'))
         res = execute(sql)
-        print(res["AFName"])
-        return "{} is logged in as admin".format(res['AFName'])
+        return "{} is logged in as admin".format(res[0]['AFName'])
 
 
 app = Flask(__name__)
@@ -123,13 +122,11 @@ def login():
 def loginForm():
 
     req = request.form
-    print(req)
     admins_query = "SELECT AID, APassword FROM D0018E.Administrator;"
     admins = execute(admins_query)
-    print(admins)
+
     
     for i in range(len(admins)):
-        print(admins[i]['AID'])
 
         if int(req['ID']) == admins[i]['AID'] and req['Password'] == admins[i]['APassword']:
             res = make_response(redirect("/admin"))
@@ -145,7 +142,6 @@ def loginForm():
 def data():
     sql = "Select * from D0018E.test"
     data = execute(sql)
-    print(data)
     return render_template("table.html", data = data)
 
 @app.route("/readTable")
@@ -175,8 +171,6 @@ def adminForm():
     if req['form_id'] == '1':
         try:
             form = parse_product_data(req, keys)
-            print(form)
-            print(form[0])
             keys = ", ".join(map(str, keys))
             query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
             res = execute(query1, False)
@@ -186,11 +180,8 @@ def adminForm():
     elif req['form_id'] == '2':
         try:
             data = parse_product_data(req, keys)
-            print(data)
-            print(keys)
             parse_string = parse_update_string(data, keys)
             sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data[0]) 
-            print(sql)
             res = execute(sql, False)
         except:
             print("something went wrong")
@@ -198,7 +189,6 @@ def adminForm():
     elif req['form_id'] == '3':
 
         sql = "DELETE FROM D0018E.Product WHERE PID = '{}'".format(req['PID'])
-        print(sql)
         res = execute(sql, False)
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
