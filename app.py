@@ -116,7 +116,7 @@ def loginForm():
             adminTable = execute(query3)
             query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
             table = execute(query2)
-            make_response(res = render_template("admin.html", table = table, adminTable = adminTable))
+            res = make_response(render_template("admin.html", table = table, adminTable = adminTable))
             return res
     
     return render_template("login.html")
