@@ -94,6 +94,7 @@ def hello():
     login = login_status()
 
     if not request.cookies.get('SID'):
+        print("Could not find cookie")
         sql = "SELECT AID FROM D0018E.Administrator"
         admins = execute(sql)
         sql2 = "SELECT CID FROM D0018E.Customer"
@@ -101,10 +102,12 @@ def hello():
         print("admins: ", admins, " customers: ", customers)
 
         session = valid_id(admins, customers)
+        print("YEP SESSION")
         res = make_response(render_template("test.html", prodTable = data, login = login))
         print(session, str(session))
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
     else:
+        print("Could find cookie")
         name = request.cookies.get('SID')
         print(name)
         res = make_response(render_template("test.html", prodTable = data, login = login))
