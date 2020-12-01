@@ -70,19 +70,21 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
+    sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
+    data = execute(sql)
 
     if not request.cookies.get('SID'):
         session = random.randint(0, 10000)
-        res = make_response("Setting a cookie")
+        res = make_response(render_template("test.html", prodTable = data))
         print(session, str(session))
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
     else:
         name = request.cookies.get('SID')
         print(name)
+        res = make_response(render_template("test.html", prodTable = data))
 
-    sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
-    data = execute(sql)
-    return render_template("test.html", prodTable = data)
+    
+    return res
 
 
 @app.route("/Kenobi")
