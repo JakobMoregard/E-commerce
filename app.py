@@ -79,7 +79,7 @@ def hello():
         print(session, str(session))
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
 
-        sql = "INSERT INTO D0018E.Customer (CID, CFName, CLName, CBAddress, CDAddress) VALUES ({}, detta, är, en, kund)".format(session)
+        sql = "INSERT INTO D0018E.Customer (CID, CFName, CLName, CBAddress, CDAddress) VALUES ({}, 'detta', 'är', 'en', 'kund')".format(session)
         execute(sql, False)
     else:
         name = request.cookies.get('SID')
