@@ -110,16 +110,16 @@ def loginForm():
     for i in range(len(admins)):
         print(admins[i]['AID'])
 
-        if req['ID'] == admins[i]['AID'] and req['Password'] == admins[i]['APassword']:
+        if int(req['ID']) == admins[i]['AID'] and req['Password'] == admins[i]['APassword']:
         
             query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
             adminTable = execute(query3)
             query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
             table = execute(query2)
-            make_response(res = render_template(admin.html, table = table, adminTable = adminTable))
+            make_response(res = render_template("admin.html", table = table, adminTable = adminTable))
             return res
     
-    return render_template(login.html)
+    return render_template("login.html")
 
 
 
