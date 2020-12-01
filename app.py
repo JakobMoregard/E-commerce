@@ -74,6 +74,16 @@ def valid_id(admin_IDs, customer_IDs):
     else:
         return valid_id(admin_IDs, customer_IDs)
 
+def login_status():
+    status = request.cookies.get('login')
+
+    if status == None:
+        return "Not currently logged in"
+    elif status == 'admin':
+        sql = "SELECT AFName FROM D0018E.Adminstrator WHERE AID = {}".format(request.cookies.get('SID'))
+        res = execute(sql)
+        return "{} is logged in as admin".format(res)
+
 
 app = Flask(__name__)
 
@@ -81,6 +91,7 @@ app = Flask(__name__)
 def hello():
     sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
+    login_status = login_status()
 
     if not request.cookies.get('SID'):
         sql = "SELECT AID FROM D0018E.Administrator"
@@ -90,13 +101,13 @@ def hello():
         print("admins: ", admins, " customers: ", customers)
 
         session = valid_id(admins, customers)
-        res = make_response(render_template("test.html", prodTable = data))
+        res = make_response(render_template("test.html", prodTable = data, login_status = login_status))
         print(session, str(session))
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
     else:
         name = request.cookies.get('SID')
         print(name)
-        res = make_response(render_template("test.html", prodTable = data))
+        res = make_response(render_template("test.html", prodTable = data, login_status = login_status))
  
     return res
 
@@ -122,7 +133,9 @@ def loginForm():
         print(admins[i]['AID'])
 
         if int(req['ID']) == admins[i]['AID'] and req['Password'] == admins[i]['APassword']:
-            return redirect("/admin")
+            res = make_response(redirect("/admin"))
+            res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
+            return res
     
     return render_template("login.html")
 
