@@ -107,18 +107,18 @@ def loginForm():
     admins = execute(admins_query)
     print(admins)
     
+    for i in range(len(admins)):
 
-    if req['ID'] in admins['AID'] and req['Password'] in admins['APassword']:
+        if req['ID'] in admins[i]['AID'] and req['Password'] in admins[i]['APassword']:
         
-        query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
-        adminTable = execute(query3)
-        query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
-        table = execute(query2)
-        res = render_template(admin.html, table = table, adminTable = adminTable)
-
-    else:
-        res = render_template(login.html)
-
+            query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
+            adminTable = execute(query3)
+            query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
+            table = execute(query2)
+            res = render_template(admin.html, table = table, adminTable = adminTable)
+            return res
+    
+    res = render_template(login.html)
     return res
 
 
