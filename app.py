@@ -94,6 +94,34 @@ def hello():
 def kenobi():
     return render_template("bold_one.html")
 
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/login", methods=['POST'])
+def loginForm():
+
+    req = request.form
+    print(req)
+    admins_query = "SELECT AID, APassword FROM D0018E.Administrator;"
+    admins = execute(admins_query)
+    
+
+    if req['ID'] in admins['AID'] and req['Password'] in admins['APassword']:
+        
+        query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
+        adminTable = execute(query3)
+        query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
+        table = execute(query2)
+        res = render_template(admin.html, table = table, adminTable = adminTable)
+
+    else:
+        res = render_template(login.html)
+
+    return res
+
+
+
 @app.route("/data")
 def data():
     sql = "Select * from D0018E.test"
