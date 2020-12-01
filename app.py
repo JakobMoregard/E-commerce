@@ -110,7 +110,7 @@ def loginForm():
     for i in range(len(admins)):
         print(admins[i]['AID'])
 
-        if req['ID'] in admins[i]['AID'] and req['Password'] in admins[i]['APassword']:
+        if req['ID'] == admins[i]['AID'] and req['Password'] == admins[i]['APassword']:
         
             query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
             adminTable = execute(query3)
