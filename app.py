@@ -137,7 +137,8 @@ def loginForm():
 
         if int(req['ID']) == admins[i]['AID'] and req['Password'] == admins[i]['APassword']:
             res = make_response(redirect("/admin"))
-            res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
+            res.set_cookie('login', 'admin', max_age=60*60*24*365*2)
+            res.set_cookie('SID', str(admins[i]['AID']), max_age=60*60*24*365*2)
             return res
     
     return render_template("login.html")
