@@ -105,6 +105,7 @@ def loginForm():
     print(req)
     admins_query = "SELECT AID, APassword FROM D0018E.Administrator;"
     admins = execute(admins_query)
+    print(admins)
     
 
     if req['ID'] in admins['AID'] and req['Password'] in admins['APassword']:
