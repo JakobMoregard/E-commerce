@@ -73,6 +73,7 @@ def hello():
 
     session = random.randint(0, 10000)
     res = make_response("Setting a cookie")
+    print(session, str(session))
     res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
 
     name = request.cookies.get('SID')
