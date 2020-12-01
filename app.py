@@ -67,7 +67,7 @@ def parse_update_string(data, keys):
     return parse_string
 
 def valid_id(admin_IDs, customer_IDs):
-    id = random.randint(0, 100000)
+    id = random.randint(1, 99999999)
 
     if id not in admin_IDs or customer_IDs:
         return id
@@ -87,20 +87,17 @@ def hello():
         admins = execute(sql)
         sql2 = "SELECT CID FROM D0018E.Customer"
         customers = execute(sql2)
+        print("admins: ", admins, " customers: ", customers)
 
         session = valid_id(admins, customers)
         res = make_response(render_template("test.html", prodTable = data))
         print(session, str(session))
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
-
-        sql = "INSERT INTO D0018E.Customer (CID, CFName, CLName, CBAddress, CDAddress) VALUES ({}, 'detta', 'är', 'en', 'kund')".format(session)
-        execute(sql, False)
     else:
         name = request.cookies.get('SID')
         print(name)
         res = make_response(render_template("test.html", prodTable = data))
-
-    
+ 
     return res
 
 
