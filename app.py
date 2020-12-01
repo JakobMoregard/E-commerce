@@ -5,6 +5,7 @@ It contains the definition of routes and views for the application.
 
 from flask import Flask, request,render_template
 import pymysql.cursors
+import random
 
 def execute(sql, isSelect = True):
     conn = pymysql.connect(host='127.0.0.1',
@@ -69,6 +70,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
+
+    session = randint(0, 10000)
+    res = make_response("Setting a cookie")
+    res.set_cookie('SID', session)
+
+    name = request.cookies.get('userID')
+    print(name)
+
     sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
     return render_template("test.html", prodTable = data)
