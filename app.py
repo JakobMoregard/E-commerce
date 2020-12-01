@@ -155,25 +155,28 @@ def adminForm():
     keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
 
     if req['form_id'] == '1':
-        
-        form = parse_product_data(req, keys)
-        print(form)
-        print(form[0])
-        keys = ", ".join(map(str, keys))
-        query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
-        res = execute(query1, False)
-
+        try:
+            form = parse_product_data(req, keys)
+            print(form)
+            print(form[0])
+            keys = ", ".join(map(str, keys))
+            query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
+            res = execute(query1, False)
+        except pymysql.err.IntegrityError:
+            print("something went wrong")
 
     elif req['form_id'] == '2':
-        
-        data = parse_product_data(req, keys)
-        print(data)
-        print(keys)
-        parse_string = parse_update_string(data, keys)
-        sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data[0]) 
-        print(sql)
-        res = execute(sql, False)
-        
+        try:
+            data = parse_product_data(req, keys)
+            print(data)
+            print(keys)
+            parse_string = parse_update_string(data, keys)
+            sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data[0]) 
+            print(sql)
+            res = execute(sql, False)
+        except:
+            print("something went wrong")
+
     elif req['form_id'] == '3':
 
         sql = "DELETE FROM D0018E.Product WHERE PID = '{}'".format(req['PID'])
