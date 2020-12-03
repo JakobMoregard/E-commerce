@@ -108,8 +108,10 @@ def valid_id():
 
 def login_status():
     status = request.cookies.get('login')
+    if status == None:
+        set_cookie('login', 'None', max_age=60*60*24*365*2)
 
-    if status == 'None' or status == None:
+    if status == 'None':
         return "Not currently logged in"
     elif status == 'admin':
         sql = "SELECT AFName FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'))
@@ -146,8 +148,6 @@ def hello():
         name = request.cookies.get('SID')
         res = make_response(render_template("test.html", prodTable = data, login = login, loginstatus = request.cookies.get('login')))
  
-    if login == "Not currently logged in": 
-        res.set_cookie('login', 'None', max_age=60*60*24*365*2)
     return res
 
 
