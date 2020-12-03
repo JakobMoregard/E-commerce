@@ -193,6 +193,9 @@ def signup():
 @app.route("/signup", methods=['POST'])
 def signupForm():
 
+    query1 = "SELECT * FROM D0018E.Registered;"
+    registered = execute(query1)
+
     req = request.form
     new_ID = valid_id()
     keys = ['RID', 'RFName', 'RLName', 'RBAddress', 'RDAddress', 'RMail', 'RPassword']
@@ -203,10 +206,9 @@ def signupForm():
         query = ("INSERT INTO D0018E.Registered ({0}) VALUES {1}".format(keys, tuple(form))) 
         execute(query, False)
     except pymysql.err.IntegrityError:
-        print("something went wrong")
+        errortext = "Mail is already registered"
+        return render_template("signup.html", registered = registered, errortext = errortext)
 
-    query1 = "SELECT * FROM D0018E.Registered;"
-    registered = execute(query1)
     return render_template("signup.html", registered = registered)
    
 
