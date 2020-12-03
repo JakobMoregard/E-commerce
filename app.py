@@ -146,7 +146,8 @@ def hello():
         name = request.cookies.get('SID')
         res = make_response(render_template("test.html", prodTable = data, login = login, loginstatus = request.cookies.get('login')))
  
-    res.set_cookie('login', 'None', max_age=60*60*24*365*2)
+    if login == "Not currently logged in": 
+        res.set_cookie('login', 'None', max_age=60*60*24*365*2)
     return res
 
 
