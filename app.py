@@ -160,6 +160,8 @@ def loginForm():
     req = request.form
     admins_query = "SELECT AID, APassword FROM D0018E.Administrator;"
     admins = execute(admins_query)
+    registered_query = "SELECT RID, RPassword FROM D0018E.Registered"
+    registered = execute(registered_query)
 
     
     for i in range(len(admins)):
@@ -169,7 +171,13 @@ def loginForm():
             res.set_cookie('login', 'admin', max_age=60*60*24*365*2)
             res.set_cookie('SID', str(admins[i]['AID']), max_age=60*60*24*365*2)
             return res
-    
+    for j in range(len(registered)):
+        if int(req['ID']) == registered[j]['RID'] and req['Password'] == registered[j]['RPassword']:    
+            res = make_response(redirect("/"))
+            res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
+            res.set_cookie('SID', str(registered[j]['RID']), max_age=60*60*24*365*2)
+            return res
+
     return render_template("login.html")
 
 @app.route("/signup", methods=['POST'])
