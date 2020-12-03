@@ -186,7 +186,7 @@ def loginForm():
 def logutForm():
 
     res = make_response(redirect("/"))
-    if res.get.cookie('login') != None:
+    if res.cookie.get('login') != None:
         res.set_cookie('login', None)
 
     return res
