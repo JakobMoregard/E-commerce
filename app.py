@@ -109,7 +109,7 @@ def valid_id():
 def login_status():
     status = request.cookies.get('login')
 
-    if status == 'None':
+    if status == 'None' or status == None:
         return "Not currently logged in"
     elif status == 'admin':
         sql = "SELECT AFName FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'))
