@@ -116,7 +116,7 @@ def login_status():
         res = execute(sql)
         return "{} is logged in as admin".format(res[0]['AFName'])
     elif status == 'registered':
-        sql = "SELECT RFName FROM D0018E.Administrator WHERE RID = {}".format(request.cookies.get('SID'))
+        sql = "SELECT RFName FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
         res = execute(sql)
         return "{} is logged in as admin".format(res[0]['RFName'])
 
