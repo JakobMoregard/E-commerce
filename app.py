@@ -182,6 +182,15 @@ def loginForm():
 
     return render_template("login.html")
 
+@app.route("/logout")
+def logutForm():
+
+    res = make_response(redirect("/"))
+    if res.get.cookie('login') != None:
+        res.set_cookie('login', None)
+
+    return res
+
 
 @app.route("/signup")
 def signup():
