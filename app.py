@@ -175,6 +175,7 @@ def loginForm():
             res.set_cookie('login', 'admin', max_age=60*60*24*365*2)
             res.set_cookie('SID', str(admins[i]['AID']), max_age=60*60*24*365*2)
             return res
+
     for j in range(len(registered)):
         if int(req['ID']) == registered[j]['RID'] and req['Password'] == registered[j]['RPassword']:    
             res = make_response(redirect("/"))
@@ -270,8 +271,6 @@ def adminForm():
     query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
     table = execute(query2)
     return render_template("admin.html", table = table, adminTable = adminTable)
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
