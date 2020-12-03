@@ -180,6 +180,14 @@ def loginForm():
 
     return render_template("login.html")
 
+
+@app.route("/signup")
+def signup():
+    query2 = "SELECT * FROM D0018E.Registered;"
+    registered = execute(query1)
+    return render_template("signup.html", registered = registered)
+
+
 @app.route("/signup", methods=['POST'])
 def signupForm():
 
