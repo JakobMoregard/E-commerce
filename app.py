@@ -109,7 +109,7 @@ def valid_id():
 def login_status():
     status = request.cookies.get('login')
 
-    if status == None:
+    if status == 'None':
         return "Not currently logged in"
     elif status == 'admin':
         sql = "SELECT AFName FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'))
@@ -124,6 +124,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
+    
     sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
     login = login_status()
@@ -145,6 +146,7 @@ def hello():
         name = request.cookies.get('SID')
         res = make_response(render_template("test.html", prodTable = data, login = login))
  
+    res.set_cookie('login', 'None', max_age=60*60*24*365*2)
     return res
 
 
