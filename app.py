@@ -73,7 +73,6 @@ def parse_registered_data(ID, data, keys):
 
     data_content.append(ID)
     print(ID)
-    used_keys.append(keys[0])
 
     for i in range(1, len(keys)):
         print(data[keys[i]])
@@ -82,7 +81,7 @@ def parse_registered_data(ID, data, keys):
         else:
             used_keys.append(keys[i])
             continue
-
+    
     for j in range(0, len(used_keys)):    
         keys.remove(used_keys[j])
     print("parse ",  keys)
@@ -183,7 +182,7 @@ def loginForm():
 
 @app.route("/signup")
 def signup():
-    query= "SELECT * FROM D0018E.Registered;"
+    query = "SELECT * FROM D0018E.Registered;"
     registered = execute(query)
     return render_template("signup.html", registered = registered)
 
