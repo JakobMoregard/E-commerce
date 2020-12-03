@@ -143,6 +143,7 @@ def hello():
         session = valid_id()
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
         res.set_cookie('login', 'None', max_age=60*60*24*365*2)
+        res = make_response(render_template("test.html", prodTable = data, login = login, loginstatus = request.cookies.get('login')))
     else:
         print("Could find cookie")
         name = request.cookies.get('SID')
