@@ -66,13 +66,46 @@ def parse_update_string(data, keys):
     print(parse_string)
     return parse_string
 
-def valid_id(admin_IDs, customer_IDs):
+def parse_registered_data(ID, data, keys):
+
+    data_content = []
+    used_keys = []
+
+    data_content.append(ID)
+    print(ID)
+    used_keys.append(keys[0])
+
+    for i in range(1, len(keys)):
+        print(data[keys[i]])
+        if data[keys[i]] != '':
+            data_content.append(data[keys[i]])
+        else:
+            used_keys.append(keys[i])
+            continue
+
+    for j in range(0, len(used_keys)):    
+        keys.remove(used_keys[j])
+    print("parse ",  keys)
+    return data_content
+
+
+
+#def valid_id(admin_IDs, customer_IDs, registered_IDs):
+def valid_id():
     id = random.randint(1, 99999999)
 
-    if id not in admin_IDs or customer_IDs:
+    sql = "SELECT AID FROM D0018E.Administrator"
+    admin_IDs = execute(sql)
+    sql2 = "SELECT CID FROM D0018E.Customer"
+    customer_IDs = execute(sql2)
+    sql3 = "SELECT RID FROM D0018E.Registered"
+    registered_IDs = execute(sql3)
+
+    if id not in admin_IDs or customer_IDs or registered_IDs:
         return id
     else:
-        return valid_id(admin_IDs, customer_IDs)
+        #return valid_id(admin_IDs, customer_IDs, registered_IDs)
+        return valid_id()
 
 def login_status():
     status = request.cookies.get('login')
@@ -94,12 +127,15 @@ def hello():
     login = login_status()
 
     if not request.cookies.get('SID'):
-        sql = "SELECT AID FROM D0018E.Administrator"
-        admins = execute(sql)
-        sql2 = "SELECT CID FROM D0018E.Customer"
-        customers = execute(sql2)
+        #sql = "SELECT AID FROM D0018E.Administrator"
+        #admins = execute(sql)
+        #sql2 = "SELECT CID FROM D0018E.Customer"
+        #customers = execute(sql2)
+        #sql3 = "SELECT RID FROM D0018E.Registered"
+        #registered = execute(sql3)
 
-        session = valid_id(admins, customers)
+        #session = valid_id(admins, customers, registered)
+        session = valid_id()
         res = make_response(render_template("test.html", prodTable = data, login = login))
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
     else:
@@ -135,6 +171,27 @@ def loginForm():
             return res
     
     return render_template("login.html")
+
+@app.route("/signup", methods=['POST'])
+def signupForm():
+
+    req = request.form
+    new_ID = valid_id()
+    keys = ['RID', 'RFName', 'RLName', 'RBAddress', 'RDAddress', 'RMail', 'RPassword']
+
+    try:
+        form = parse_registered_data(new_ID, req, keys)
+        keys = ", ".join(map(str, keys))
+        query = ("INSERT INTO D0018E.Registered ({0}) VALUES {1}".format(keys, tuple(form))) 
+        res = execute(query, False)
+    except pymysql.err.IntegrityError:
+        print("something went wrong")
+
+
+    return render_template("signup.html")
+   
+
+    
 
 
 
