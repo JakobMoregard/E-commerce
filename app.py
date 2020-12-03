@@ -109,7 +109,7 @@ def valid_id():
 def login_status():
     status = request.cookies.get('login')
     if status == None:
-        set_cookie('login', 'None', max_age=60*60*24*365*2)
+        request.set_cookie('login', 'None', max_age=60*60*24*365*2)
 
     if status == 'None':
         return "Not currently logged in"
