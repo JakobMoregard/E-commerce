@@ -144,7 +144,6 @@ def hello():
         session = valid_id()
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
         res.set_cookie('login', 'None', max_age=60*60*24*365*2)
-        res = hello()
     else:
         print("Could find cookie")
         name = request.cookies.get('SID')
