@@ -13,7 +13,9 @@
     <a href="/Kenobi"> click pls </a><br>
     <p> {{loginstatus}}</p>
     {% if loginstatus == "None" %}
-    <a href="/login"> login  </a><br>
+    <a href="/login"> Login  </a><br>
+    {% else if loginstatus== None %}
+    <a href="/login"> Login  </a><br>
     {% else %}
     <a href="/logout"> Logout </a>
     {% endif %}
