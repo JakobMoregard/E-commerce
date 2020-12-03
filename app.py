@@ -183,7 +183,7 @@ def signupForm():
         form = parse_registered_data(new_ID, req, keys)
         keys = ", ".join(map(str, keys))
         query = ("INSERT INTO D0018E.Registered ({0}) VALUES {1}".format(keys, tuple(form))) 
-        res = execute(query, False)
+        execute(query, False)
     except pymysql.err.IntegrityError:
         print("something went wrong")
 
