@@ -116,7 +116,10 @@ def login_status():
         sql = "SELECT AFName FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'))
         res = execute(sql)
         return "{} is logged in as admin".format(res[0]['AFName'])
-
+    elif status == 'registered':
+        sql = "SELECT RFName FROM D0018E.Administrator WHERE RID = {}".format(request.cookies.get('SID'))
+        res = execute(sql)
+        return "{} is logged in as admin".format(res[0]['RFName'])
 
 app = Flask(__name__)
 
@@ -200,21 +203,6 @@ def signupForm():
     return render_template("signup.html", registered = registered)
    
 
-    
-
-
-
-@app.route("/data")
-def data():
-    sql = "Select * from D0018E.test"
-    data = execute(sql)
-    return render_template("table.html", data = data)
-
-@app.route("/readTable")
-def readTable():
-    sql = "SELECT CID, CFName FROM D0018E.Customer;"
-    table = execute(sql)
-    return render_template("readTable.html", table = table)
 
 @app.route("/admin")
 def admin():
@@ -264,11 +252,6 @@ def adminForm():
     return render_template("admin.html", table = table, adminTable = adminTable)
 
 
-@app.route("/products")
-def product():
-    query = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
-    prodTable = execute(query)
-    return render_template("products.html", prodTable = prodTable)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
