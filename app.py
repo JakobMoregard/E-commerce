@@ -202,7 +202,7 @@ def signupForm():
     except pymysql.err.IntegrityError:
         print("something went wrong")
 
-    query2 = "SELECT * FROM D0018E.Registered;"
+    query1 = "SELECT * FROM D0018E.Registered;"
     registered = execute(query1)
     return render_template("signup.html", registered = registered)
    
