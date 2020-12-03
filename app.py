@@ -106,7 +106,8 @@ def valid_id():
         #return valid_id(admin_IDs, customer_IDs, registered_IDs)
         return valid_id()
 
-def login_status(status):
+def login_status():
+    status = request.cookies.get('login')
 
     if status == 'None':
         return "Not currently logged in"
@@ -126,13 +127,8 @@ def hello():
     
     sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
-    status = request.cookies.get('login')
-    if status == None:
-        request.set_cookie('login', 'None', max_age=60*60*24*365*2)
-        login = login_status('None')
-    else:
-        login = login_status(status)
-    
+    login = login_status()
+
     res = make_response(render_template("test.html", prodTable = data, login = login, loginstatus = request.cookies.get('login')))
 
     if not request.cookies.get('SID'):
@@ -146,6 +142,7 @@ def hello():
         #session = valid_id(admins, customers, registered)
         session = valid_id()
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
+        res.set_cookie('login', 'None', max_age=60*60*24*365*2)
     else:
         print("Could find cookie")
         name = request.cookies.get('SID')
