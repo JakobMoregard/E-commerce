@@ -183,8 +183,8 @@ def loginForm():
 
 @app.route("/signup")
 def signup():
-    query2 = "SELECT * FROM D0018E.Registered;"
-    registered = execute(query1)
+    query= "SELECT * FROM D0018E.Registered;"
+    registered = execute(query)
     return render_template("signup.html", registered = registered)
 
 
