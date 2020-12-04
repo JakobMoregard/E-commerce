@@ -282,5 +282,22 @@ def adminForm():
     table = execute(query2)
     return render_template("admin.html", table = table, adminTable = adminTable)
 
+@app.route("/user")
+def user():
+
+    status = request.cookies.get('login')
+
+    if status == 'registered':
+        sql = "SELECT * FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
+        user = execute(sql)
+        return render_template("user.html", user = user)
+        
+    else:
+        res = make_response(redirect("/"))
+        return res
+
+
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
