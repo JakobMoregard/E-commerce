@@ -118,7 +118,7 @@ def login_status():
     elif status == 'registered':
         sql = "SELECT RFName FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
         res = execute(sql)
-        return "{} is logged in as admin".format(res[0]['RFName'])
+        return "{} is logged in as registered".format(res[0]['RFName'])
 
 app = Flask(__name__)
 
