@@ -122,6 +122,12 @@ def login_status():
 
 app = Flask(__name__)
 
+
+@app.route("/", methods=['POST'])
+def cart_route():
+
+    return render_template("bold_one.html")
+
 @app.route("/")
 def hello():
     
