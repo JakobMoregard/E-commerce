@@ -296,6 +296,9 @@ def user():
         res = make_response(redirect("/"))
         return res
 
+@app.route("/user", method = ['POST'])
+def userForm():
+
 
 
 

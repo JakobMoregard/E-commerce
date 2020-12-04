@@ -7,39 +7,17 @@
 </head>
 <body>
     <form method="POST">
-        First name: <input name="RFName"><br>
-        Last name: <input name="RLName"><br>
-        Billing Address: <input name="RBAddress"><br>
-        Delivery Address: <input name="RDAddress"><br>
-        E-Mail: <input name="RMail"><br>
-        Password: <input name="RPassword">
+        First name*: <input name="RFName"><br>
+        Last name*: <input name="RLName"><br>
+        Billing Address*: <input name="RBAddress"><br>
+        Delivery Address*: <input name="RDAddress"><br>
+        E-Mail*: <input name="RMail"><br>
+        Password*: <input name="RPassword">
         <input type="submit">
-    </form><br>
+    </form>
+    <i> Fields marked with * are mandatory </i><br>
 
     <output> {{errortext}} </output>
 
-    <table style="width:100%">
-        <!-- table header -->
-        <tr>
-
-            <th> RID </th>
-            <th> First Name </th>
-            <th> Last Name </th>
-            <th> Billing Address </th>
-            <th> Delivery Address </th>
-            <th> Mail </th>
-            <th> Password </th>
-
-        </tr>
-
-        <!-- table rows -->
-        {% for dict_item in registered %}
-        <tr>
-            {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table><br>
 </body>
 </html>
