@@ -153,6 +153,7 @@ def hello():
 
 @app.route("/Kenobi")
 def kenobi():
+
     return render_template("bold_one.html")
 
 @app.route("/login")
