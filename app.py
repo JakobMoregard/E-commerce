@@ -222,12 +222,10 @@ def signupForm():
         return render_template("signup.html", registered = registered, errortext = errortext)
 
     res = make_response(redirect("/"))
-    res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
     res.set_cookie('SID', str(new_ID), max_age=60*60*24*365*2)
+    res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
     return res
     
-    return render_template("signup.html", registered = registered)
-   
 
 
 @app.route("/admin")
