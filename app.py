@@ -127,14 +127,14 @@ app = Flask(__name__)
 def cart_route():
     sql = "SELECT CuID, ReID FROM D0018E.Cart"
     IDs = execute(sql)
-    cookie_id = request.cookies.get('SID')
+    cookie_id = str(request.cookies.get('SID'))
     print(cookie_id)
     for i in range(len(IDs)):
         print(IDs[i])
-        if cookie_id == int(IDs[i]['CuID']):
+        if cookie_id == IDs[i]['CuID']:
             res = make_response(redirect("cart.html", CartID = cookie_id))
             return res
-        elif cookie_id == int(IDs[i]['ReID']):
+        elif cookie_id == IDs[i]['ReID']:
             res = make_response(redirect("cart.html", CartID = cookie_id))
             return res
     CaID = valid_id()
