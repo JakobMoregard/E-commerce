@@ -139,10 +139,10 @@ def cart_route():
     CaID = valid_id()
     
     if request.cookies.get('login') == 'registered':
-        sql_insert = "INSERT INTO D0018E.Cart (CaID, ReID) VALUES ({})".format(CaID, cookie_id)
+        sql_insert = "INSERT INTO D0018E.Cart ('CaID', 'ReID') VALUES ({})".format(CaID, cookie_id)
         execute(sql_insert, False)
     elif request.cookies.get('login') == 'None':
-        sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({})".format(CaID, cookie_id)
+        sql_insert = "INSERT INTO D0018E.Cart ('CaID', 'CuID') VALUES ({})".format(CaID, cookie_id)
         execute(sql_insert, False)
     
     return render_template("cart.html", CartID = cookie_id)
