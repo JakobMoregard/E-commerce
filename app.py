@@ -130,6 +130,7 @@ def cart_route():
     cookie_id = request.cookies.get('SID')
 
     for i in range(len(IDs)):
+        print(IDs[i])
         if cookie_id == IDs[i]['CuID']:
             res = make_response(redirect("cart.html", CartID = cookie_id))
             return res
