@@ -185,7 +185,7 @@ def loginForm():
 
     for j in range(len(registered)):
         if req['Mail'] == registered[j]['RMail'] and req['Password'] == registered[j]['RPassword']: 
-            res = make_response(redirect("/"))
+            res = make_response(redirect("/user"))
             res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
             res.set_cookie('SID', str(registered[j]['RID']), max_age=60*60*24*365*2)
             return res
@@ -228,7 +228,7 @@ def signupForm():
         errortext = "Mail is already registered"
         return render_template("signup.html", registered = registered, errortext = errortext)
 
-    res = make_response(redirect("/"))
+    res = make_response(redirect("/user"))
     res.set_cookie('SID', str(new_ID), max_age=60*60*24*365*2)
     res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
     return res
