@@ -129,13 +129,12 @@ def cart_route():
     IDs = execute(sql)
     cookie_id = int(request.cookies.get('SID'))
     print(type(cookie_id))
+    res = make_response(redirect("/cart"))
     for i in range(len(IDs)):
         print(IDs[i], " CuID: ", type(IDs[i]['CuID']), " ReID: ",type(IDs[i]['ReID']))
         if cookie_id == IDs[i]['CuID']:
-            res = make_response(redirect("cart.html", CartID = cookie_id))
             return res
         elif cookie_id == IDs[i]['ReID']:
-            res = make_response(redirect("cart.html", CartID = cookie_id))
             return res
     CaID = valid_id()
     
@@ -146,7 +145,7 @@ def cart_route():
         sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, cookie_id)
         execute(sql_insert, False)
     
-    return render_template("cart.html", CartID = cookie_id)
+    return res
 
 @app.route("/")
 def hello():
@@ -180,7 +179,7 @@ def hello():
 @app.route("/cart")
 def cart():
 
-    return render_template("cart.html")
+    return render_template("cart.html", CartID = request.cookie.get('SID'))
 
 
 @app.route("/Kenobi")
