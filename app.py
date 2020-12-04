@@ -125,7 +125,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     
-    sql = "SELECT PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
+    sql = "SELECT PID, PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
     login = login_status()
 
