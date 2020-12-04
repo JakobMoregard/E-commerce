@@ -163,21 +163,21 @@ def login():
 def loginForm():
 
     req = request.form
-    admins_query = "SELECT AMail, APassword FROM D0018E.Administrator;"
+    admins_query = "SELECT AID, AMail, APassword FROM D0018E.Administrator;"
     admins = execute(admins_query)
-    registered_query = "SELECT RMail, RPassword FROM D0018E.Registered"
+    registered_query = "SELECT RID, RMail, RPassword FROM D0018E.Registered;"
     registered = execute(registered_query)
 
     
     for i in range(len(admins)):
-        if int(req['Mail']) == admins[i]['AMail'] and req['Password'] == admins[i]['APassword']:
+        if req['Mail'] == admins[i]['AMail'] and req['Password'] == admins[i]['APassword']:
             res = make_response(redirect("/admin"))
             res.set_cookie('login', 'admin', max_age=60*60*24*365*2)
             res.set_cookie('SID', str(admins[i]['AID']), max_age=60*60*24*365*2)
             return res
 
     for j in range(len(registered)):
-        if int(req['Mail']) == registered[j]['RMail'] and req['Password'] == registered[j]['RPassword']: 
+        if req['Mail'] == registered[j]['RMail'] and req['Password'] == registered[j]['RPassword']: 
             res = make_response(redirect("/"))
             res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
             res.set_cookie('SID', str(registered[j]['RID']), max_age=60*60*24*365*2)
@@ -222,12 +222,10 @@ def signupForm():
         return render_template("signup.html", registered = registered, errortext = errortext)
 
     res = make_response(redirect("/"))
-    res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
     res.set_cookie('SID', str(new_ID), max_age=60*60*24*365*2)
+    res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
     return res
     
-    return render_template("signup.html", registered = registered)
-   
 
 
 @app.route("/admin")
