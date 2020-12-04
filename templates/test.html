@@ -71,7 +71,13 @@
 
             {% endif %}
             {% endfor %}
-            <td> <button onclick="location.href='/Kenobi'" type="submit" , value="dict_item['PID']">Add to cart</button> </td>
+            <td>
+                <form method="POST">
+                    <input value="dict_item['PID']" type="hidden" name="form_id">
+                    <input type="number" name="Amount"><br>
+                    <button onclick="location.href='/Kenobi'" type="submit">Add to cart</button>
+                </form>
+            </td>
             <td> {{dict_item['PID']}}</td>
         </tr>
 
