@@ -288,7 +288,7 @@ def user():
     status = request.cookies.get('login')
 
     if status == 'registered':
-        sql = "SELECT * FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
+        sql = "SELECT RFName, RLName, RBAddress, RDAddress, RMail, RPassword FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
         user = execute(sql)
         return render_template("user.html", user = user)
         
