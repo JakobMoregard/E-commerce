@@ -296,11 +296,6 @@ def user():
         res = make_response(redirect("/"))
         return res
 
-@app.route("/user", method = ['POST'])
-def userForm():
-
-
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
