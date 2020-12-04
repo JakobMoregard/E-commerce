@@ -129,7 +129,7 @@ def cart_route():
     IDs = execute(sql)
     cookie_id = int(request.cookies.get('SID'))
     print(type(cookie_id))
-    res = make_response(redirect("/cart"))
+    res = make_response(redirect(url_for('.cart', data = IDs)))
     for i in range(len(IDs)):
         print(IDs[i], " CuID: ", type(IDs[i]['CuID']), " ReID: ",type(IDs[i]['ReID']))
         if cookie_id == IDs[i]['CuID']:
@@ -178,10 +178,9 @@ def hello():
 
 @app.route("/cart")
 def cart():
-
-    req = request.form
-    print(req)
-    return render_template("cart.html", CartID = request.cookies.get('SID'))
+    data = request.args['data'] 
+    
+    return render_template("cart.html", CartID = data)
 
 
 @app.route("/Kenobi")
