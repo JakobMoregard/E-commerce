@@ -64,12 +64,13 @@
             {% for item in dict_item.items() %}
             <td> {{ item[1] }} </td>
             {% endfor %}
-            <td> <button onclick="location.href='/Kenobi'" type="button", value="dict_item">Add to cart</button> </td>
+            <td> <button onclick="location.href='/Kenobi'" type="button" , value="dict_item">Add to cart</button> </td>
         </tr>
 
     </table><br>
     {% endfor %}
 
+    {% if loginstatus == "admin" %}
     <a href="/admin"> secret </a><br>
 </body>
 </html>
