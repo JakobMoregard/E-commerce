@@ -179,6 +179,8 @@ def hello():
 @app.route("/cart")
 def cart():
 
+    req = request.form
+    print(req)
     return render_template("cart.html", CartID = request.cookies.get('SID'))
 
 
