@@ -179,7 +179,7 @@ def hello():
 @app.route("/cart")
 def cart():
 
-    return render_template("cart.html", CartID = request.cookie.get('SID'))
+    return render_template("cart.html", CartID = request.cookies.get('SID'))
 
 
 @app.route("/Kenobi")
