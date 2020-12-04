@@ -163,9 +163,9 @@ def login():
 def loginForm():
 
     req = request.form
-    admins_query = "SELECT AMail, APassword FROM D0018E.Administrator;"
+    admins_query = "SELECT AID, AMail, APassword FROM D0018E.Administrator;"
     admins = execute(admins_query)
-    registered_query = "SELECT RMail, RPassword FROM D0018E.Registered;"
+    registered_query = "SELECT RID, RMail, RPassword FROM D0018E.Registered;"
     registered = execute(registered_query)
 
     
