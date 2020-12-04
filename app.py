@@ -125,8 +125,27 @@ app = Flask(__name__)
 
 @app.route("/", methods=['POST'])
 def cart_route():
+    sql = "SELECT CuID, ReID FROM D0018E.Cart"
+    IDs = execute(sql)
+    cookie_id = request.cookies.get('SID')
 
-    return render_template("bold_one.html")
+    for i in range(len(IDs)):
+        if cookie_id == IDs[i]['CuID']:
+            res = make_response(redirect("cart.html", CartID = cookie_id))
+            return res
+        elif cookie_id == IDs[i]['ReID']:
+            res = make_response(redirect("cart.html", CartID = cookie_id))
+            return res
+    CaID = valid_id()
+    
+    if request.cookies.get('login') == 'registered':
+        sql_insert = "INSERT INTO D0018E.Cart (CaID, ReID) VALUES ({})".format(CaID, cookie_id)
+        execute(sql_insert, False)
+    elif request.cookies.get('login') == 'None':
+        sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({})".format(CaID, cookie_id)
+        execute(sql_insert, False)
+    
+    return render_template("cart.html", CartID = cookie_id)
 
 @app.route("/")
 def hello():
@@ -155,6 +174,12 @@ def hello():
         name = request.cookies.get('SID')
  
     return res
+
+
+@app.route("/cart")
+def cart():
+
+    return render_template("cart.html")
 
 
 @app.route("/Kenobi")
