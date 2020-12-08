@@ -62,6 +62,8 @@ def cart_route():
         sql_insert = "INSERT INTO D0018E.Cart (CaID, ReID) VALUES ({0}, (SELECT RID FROM D0018E.Registered WHERE RID = {1}))".format(CaID, cookie_id)
         execute(sql_insert, False)
     elif request.cookies.get('login') == 'None':
+        if cookie_id == None:
+            cookie_id = valid_id()
         sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, cookie_id)
         execute(sql_insert, False)
     
