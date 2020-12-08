@@ -6,31 +6,8 @@ It contains the definition of routes and views for the application.
 from flask import Flask, request,render_template, make_response, redirect, url_for
 import pymysql.cursors
 import random
+import executer
 import parsing
-
-def execute(sql, isSelect = True):
-    conn = pymysql.connect(host='127.0.0.1',
-                           port=3306,
-                           user='bersim-8',
-                           password='SecretPassword',
-                           db ='D0018E',
-                           charset='utf8mb4',
-                           cursorclass=pymysql.cursors.DictCursor)
-    result = None
-    try:
-        with conn.cursor() as cursor:
-            if isSelect:
-                cursor.execute(sql)
-                result = cursor.fetchall()
-            else:
-                cursor.execute(sql)
-                result = conn.insert_id()
-                conn.commit()
-    finally:
-        conn.close()
-    return result
-
-
 
 #def valid_id(admin_IDs, customer_IDs, registered_IDs):
 def valid_id():
@@ -202,7 +179,6 @@ def signupForm():
     res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
     return res
     
-
 
 @app.route("/admin")
 def admin():
