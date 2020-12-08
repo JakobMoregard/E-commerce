@@ -6,11 +6,88 @@ It contains the definition of routes and views for the application.
 from flask import Flask, request,render_template, make_response, redirect, url_for
 import pymysql.cursors
 import random
-<<<<<<< HEAD
-import execute
-=======
->>>>>>> d7b4f12acc69aa8b6f4069603114404d163e6525
-import parsing
+
+def execute(sql, isSelect = True):
+    conn = pymysql.connect(host='127.0.0.1',
+                           port=3306,
+                           user='bersim-8',
+                           password='SecretPassword',
+                           db ='D0018E',
+                           charset='utf8mb4',
+                           cursorclass=pymysql.cursors.DictCursor)
+    result = None
+    try:
+        with conn.cursor() as cursor:
+            if isSelect:
+                cursor.execute(sql)
+                result = cursor.fetchall()
+            else:
+                cursor.execute(sql)
+                result = conn.insert_id()
+                conn.commit()
+    finally:
+        conn.close()
+    return result
+
+
+def parse_product_data(data, keys):
+
+    data_content = []
+    used_keys = []
+
+    for i in range(0, len(keys)):
+        print(data[keys[i]])
+        if data[keys[i]] != '':
+            data_content.append(data[keys[i]])
+        else:
+            used_keys.append(keys[i])
+            continue
+
+    #new_data = [tuple(keys), tuple(data_content)]
+    for j in range(0, len(used_keys)):    
+        keys.remove(used_keys[j])
+    print("parse ",  keys)
+    return data_content
+
+
+def parse_update_string(data, keys):
+
+    parse_string = ""
+
+    print(keys)
+
+    for i in range(1, len(keys)):
+        if i > 1:
+            parse_string += ","
+        print("key = " + keys[i] + " data = " + data[i])
+        parse_string += keys[i] + " = '" + data[i] + "'"
+        
+    
+    print(parse_string)
+    return parse_string
+
+def parse_registered_data(ID, data, keys):
+
+    data_content = []
+    used_keys = []
+
+    data_content.append(ID)
+    print(ID)
+
+    for i in range(1, len(keys)):
+        print(data[keys[i]])
+        if data[keys[i]] != '':
+            data_content.append(data[keys[i]])
+        else:
+            used_keys.append(keys[i])
+            continue
+    
+    for j in range(0, len(used_keys)):    
+        keys.remove(used_keys[j])
+    print("parse ",  keys)
+    return data_content
+
+
 
 #def valid_id(admin_IDs, customer_IDs, registered_IDs):
 def valid_id():
@@ -65,8 +142,6 @@ def cart_route():
         sql_insert = "INSERT INTO D0018E.Cart (CaID, ReID) VALUES ({0}, (SELECT RID FROM D0018E.Registered WHERE RID = {1}))".format(CaID, cookie_id)
         execute(sql_insert, False)
     elif request.cookies.get('login') == 'None':
-        if cookie_id == None:
-            cookie_id = valid_id()
         sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, cookie_id)
         execute(sql_insert, False)
     
@@ -184,6 +259,7 @@ def signupForm():
     res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
     return res
     
+
 
 @app.route("/admin")
 def admin():
