@@ -6,7 +6,10 @@ It contains the definition of routes and views for the application.
 from flask import Flask, request,render_template, make_response, redirect, url_for
 import pymysql.cursors
 import random
+<<<<<<< HEAD
 import execute
+=======
+>>>>>>> d7b4f12acc69aa8b6f4069603114404d163e6525
 import parsing
 
 #def valid_id(admin_IDs, customer_IDs, registered_IDs):
