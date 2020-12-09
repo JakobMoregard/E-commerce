@@ -189,6 +189,7 @@ def customer():
 
 @app.route("/customer", methods=['POST'])
 def customerForm():
+    print("k")
 
     #query1 = "SELECT * FROM D0018E.Customer"
     #registered = execute(query1)
