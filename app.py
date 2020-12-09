@@ -322,6 +322,38 @@ def user():
         res = make_response(redirect("/"))
         return res
 
+@app.route("/user", method = ['POST'])
+def userForm():
+
+    status = request.cookies.get('login')
+
+    if status == 'registered':
+        req = request.form
+        print(req)
+        ID = request.cookies.get('SID')
+        keys = ['RID', 'RFName', 'RLName', 'RBAddress', 'RDAddress', 'RMail', 'RPassword']
+
+        try:
+            data = parse_registered_data(ID, req, keys)
+            parse_string = parse_update_string(data, keys)
+            sql = ("UPDATE D0018E.registered SET {} WHERE RID = ".format(parse_string) + data[0]) 
+            res = execute(sql, False)
+        except:
+            errortext = "something went wrong"
+            sql = "SELECT RFName, RLName, RBAddress, RDAddress, RMail, RPassword FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
+            user = execute(sql)
+            return render_template("user.html", user = user, errortext = errortext)
+
+        sql = "SELECT RFName, RLName, RBAddress, RDAddress, RMail, RPassword FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
+        user = execute(sql)
+        return render_template("user.html", user = user)
+
+
+    else:
+        res = make_response(redirect("/"))
+        return res
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

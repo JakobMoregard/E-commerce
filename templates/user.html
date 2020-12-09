@@ -42,5 +42,21 @@
         </tr>
         {% endfor %}
     </table><br>
+
+
+    <p> Update your information </p>
+    <output> {{errortext}} </output><br>
+    <form method="POST">
+        First name*: <input name="RFName"><br>
+        Last name*: <input name="RLName"><br>
+        Billing Address*: <input name="RBAddress"><br>
+        Delivery Address*: <input name="RDAddress"><br>
+        E-Mail*: <input name="RMail"><br>
+        Password*: <input name="RPassword">
+        <input type="submit">
+    </form>
+    <i> Fields marked with * are mandatory </i><br>
+
+
 </body>
 </html>
