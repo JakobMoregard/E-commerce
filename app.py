@@ -196,6 +196,8 @@ def customerForm():
 
     req = request.form
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
+    print(req)
+    print(keys)
 
     try:
         ID = request.cookies.get('SID')
