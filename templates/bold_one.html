@@ -45,14 +45,16 @@
     </style>
 
     <div class="topnav">
-        <a href="/">Home</a>
         {% if loginstatus == "None" %}
+        <a href="/">Home</a>
         <a href="/login">Login</a>
         <a href="/signup">Signup</a>
         {% elif loginstatus == "registered" %}
+        <a href="/">Home</a>
         <a href="/user">Account</a>
         <a href="/logout"> Logout </a>
         {% elif loginstatus == "admin" %}
+        <a href="/">Home</a>
         <a href="/admin"> Admin </a>
         <a href="/logout"> Logout </a>
         {% endif %}
