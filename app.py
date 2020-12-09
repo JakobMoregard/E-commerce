@@ -214,12 +214,10 @@ def customerForm():
         return render_template("customer.html", errortext = errortext)
 
     CaID = valid_id()
-    print("ok fine, this shit sucks")
-    sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
-    execute(sql_insert, False)
+    #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
+    #execute(sql_insert, False)
 
-    res = make_response(redirect("/cart"))
-    print("k what")
+    res = make_response(redirect(url_for('.cart', data = CaID), code=307))
     return res
 
 @app.route("/cart")
