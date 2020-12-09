@@ -135,7 +135,7 @@ def cart_route():
 
     cookie_id = int(request.cookies.get('SID'))
 
-    if request.cookies.get('login') == 'None' and request.cookies.get('login') not in customers:
+    if request.cookies.get('login') == 'None' and request.cookies.get('SID') not in customers:
         res = make_response(redirect("/customer"))
         return res
 
