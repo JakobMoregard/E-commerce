@@ -72,8 +72,7 @@ def parse_registered_data(ID, data, keys):
     used_keys = []
 
     data_content.append(ID)
-    print("this function is mean",ID)
-    print(len(keys), keys)
+    print(ID)
 
     for i in range(1, len(keys)):
         print(data[keys[i]])
@@ -134,6 +133,8 @@ def cart_route():
     IDs = execute(sql2)
 
     cookie_id = int(request.cookies.get('SID'))
+    print(customers)
+    print(request.cookies.get('SID'))
 
     if request.cookies.get('login') == 'None' and request.cookies.get('SID') not in customers:
         res = make_response(redirect("/customer"))
