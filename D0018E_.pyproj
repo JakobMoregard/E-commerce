@@ -28,7 +28,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.py" />
-    <Compile Include="executer.py" />
+    <Compile Include="execute.py" />
     <Compile Include="parsing.py" />
   </ItemGroup>
   <ItemGroup>

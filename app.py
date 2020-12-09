@@ -125,10 +125,19 @@ app = Flask(__name__)
 
 @app.route("/", methods=['POST'])
 def cart_route():
-    sql = "SELECT CuID, ReID FROM D0018E.Cart"
+
+    sql1 = "SELECT CID from D0018E.Customer"
+    customers = execute(sql)
+
+    sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
     IDs = execute(sql)
+
     cookie_id = int(request.cookies.get('SID'))
-    print(type(cookie_id))
+
+    if request.cookies.get('login') == 'None' and request.cookies.get('login') not in customers:
+        res = make_response(redirecturl_for('.customer', code = 307))
+        return res
+
     res = make_response(redirect(url_for('.cart', data = IDs)))
     for i in range(len(IDs)):
         print(IDs[i], " CuID: ", type(IDs[i]['CuID']), " ReID: ",type(IDs[i]['ReID']))
@@ -175,6 +184,31 @@ def hello():
  
     return res
 
+
+@app.route("/customer")
+def customer(): 
+    return render_template("customer.html", CartID = data)
+
+@app.route("/customer", methods=['POST'])
+def customerForm():
+
+    query1 = "SELECT * FROM D0018E.Customer;"
+    registered = execute(query1)
+
+    req = request.form
+    keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
+
+    try:
+        form = parse_registered_data(request.cookies.get('SID'), req, keys)
+        keys = ", ".join(map(str, keys))
+        query = ("INSERT INTO D0018E.Customer ({0}) VALUES {1}".format(keys, tuple(form))) 
+        execute(query, False)
+    except pymysql.err.IntegrityError:
+        errortext = "Customer is already registered"
+        return render_template("customer.html", errortext = errortext)
+
+    res = make_response(redirect("/cart"))
+    return res
 
 @app.route("/cart")
 def cart():
