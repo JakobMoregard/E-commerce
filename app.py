@@ -198,8 +198,9 @@ def customerForm():
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
 
     try:
+        ID = request.cookies.get('SID')
         print("wow")
-        form = parse_registered_data(request.cookies.get('SID'), req, keys)
+        form = parse_registered_data(ID, req, keys)
         print("I see")
         keys = ", ".join(map(str, keys))
         print("this shit bad")
