@@ -198,7 +198,9 @@ def customerForm():
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
 
     try:
+        print("wow")
         form = parse_registered_data(request.cookies.get('SID'), req, keys)
+        print("I see")
         keys = ", ".join(map(str, keys))
         print("this shit bad")
         query = ("INSERT INTO D0018E.Customer ({0}) VALUES {1}".format(keys, tuple(form)))
