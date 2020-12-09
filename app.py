@@ -196,19 +196,14 @@ def customerForm():
 
     req = request.form
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
-    print(req)
-    print(keys)
+
 
     try:
         ID = request.cookies.get('SID')
-        print("wow")
         form = parse_registered_data(ID, req, keys)
-        print("I see")
         keys = ", ".join(map(str, keys))
-        print("this shit bad")
         query = ("INSERT INTO D0018E.Customer ({0}) VALUES {1}".format(keys, tuple(form)))
         execute(query, False)
-        print("nvm is good")
     except pymysql.err.IntegrityError:
         errortext = "Customer is already registered"
         return render_template("customer.html", errortext = errortext)
@@ -217,7 +212,7 @@ def customerForm():
     #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
     #execute(sql_insert, False)
 
-    res = make_response(redirect(url_for('./'), code=307))
+    res = make_response(redirect("/", code=307))
     return res
 
 @app.route("/cart")
