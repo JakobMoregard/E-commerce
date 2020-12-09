@@ -190,8 +190,8 @@ def customer():
 @app.route("/customer", methods=['POST'])
 def customerForm():
 
-    query1 = "SELECT * FROM D0018E.Customer;"
-    registered = execute(query1)
+    #query1 = "SELECT * FROM D0018E.Customer"
+    #registered = execute(query1)
 
     req = request.form
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
