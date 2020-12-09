@@ -207,7 +207,7 @@ def customerForm():
         errortext = "Customer is already registered"
         return render_template("customer.html", errortext = errortext)
 
-    res = make_response(redirect( url_for('./'), code = '307') ) 
+    res = make_response(redirect( "/", code = '307')) 
     return res
 
 @app.route("/cart")
