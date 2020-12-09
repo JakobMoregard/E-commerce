@@ -145,7 +145,7 @@ def cart_route():
         res = make_response(redirect("/customer"))
         return res
 
-    res = make_response(redirect(url_for('.cart', data = IDs)))
+    res = make_response(redirect(url_for('.cart', data = cookie_id)))
     for i in range(len(IDs)):
         if cookie_id == IDs[i]['CuID']:
             return res
