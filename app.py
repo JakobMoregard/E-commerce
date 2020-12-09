@@ -232,7 +232,7 @@ def cart():
 def kenobi():
 
     login = login_status()
-    return render_template("bold_one.html", login = login)
+    return render_template("bold_one.html", loginstatus = request.cookies.get('login'))
 
 @app.route("/login")
 def login():
