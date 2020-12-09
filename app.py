@@ -322,7 +322,7 @@ def user():
         res = make_response(redirect("/"))
         return res
 
-@app.route("/user", method = ['POST'])
+@app.route("/user", methods = ['POST'])
 def userForm():
 
     status = request.cookies.get('login')
