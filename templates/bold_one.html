@@ -3,7 +3,62 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                .topnav a.active {
+                    background-color: #5BB9E1;
+                    color: white;
+                }
+
+            .topnav u {
+                float: right;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+    </style>
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        {% if loginstatus == "None" %}
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        {% elif loginstatus == "registered" %}
+        <a href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        {% elif loginstatus == "admin" %}
+        <a href="/admin"> Admin </a>
+        <a href="/logout"> Logout </a>
+        {% endif %}
+        <u>{{login}}</u>
+
+    </div>
 </head>
 <body>
 

@@ -231,7 +231,8 @@ def cart():
 @app.route("/Kenobi")
 def kenobi():
 
-    return render_template("bold_one.html")
+    login = login_status()
+    return render_template("bold_one.html", login = login)
 
 @app.route("/login")
 def login():
