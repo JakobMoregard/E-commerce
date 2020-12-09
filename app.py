@@ -235,7 +235,7 @@ def kenobi():
 
 @app.route("/login")
 def login():
-    return render_template("login.html")
+    return render_template("login.html", login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/login", methods=['POST'])
 def loginForm():
@@ -277,7 +277,7 @@ def logutForm():
 def signup():
     query = "SELECT * FROM D0018E.Registered;"
     registered = execute(query)
-    return render_template("signup.html", registered = registered)
+    return render_template("signup.html", registered = registered, login = login_status(), loginstatus = request.cookies.get('login'))
 
 
 @app.route("/signup", methods=['POST'])
@@ -314,7 +314,7 @@ def admin():
     query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
     table = execute(query2)
 
-    return render_template("admin.html", table = table, admin = admin)
+    return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
    
 @app.route("/admin", methods=['POST'])
@@ -351,7 +351,7 @@ def adminForm():
     admin = execute(query3)
     query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
     table = execute(query2)
-    return render_template("admin.html", table = table, admin = admin)
+    return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/user")
 def user():
@@ -361,7 +361,7 @@ def user():
     if status == 'registered':
         sql = "SELECT RFName, RLName, RBAddress, RDAddress, RMail, RPassword FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
         user = execute(sql)
-        return render_template("user.html", user = user)
+        return render_template("user.html", user = user, login = login_status(), loginstatus = request.cookies.get('login'))
         
     else:
         res = make_response(redirect("/"))
@@ -392,7 +392,7 @@ def userForm():
 
         sql = "SELECT RFName, RLName, RBAddress, RDAddress, RMail, RPassword FROM D0018E.Registered WHERE RID = {}".format(request.cookies.get('SID'))
         user = execute(sql)
-        return render_template("user.html", user = user)
+        return render_template("user.html", user = user, login = login_status(), loginstatus = request.cookies.get('login'))
 
 
     else:
