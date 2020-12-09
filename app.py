@@ -187,7 +187,7 @@ def hello():
 
 @app.route("/customer")
 def customer(): 
-    return render_template("customer.html", CartID = data)
+    return render_template("customer.html")
 
 @app.route("/customer", methods=['POST'])
 def customerForm():
