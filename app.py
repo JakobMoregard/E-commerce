@@ -72,7 +72,7 @@ def parse_registered_data(ID, data, keys):
     used_keys = []
 
     data_content.append(ID)
-    print(ID)
+    print("this function is mean",ID)
 
     for i in range(1, len(keys)):
         print(data[keys[i]])
