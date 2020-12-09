@@ -127,10 +127,10 @@ app = Flask(__name__)
 def cart_route():
 
     sql1 = "SELECT CID from D0018E.Customer"
-    customers = execute(sql)
+    customers = execute(sql1)
 
     sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
-    IDs = execute(sql)
+    IDs = execute(sql2)
 
     cookie_id = int(request.cookies.get('SID'))
 
