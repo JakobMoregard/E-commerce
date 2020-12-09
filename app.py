@@ -308,13 +308,13 @@ def signupForm():
 
 @app.route("/admin")
 def admin():
-    query = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
-    adminTable = execute(query)
+    query = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
+    admin = execute(query)
 
     query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
     table = execute(query2)
 
-    return render_template("admin.html", table = table, adminTable = adminTable)
+    return render_template("admin.html", table = table, admin = admin)
 
    
 @app.route("/admin", methods=['POST'])
@@ -347,11 +347,11 @@ def adminForm():
         sql = "DELETE FROM D0018E.Product WHERE PID = '{}'".format(req['PID'])
         res = execute(sql, False)
 
-    query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator;"
-    adminTable = execute(query3)
+    query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
+    admin = execute(query3)
     query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
     table = execute(query2)
-    return render_template("admin.html", table = table, adminTable = adminTable)
+    return render_template("admin.html", table = table, admin = admin)
 
 @app.route("/user")
 def user():
