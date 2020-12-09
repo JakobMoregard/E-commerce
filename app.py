@@ -140,7 +140,6 @@ def cart_route():
 
     res = make_response(redirect(url_for('.cart', data = IDs)))
     for i in range(len(IDs)):
-        print(IDs[i], " CuID: ", type(IDs[i]['CuID']), " ReID: ",type(IDs[i]['ReID']))
         if cookie_id == IDs[i]['CuID']:
             return res
         elif cookie_id == IDs[i]['ReID']:
@@ -166,7 +165,6 @@ def hello():
     res = make_response(render_template("test.html", prodTable = data, login = login, loginstatus = request.cookies.get('login')))
 
     if not request.cookies.get('SID'):
-        print("yup")
         #sql = "SELECT AID FROM D0018E.Administrator"
         #admins = execute(sql)
         #sql2 = "SELECT CID FROM D0018E.Customer"
@@ -207,7 +205,7 @@ def customerForm():
         errortext = "Customer is already registered"
         return render_template("customer.html", errortext = errortext)
 
-    res = make_response(redirect( "/", code = 307)) 
+    res = make_response(redirect( url_for("/") , code = 307)) 
     return res
 
 @app.route("/cart")
