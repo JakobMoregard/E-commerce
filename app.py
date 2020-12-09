@@ -73,6 +73,7 @@ def parse_registered_data(ID, data, keys):
 
     data_content.append(ID)
     print("this function is mean",ID)
+    print(len(keys), keys)
 
     for i in range(1, len(keys)):
         print(data[keys[i]])
@@ -189,7 +190,6 @@ def customer():
 
 @app.route("/customer", methods=['POST'])
 def customerForm():
-    print("k")
 
     #query1 = "SELECT * FROM D0018E.Customer"
     #registered = execute(query1)
