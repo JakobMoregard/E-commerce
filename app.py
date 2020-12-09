@@ -336,7 +336,8 @@ def userForm():
         try:
             data = parse_registered_data(ID, req, keys)
             parse_string = parse_update_string(data, keys)
-            sql = ("UPDATE D0018E.registered SET {} WHERE RID = ".format(parse_string) + data[0]) 
+            sql = ("UPDATE D0018E.registered SET {} WHERE RID = ".format(parse_string) + data[0])
+            print(sql)
             res = execute(sql, False)
         except:
             errortext = "something went wrong"
