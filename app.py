@@ -167,9 +167,8 @@ def hello():
     
     sql = "SELECT PID, PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
-    login = login_status()
 
-    res = make_response(render_template("test.html", prodTable = data, login = login, loginstatus = request.cookies.get('login')))
+    res = make_response(render_template("test.html", prodTable = data, login = login_status(), loginstatus = request.cookies.get('login')))
 
     if not request.cookies.get('SID'):
         #sql = "SELECT AID FROM D0018E.Administrator"
@@ -262,7 +261,7 @@ def loginForm():
             res.set_cookie('SID', str(registered[j]['RID']), max_age=60*60*24*365*2)
             return res
 
-    return render_template("login.html")
+    return render_template("login.html", login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/logout")
 def logutForm():
