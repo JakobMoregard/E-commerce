@@ -201,6 +201,7 @@ def hello():
 @app.route("/customer")
 def customer():
     data = request.args['data']
+    print("data ", data)
     return render_template("customer.html", data = data)
 
 @app.route("/customer", methods=['POST'])
