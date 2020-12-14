@@ -145,6 +145,7 @@ def cart_route():
         if customers[i]['CID'] == cookie_id:
             flag = False
 
+    data2 = ""
     if not flag:
         data2 = "{0}, {1}".format(request.form['form_id'], request.form['Amount'])
     print(data2)
