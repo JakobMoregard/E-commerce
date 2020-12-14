@@ -126,6 +126,7 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def cart_route():
 
+    print(request.args)
     if request.args != None:
         data = request.args['data'] 
     print("cool")
