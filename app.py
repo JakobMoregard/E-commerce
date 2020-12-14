@@ -131,7 +131,6 @@ def cart_route():
     print(request.args)
     if request.args:
         data = request.args['data'] 
-    print("cool")
 
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
@@ -148,11 +147,15 @@ def cart_route():
         if customers[i]['CID'] == cookie_id:
             flag = False
 
+    amount = request.form['Amount']
+    print(amount)
     if request.cookies.get('login') == 'None' and flag:
-        res = make_response(redirect(url_for(".customer", data = data)))
+        res = make_response(redirect(url_for(".customer", data = amount)))
         return res
 
-    amount = request.form['Amount']
+
+
+    
     res = make_response(redirect(url_for('.cart', data = amount)))
     for i in range(len(IDs)):
         if cookie_id == IDs[i]['CuID']:
@@ -167,6 +170,7 @@ def cart_route():
     elif request.cookies.get('login') == 'None':
         sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, cookie_id)
         execute(sql_insert, False)
+        res = make_response(redirect(url_for('.cart', data = data)))
     
     return res
 
