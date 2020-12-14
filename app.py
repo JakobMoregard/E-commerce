@@ -127,6 +127,7 @@ app = Flask(__name__)
 def cart_route():
 
     data = request.args['data'] 
+    print("cool")
 
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
