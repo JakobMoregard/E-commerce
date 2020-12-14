@@ -126,7 +126,7 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def cart_route():
 
-    data = ""
+    data1 = ""
     if request.args:
         data1 = request.args['data'] 
 
@@ -146,7 +146,7 @@ def cart_route():
             flag = False
 
 
-    data2 = (request.form['Amount'], request.form['form_id'])
+    data2 = [request.form['Amount'], request.form['form_id']]
     print(data2)
     if request.cookies.get('login') == 'None' and flag:
         res = make_response(redirect(url_for(".customer", data = data2)))
