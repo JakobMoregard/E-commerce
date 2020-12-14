@@ -128,7 +128,7 @@ def cart_route():
 
     print(request.args)
     if request.args:
-        amount = request.args['data'] 
+        data = request.args['data'] 
     print("cool")
 
     sql1 = "SELECT CID from D0018E.Customer"
@@ -147,7 +147,7 @@ def cart_route():
             flag = False
 
     if request.cookies.get('login') == 'None' and flag:
-        res = make_response(redirect("/customer"))
+        res = make_response(redirect(url_for("/customer", data = data)))
         return res
 
     amount = request.form['Amount']
@@ -196,8 +196,9 @@ def hello():
 
 
 @app.route("/customer")
-def customer(): 
-    return render_template("customer.html")
+def customer():
+    data = request.args['data']
+    return render_template("customer.html", data = data)
 
 @app.route("/customer", methods=['POST'])
 def customerForm():
@@ -208,7 +209,7 @@ def customerForm():
     req = request.form
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
 
-
+    Amount = req['Amount']
     try:
         ID = request.cookies.get('SID')
         form = parse_registered_data(ID, req, keys)
@@ -223,7 +224,7 @@ def customerForm():
     #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
     #execute(sql_insert, False)
 
-    res = make_response(redirect("/", code=307))
+    res = make_response(redirect(url_for("/", Amount = Amount), code=307))
     return res
 
 @app.route("/cart")
