@@ -127,10 +127,8 @@ app = Flask(__name__)
 def cart_route():
 
     data = ""
-
-    print(request.args)
     if request.args:
-        data = request.args['data'] 
+        data1 = request.args['data'] 
 
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
@@ -147,16 +145,14 @@ def cart_route():
         if customers[i]['CID'] == cookie_id:
             flag = False
 
-    amount = request.form['Amount']
-    print(amount)
+
+    data2 = (request.form['Amount'], request.form['form_id'])
+    print(data2)
     if request.cookies.get('login') == 'None' and flag:
-        res = make_response(redirect(url_for(".customer", data = amount)))
+        res = make_response(redirect(url_for(".customer", data = data2)))
         return res
 
-
-
-    
-    res = make_response(redirect(url_for('.cart', data = amount)))
+    res = make_response(redirect(url_for('.cart', data = data2)))
     for i in range(len(IDs)):
         if cookie_id == IDs[i]['CuID']:
             return res
@@ -170,7 +166,7 @@ def cart_route():
     elif request.cookies.get('login') == 'None':
         sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, cookie_id)
         execute(sql_insert, False)
-        res = make_response(redirect(url_for('.cart', data = data)))
+        res = make_response(redirect(url_for('.cart', data = data1)))
     
     return res
 
@@ -217,8 +213,8 @@ def customerForm():
     req = request.form
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
 
-    Amount = req['Amount']
-    print("amount ", Amount)
+    Amount = req['data']
+    print("data ", data)
     try:
         ID = request.cookies.get('SID')
         form = parse_registered_data(ID, req, keys)
@@ -233,7 +229,7 @@ def customerForm():
     #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
     #execute(sql_insert, False)
 
-    res = make_response(redirect(url_for("index", data = Amount), code=307))
+    res = make_response(redirect(url_for("index", data = data), code=307))
     return res
 
 @app.route("/cart")
