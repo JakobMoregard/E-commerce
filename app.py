@@ -126,6 +126,8 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def cart_route():
 
+    data = ""
+
     print(request.args)
     if request.args:
         data = request.args['data'] 
@@ -218,13 +220,13 @@ def customerForm():
         execute(query, False)
     except pymysql.err.IntegrityError:
         errortext = "Customer is already registered"
-        return render_template("customer.html", errortext = errortext)
+        return render_template("customer.html", data = Amount, errortext = errortext)
 
     CaID = valid_id()
     #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
     #execute(sql_insert, False)
 
-    res = make_response(redirect(url_for("/", Amount = Amount), code=307))
+    res = make_response(redirect(url_for("/", data = Amount), code=307))
     return res
 
 @app.route("/cart")
