@@ -149,7 +149,7 @@ def cart_route():
             flag = False
 
     if request.cookies.get('login') == 'None' and flag:
-        res = make_response(redirect(url_for("/customer", data = data)))
+        res = make_response(redirect(url_for(".customer", data = data)))
         return res
 
     amount = request.form['Amount']
