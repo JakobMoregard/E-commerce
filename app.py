@@ -213,6 +213,7 @@ def customerForm():
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
 
     Amount = req['Amount']
+    print("amount ", Amount)
     try:
         ID = request.cookies.get('SID')
         form = parse_registered_data(ID, req, keys)
