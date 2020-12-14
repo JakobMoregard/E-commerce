@@ -126,7 +126,8 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def cart_route():
 
-    data = request.args['data'] 
+    if request.args != None:
+        data = request.args['data'] 
     print("cool")
 
     sql1 = "SELECT CID from D0018E.Customer"
