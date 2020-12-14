@@ -226,7 +226,7 @@ def customerForm():
     #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
     #execute(sql_insert, False)
 
-    res = make_response(redirect(url_for(". ", data = Amount), code=307))
+    res = make_response(redirect(url_for("./", data = Amount), code=307))
     return res
 
 @app.route("/cart")
