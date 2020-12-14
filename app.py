@@ -173,7 +173,7 @@ def cart_route():
 @app.route("/")
 def hello():
     
-    print("url ", url_for('/'))
+    print("url ", url_for('index'))
 
     sql = "SELECT PID, PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
     data = execute(sql)
@@ -196,7 +196,7 @@ def hello():
         print("Could find cookie")
         name = request.cookies.get('SID')
  
-    return res
+    return res, 'index'
 
 
 @app.route("/customer")
