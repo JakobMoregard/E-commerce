@@ -127,8 +127,10 @@ app = Flask(__name__)
 def cart_route():
 
     data = ""
+    flag2 = False
     if request.args:
-        data1 = request.args['data'] 
+        data1 = request.args['data']
+        flag2 = True
 
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
@@ -146,7 +148,7 @@ def cart_route():
             flag = False
 
     data2 = ""
-    if not flag:
+    if not flag2:
         data2 = "{0}, {1}".format(request.form['form_id'], request.form['Amount'])
     print(data2)
     if request.cookies.get('login') == 'None' and flag:
@@ -167,7 +169,8 @@ def cart_route():
     elif request.cookies.get('login') == 'None':
         sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, cookie_id)
         execute(sql_insert, False)
-        res = make_response(redirect(url_for('.cart', data = data1)))
+        if flag2:
+            res = make_response(redirect(url_for('.cart', data = data1)))
     
     return res
 
