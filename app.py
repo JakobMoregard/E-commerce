@@ -172,7 +172,7 @@ def cart_route():
 
 @app.route("/")
 def hello():
-    app.add_url_rule('/', 'index', index)
+    app.add_url_rule('/', 'index', hello)
     print("url ", url_for('index'))
 
     sql = "SELECT PID, PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
