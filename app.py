@@ -126,6 +126,8 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def cart_route():
 
+    data = request.args['data'] 
+
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
 
@@ -145,7 +147,8 @@ def cart_route():
         res = make_response(redirect("/customer"))
         return res
 
-    res = make_response(redirect(url_for('.cart', data = cookie_id)))
+    amount = request.form['Amount']
+    res = make_response(redirect(url_for('.cart', data = amount)))
     for i in range(len(IDs)):
         if cookie_id == IDs[i]['CuID']:
             return res
