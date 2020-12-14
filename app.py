@@ -223,7 +223,7 @@ def customerForm():
         execute(query, False)
     except pymysql.err.IntegrityError:
         errortext = "Customer is already registered"
-        return render_template("customer.html", data = Amount, errortext = errortext)
+        return render_template("customer.html", data = data, errortext = errortext)
 
     CaID = valid_id()
     #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
