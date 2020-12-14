@@ -118,7 +118,7 @@
             {% endfor %}
             <td>
                 <form method="POST">
-                    <input value="dict_item['PID']" type="hidden" name="form_id">
+                    <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
                     <input type="number" name="Amount">
                     <button type="submit">Add to cart</button>
                 </form>
