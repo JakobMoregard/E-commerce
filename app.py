@@ -146,7 +146,7 @@ def cart_route():
             flag = False
 
 
-    data2 = "{0}, {1}".format(request.form['form_id'],request.form['Amount'])
+    data2 = "{0}, {1}".format(request.form['form_id'], request.form['Amount'])
     print(data2)
     if request.cookies.get('login') == 'None' and flag:
         res = make_response(redirect(url_for(".customer", data = data2)))
@@ -192,7 +192,6 @@ def hello():
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
         res.set_cookie('login', 'None', max_age=60*60*24*365*2)
     else:
-        print("Could find cookie")
         name = request.cookies.get('SID')
  
     return res 
