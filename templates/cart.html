@@ -6,6 +6,37 @@
     <title></title>
 </head>
 <body>
-    <p> {{CartID}}</p>
+    <p> {{NoCartID}}</p>
+
+    <style>
+
+    td {
+        width: 150px;
+        text-align: center;
+        border: 1px solid black;
+        padding: 5px;
+    }
+    </style>
+
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
+
+            <th> Name </th>
+            <th> Price </th>
+            <th> Amount </th>
+            <th> Rating </th>
+
+        </tr>
+
+        <!-- table rows -->
+        {% for dict_item in table %}
+        <tr>
+            {% for item in dict_item.items() %}
+            <td> {{ item[1] }} </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
 </body>
 </html>
