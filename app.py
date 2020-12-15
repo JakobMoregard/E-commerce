@@ -352,7 +352,7 @@ def change_cart():
     amount = int(data["Amount"])
     sql = "SELECT IAmount FROM D0018E.Item WHERE IID = " + data['form_id']
     cur_amount = execute(sql)
-    new_amount = amount + cur_amount
+    new_amount = amount + int(cur_amount['IAmount'])
 
     if amount == '':
         pass
