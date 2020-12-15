@@ -274,6 +274,7 @@ def cart():
         res = execute(sql1)
         print(res)
         CaID = res[0]['CaID']
+    print(CaID)
     
     #data[0] = PID, data[1] = Amount 
     if request.args:
