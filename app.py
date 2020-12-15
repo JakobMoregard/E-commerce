@@ -30,12 +30,15 @@ def execute(sql, isSelect = True):
     return result
 
 
-def parse_product_data(data, keys):
+def parse_product_data(ID, data, keys):
 
     data_content = []
     used_keys = []
 
-    for i in range(0, len(keys)):
+    data_content.append(ID)
+    print(ID)
+
+    for i in range(1, len(keys)):
         print(data[keys[i]])
         if data[keys[i]] != '':
             data_content.append(data[keys[i]])
@@ -43,16 +46,39 @@ def parse_product_data(data, keys):
             used_keys.append(keys[i])
             continue
 
-    #new_data = [tuple(keys), tuple(data_content)]
     for j in range(0, len(used_keys)):    
         keys.remove(used_keys[j])
     print("parse ",  keys)
     return data_content
 
 
+def parse_price_data(ID, data, keys):
+
+    data_content = []
+    used_keys = []
+
+    data_content.append(ID)
+    print(ID)
+
+    for i in range(1, len(keys)-1):
+        print(data[keys[i]])
+        if data[keys[i]] != '':
+            data_content.append(data[keys[i]])
+        else:
+            used_keys.append(keys[i])
+            continue
+
+    for j in range(0, len(used_keys)):    
+        keys.remove(used_keys[j])
+    print("parse ",  keys)
+
+    return data_content
+
+
 def parse_update_string(data, keys):
 
     parse_string = ""
+
 
     print(keys)
 
@@ -99,12 +125,18 @@ def valid_id():
     customer_IDs = execute(sql2)
     sql3 = "SELECT RID FROM D0018E.Registered"
     registered_IDs = execute(sql3)
-    sql4 = "SELECT IID FROM D0018E.Item"
-    item_IDs = execute(sql4)
-    sql5 = "SELECT CaID FROM D0018E.Cart"
-    cart_IDs = execute(sql5)
+    sql4 = "SELECT IID FROM D0018E.Product"
+    product_IDs = execute(sql4)
+    sql5 = "SELECT CaID FROM D0018E.Available"
+    available_IDs = execute(sql5)
+    sql6 = "SELECT CaID FROM D0018E.Rating"
+    rating_IDs = execute(sql6)
+    sql7 = "SELECT CaID FROM D0018E.Cart"
+    cart_IDs = execute(sql7)
+    sql8 = "SELECT CaID FROM D0018E.Item"
+    Item_IDs = execute(sql8)
 
-    if id not in admin_IDs or customer_IDs or registered_IDs or item_IDs or cart_IDs:
+    if id not in admin_IDs or customer_IDs or registered_IDs or product_IDs or available_IDs or rating_IDs  or cart_IDs or item_IDs:
         return id
     else:
         #return valid_id(admin_IDs, customer_IDs, registered_IDs)
@@ -415,14 +447,25 @@ def adminForm():
 
     req = request.form
     print(req)
-    keys = ['PID', 'PName', 'PPrice', 'PStock', 'PColor', 'PDescript', 'PRating']
+    
+    product_keys = ['PID', 'PName', 'PColor', 'PDescript']
+    price_keys = ['AvID', 'APrice', 'AStock', 'PrID']
 
     if req['form_id'] == '1':
         try:
-            form = parse_product_data(req, keys)
-            keys = ", ".join(map(str, keys))
-            query1 = ("INSERT INTO D0018E.Product ({0}) VALUES {1}".format(keys, tuple(form))) 
-            res = execute(query1, False)
+            product_ID = valid_id()
+            price_ID = valid_id()
+
+            form1 = parse_product_data(product_ID, req, product_keys)
+            form2 = parse_price_data(price_ID, req, price_keys)
+
+            product_keys = ", ".join(map(str, product_keys))
+            price_keys = ", ".join(map(str, price_keys))
+
+            sql1 = "INSERT INTO D0018E.Product ({0}) VALUES {1}".format(product_keys, tuple(form1))
+            res = execute(sql1, False)
+            sql1 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, (SELECT PID FROM D0018E.Product WHERE PID = {2});".format(price_keys, form2, str(product_ID)) 
+            res = execute(sql1, False)
         except pymysql.err.IntegrityError:
             print("something went wrong")
 
