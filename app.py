@@ -464,9 +464,9 @@ def adminForm():
 
             sql1 = "INSERT INTO D0018E.Product ({0}) VALUES {1}".format(product_keys, tuple(form1))
             res = execute(sql1, False)
-            sql1 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, (SELECT PID FROM D0018E.Product WHERE PID = {2});".format(price_keys, form2, str(product_ID)) 
-            res = execute(sql1, False)
-        except pymysql.err.IntegrityError:
+            sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, (SELECT PID FROM D0018E.Product WHERE PID = {2}));".format(price_keys, form2, str(product_ID)) 
+            res = execute(sql2, False)
+        except pymysql.err.ProgrammingError:
             print("something went wrong")
 
     elif req['form_id'] == '2':
