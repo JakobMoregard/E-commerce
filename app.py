@@ -484,16 +484,26 @@ def adminForm():
             sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, (SELECT PID FROM D0018E.Product WHERE PID = {2}));".format(price_keys, form2, str(product_ID)) 
             res = execute(sql2, False)
         except pymysql.err.ProgrammingError:
-            print("something went wrong")
+            print("bad sql query")
 
     elif req['form_id'] == '2':
         try:
-            data = parse_product_data(req, keys)
-            parse_string = parse_update_string(data, keys)
-            sql = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string) + data[0]) 
-            res = execute(sql, False)
-        except:
-            print("something went wrong")
+            product_ID = req['PID']
+            sql = "SELECT AvID FROM D0018E.Available WHERE PrID = {0};".format(str(product_ID))
+            price_ID = execute(sql)
+
+            form1 = parse_product_data(product_ID, req, product_keys)
+            form2 = parse_product_data(price_ID, req, price_keys)
+
+            parse_string1 = parse_update_string(form1, product_keys)
+            parse_string2 = parse_update_string(form2, price_keys)
+
+            sql2 = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string1) + form1[0]) 
+            res = execute(sql2, False)
+            sql2 = ("UPDATE D0018E.Available SET {} WHERE AvID = ".format(parse_string2) + form2[0]) 
+            res = execute(sql2, False)
+        except pymysql.err.ProgrammingError:
+            print("bad sql query")
 
     elif req['form_id'] == '3':
 
