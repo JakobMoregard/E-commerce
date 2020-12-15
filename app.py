@@ -269,7 +269,7 @@ def cart():
         CaID = execute(sql1)
     elif request.cookies.get('login') == 'None':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
-        CaID = execute(sql1)
+        CaID = execute(sql1)['CaID']
     
     #data[0] = PID, data[1] = Amount 
     if request.args:
