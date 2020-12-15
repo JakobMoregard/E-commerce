@@ -361,6 +361,7 @@ def change_cart():
         pass #remove
     else:
         sql = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(new_amount, data['form_id'])
+        execute(sql, False)
         pass #update val
     
     return redirect("/cart")
