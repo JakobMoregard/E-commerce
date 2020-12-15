@@ -299,6 +299,7 @@ def cart():
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
             update = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(temp, int(PrIDs[0]['IID']))
+            execute(update, False)
         else:
             sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES ({1}, (SELECT CaID FROM D0018E.Cart WHERE CaID = {2}), (SELECT PID FROM D0018E.Product WHERE PID = {3}), {4})".format(keys, str(IID), CaID, data[0], data[1])
             execute(sql_insert, False)
