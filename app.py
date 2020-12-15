@@ -230,7 +230,7 @@ def customer():
 
     data = request.args['data']
     print("data ", data)
-    return render_template("customer.html", data = data)
+    return render_template("customer.html", data = data, login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/customer", methods=['POST'])
 def customerForm():
