@@ -267,10 +267,12 @@ def cart():
     if request.cookies.get('login') == 'registered':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(request.cookies.get('SID'))
         res = execute(sql1)
+        print(res)
         CaID = res['CaID']
     elif request.cookies.get('login') == 'None':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
         res = execute(sql1)
+        print(res)
         CaID = res['CaID']
     
     #data[0] = PID, data[1] = Amount 
