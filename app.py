@@ -263,17 +263,22 @@ def customerForm():
 @app.route("/cart")
 def cart():
 
-    CaID = ""        
-    if request.cookies.get('login') == 'registered':
-        sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(request.cookies.get('SID'))
-        res = execute(sql1)
-        print(res)
-        CaID = res[0]['CaID']
-    elif request.cookies.get('login') == 'None':
-        sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
-        res = execute(sql1)
-        print(res)
-        CaID = res[0]['CaID']
+
+
+    CaID = ""
+    try:
+        if request.cookies.get('login') == 'registered':
+            sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(request.cookies.get('SID'))
+            res = execute(sql1)
+            print(res)
+            CaID = res[0]['CaID']
+        elif request.cookies.get('login') == 'None':
+            sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
+            res = execute(sql1)
+            print(res)
+            CaID = res[0]['CaID']
+    except IndexError:
+        return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", loginstatus = request.cookies.get('login'))
     print(CaID)
     
     #data[0] = PID, data[1] = Amount 
