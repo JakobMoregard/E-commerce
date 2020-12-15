@@ -139,7 +139,7 @@ def cart_route():
 
     if request.cookies.get('login') == 'admin':
         return make_response(redirect("/"))
-    elif not flag2:
+    elif flag2:
         temp = data1.split(",")
         print("temp: ", temp)
         if temp == ['']: 
@@ -215,6 +215,7 @@ def hello():
 
 @app.route("/customer")
 def customer():
+
     data = request.args['data']
     print("data ", data)
     return render_template("customer.html", data = data)
