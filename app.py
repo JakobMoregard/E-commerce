@@ -99,8 +99,12 @@ def valid_id():
     customer_IDs = execute(sql2)
     sql3 = "SELECT RID FROM D0018E.Registered"
     registered_IDs = execute(sql3)
+    sql4 = "SELECT IID FROM D0018E.Item"
+    item_IDs = execute(sql4)
+    sql5 = "SELECT CaID FROM D0018E.Cart"
+    cart_IDs = execute(sql5)
 
-    if id not in admin_IDs or customer_IDs or registered_IDs:
+    if id not in admin_IDs or customer_IDs or registered_IDs or item_IDs or cart_IDs:
         return id
     else:
         #return valid_id(admin_IDs, customer_IDs, registered_IDs)
@@ -258,9 +262,31 @@ def customerForm():
 
 @app.route("/cart")
 def cart():
-    data = request.args['data'] 
+
+    CaID = ""        
+    if request.cookies.get('login') == 'registered':
+        sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(request.cookies.get('SID'))
+        CaID = execute(sql1)
+    elif request.cookies.get('login') == 'None':
+        sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
+        CaID = execute(sql1)
     
-    return render_template("cart.html", CartID = data)
+    #data[0] = PID, data[1] = Amount 
+    if request.args:
+        
+        keys = ["IID", "CaID", "PID", "IAmount"]
+        keys = ", ".join(map(str, keys))
+
+        data = request.args['data'].split(",")
+        IID = valid_id()
+        values =[str(IID), CaID, data[0], data[1]]
+
+        sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES {1}".format(keys, values)
+        execute(sql_insert, False)
+
+    sql_items = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = ".format(CaID)
+    table = execute(sql_items)
+    return render_template("cart.html", table = x ,CartID = data)
 
 
 @app.route("/Kenobi")
