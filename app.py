@@ -286,7 +286,7 @@ def cart():
     #data[0] = PID, data[1] = Amount 
     if request.args:
         
-        keys = ["IID", "CaID", "PID", "IAmount"]
+        keys = ["IID", "CaID", "PrID", "IAmount"]
         keys = ", ".join(map(str, keys))
 
         data = request.args['data'].split(",")
