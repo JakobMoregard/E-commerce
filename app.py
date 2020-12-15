@@ -349,6 +349,20 @@ def change_cart():
     
     data = request.form
     print(data)
+    amount = int(data["Amount"])
+    sql = "SELECT IAmount FROM D0018E.Item WHERE IID = " + data['form_id']
+    cur_amount = execute(sql)
+    new_amount = amount + cur_amount
+
+    if amount == '':
+        pass
+
+    elif new_amount == 0:
+        pass #remove
+    else:
+        sql = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(new_amount, data['form_id'])
+        pass #update val
+    
     return redirect("/cart")
 
 
