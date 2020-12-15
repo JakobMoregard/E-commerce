@@ -262,6 +262,9 @@ def customerForm():
     res = make_response(redirect(url_for("index", data = data), code=307))
     return res
 
+
+
+
 @app.route("/cart")
 def cart():
 
@@ -307,6 +310,14 @@ def cart():
     sql_items = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
     table = execute(sql_items)
     return render_template("cart.html", table = table , loginstatus = request.cookies.get('login'))
+
+
+@app.route("/cart", methods=['POST'])
+def change_cart():
+    
+    data = request.form
+    print(data)
+    return redirect("/cart")
 
 
 @app.route("/Kenobi")
