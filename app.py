@@ -296,7 +296,7 @@ def cart():
         PrIDs = execute(sql_check_if_exists)
         print(PrIDs)
         if PrIDs:
-            temp = str(int(data[1]) + int(PrIDs[0]['IAmount']))
+            temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
             update = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(temp, PrIDs[0]['IID'])
         else:
