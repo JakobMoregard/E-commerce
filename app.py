@@ -139,10 +139,6 @@ def cart_route():
 
     if request.cookies.get('login') == 'admin':
         return make_response(redirect("/"))
-    #elif flag2:
-    #    print("flag2: ", request.form['Amount'])
-    #    if request.form['Amount'] == '' or request.form['Amount'] <= 0:
-    #        return make_response(redirect("/"))
     elif not flag2:
         temp = data1.split(",")
         print("temp: ", temp)
