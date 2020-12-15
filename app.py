@@ -125,15 +125,15 @@ def valid_id():
     customer_IDs = execute(sql2)
     sql3 = "SELECT RID FROM D0018E.Registered"
     registered_IDs = execute(sql3)
-    sql4 = "SELECT IID FROM D0018E.Product"
+    sql4 = "SELECT PID FROM D0018E.Product"
     product_IDs = execute(sql4)
-    sql5 = "SELECT CaID FROM D0018E.Available"
+    sql5 = "SELECT AvID FROM D0018E.Available"
     available_IDs = execute(sql5)
-    sql6 = "SELECT CaID FROM D0018E.Rating"
+    sql6 = "SELECT RaID FROM D0018E.Rating"
     rating_IDs = execute(sql6)
     sql7 = "SELECT CaID FROM D0018E.Cart"
     cart_IDs = execute(sql7)
-    sql8 = "SELECT CaID FROM D0018E.Item"
+    sql8 = "SELECT IID FROM D0018E.Item"
     Item_IDs = execute(sql8)
 
     if id not in admin_IDs or customer_IDs or registered_IDs or product_IDs or available_IDs or rating_IDs  or cart_IDs or item_IDs:
@@ -478,9 +478,9 @@ def adminForm():
 
             sql1 = "INSERT INTO D0018E.Product ({0}) VALUES {1}".format(product_keys, tuple(form1))
             res = execute(sql1, False)
-            sql1 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, (SELECT PID FROM D0018E.Product WHERE PID = {2});".format(price_keys, form2, str(product_ID)) 
-            res = execute(sql1, False)
-        except pymysql.err.IntegrityError:
+            sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, (SELECT PID FROM D0018E.Product WHERE PID = {2}));".format(price_keys, form2, str(product_ID)) 
+            res = execute(sql2, False)
+        except pymysql.err.ProgrammingError:
             print("something went wrong")
 
     elif req['form_id'] == '2':
@@ -499,7 +499,7 @@ def adminForm():
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(query3)
-    query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
+    query2 = "Select PID, PName from D0018E.Product"
     table = execute(query2)
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
