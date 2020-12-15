@@ -140,10 +140,13 @@ def cart_route():
     if request.cookies.get('login') == 'admin':
         return make_response(redirect("/"))
     elif flag2:
-        if data2[1] == '' or data2[1] <= 0:
+        print("flag2: ", request.form['Amount'])
+        if request.form['Amount'] == '' or request.form['Amount'] <= 0:
             return make_response(redirect("/"))
     elif not flag2:
-        if data1[1] == '' or data1[1] <= 0:
+        temp = data1.split(",")
+        print("temp: ", temp)
+        if temp[1] == '' or temp[1] <= 0:
             return make_response(redirect("/"))
 
     sql1 = "SELECT CID from D0018E.Customer"
