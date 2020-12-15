@@ -144,8 +144,16 @@ def cart_route():
         print("temp: ", temp)
         if temp == ['']: 
             return make_response(redirect("/"))
-        elif temp[1] <= 0:
+        elif int(temp[1]) <= 0:
             return make_response(redirect("/"))
+    elif not flag2:
+        temp = data2.split(",")
+        print("temp: ", temp)
+        if temp[1] == '': 
+            return make_response(redirect("/"))
+        elif int(temp[1]) <= 0:
+            return make_response(redirect("/"))
+
 
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
