@@ -149,7 +149,7 @@ def cart_route():
     elif not flag2:
         temp = data2.split(",")
         print("temp: ", temp)
-        if temp[1] == '': 
+        if temp[1] == ' ': 
             return make_response(redirect("/"))
         elif int(temp[1]) <= 0:
             return make_response(redirect("/"))
