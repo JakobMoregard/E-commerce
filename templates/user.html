@@ -16,24 +16,24 @@
             background-color: #333;
         }
 
-        .topnav a {
-            float: left;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-        }
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
 
-        .topnav a:hover {
-            background-color: #ddd;
-            color: black;
-        }
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
 
-        .topnav a.active {
-            background-color: #5BB9E1;
-            color: white;
-        }
+                .topnav a.active {
+                    background-color: #5BB9E1;
+                    color: white;
+                }
 
             .topnav u {
                 float: right;
@@ -43,12 +43,32 @@
                 text-decoration: none;
                 font-size: 17px;
             }
+
+        #cart {
+            float: right;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+            #cart:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+            #cart.active {
+                background-color: #5BB9E1;
+                color: white;
+            }
     </style>
 
     <div class="topnav">
         <a href="/">Home</a>
         <a class="active" href="/user">Account</a>
         <a href="/logout"> Logout </a>
+        <a id="cart" href="/cart">Cart</a>
         <u>{{login}}</u>
 
     </div>
