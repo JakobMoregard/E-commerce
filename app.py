@@ -126,11 +126,25 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def cart_route():
 
-    data = ""
+    
+    data1 = ""
     flag2 = False
     if request.args:
         data1 = request.args['data']
         flag2 = True
+
+    data2 = ""
+    if not flag2:
+        data2 = "{0}, {1}".format(request.form['form_id'], request.form['Amount'])
+
+    if request.cookies.get('login') == 'admin':
+        return make_response(redirect("/"))
+    elif flag2:
+        if data2[1] == '' or data2[1] <= 0:
+            return make_response(redirect("/"))
+    elif not flag2:
+        if data1[1] == '' or data1[1] <= 0:
+            return make_response(redirect("/"))
 
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
@@ -147,10 +161,7 @@ def cart_route():
         if customers[i]['CID'] == cookie_id:
             flag = False
 
-    data2 = ""
-    if not flag2:
-        data2 = "{0}, {1}".format(request.form['form_id'], request.form['Amount'])
-    print(data2)
+    
     if request.cookies.get('login') == 'None' and flag:
         res = make_response(redirect(url_for(".customer", data = data2)))
         return res
