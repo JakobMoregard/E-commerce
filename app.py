@@ -268,12 +268,12 @@ def cart():
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(request.cookies.get('SID'))
         res = execute(sql1)
         print(res)
-        CaID = res['CaID']
+        CaID = res[0]['CaID']
     elif request.cookies.get('login') == 'None':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
         res = execute(sql1)
         print(res)
-        CaID = res['CaID']
+        CaID = res[0]['CaID']
     
     #data[0] = PID, data[1] = Amount 
     if request.args:
@@ -285,7 +285,7 @@ def cart():
         IID = valid_id()
         values =[str(IID), CaID, data[0], data[1]]
 
-        sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES {1}".format(keys, values)
+        sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES {1}".format(keys, tuple(values))
         execute(sql_insert, False)
 
     sql_items = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = ".format(CaID)
