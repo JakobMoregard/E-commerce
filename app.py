@@ -146,7 +146,9 @@ def cart_route():
     elif not flag2:
         temp = data1.split(",")
         print("temp: ", temp)
-        if temp == '' or temp[1] <= 0:
+        if temp == '': 
+            return make_response(redirect("/"))
+        elif temp[1] <= 0:
             return make_response(redirect("/"))
 
     sql1 = "SELECT CID from D0018E.Customer"
