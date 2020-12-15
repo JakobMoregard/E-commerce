@@ -485,7 +485,7 @@ def adminForm():
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(query3)
-    query2 = "Select PID, PName, PStock, PRating from D0018E.Product"
+    query2 = "Select PID, PName from D0018E.Product"
     table = execute(query2)
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
