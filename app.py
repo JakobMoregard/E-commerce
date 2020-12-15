@@ -202,10 +202,12 @@ def cart_route():
 def hello():
     
     app.add_url_rule('/', 'index', hello)
-    sql = "SELECT PID, PName, PPrice, PStock, PColor, PDescript FROM D0018E.Product;"
-    data = execute(sql)
+    sql1 = "SELECT PID, PName, PColor, PDescript FROM D0018E.Product;"
+    product = execute(sql1)
+    sql2 = "SELECT AvID, APrice, AStock, PrID FROM D0018E.Available;"
+    price = execute(sql2)
 
-    res = make_response(render_template("test.html", prodTable = data, login = login_status(), loginstatus = request.cookies.get('login')))
+    res = make_response(render_template("test.html", product = product, price = price, login = login_status(), loginstatus = request.cookies.get('login')))
 
     if not request.cookies.get('SID'):
         #sql = "SELECT AID FROM D0018E.Administrator"
@@ -278,7 +280,7 @@ def cart():
             print(res)
             CaID = res[0]['CaID']
     except IndexError:
-        return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", loginstatus = request.cookies.get('login'))
+        return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
     print(CaID)
     
     #data[0] = PID, data[1] = Amount 

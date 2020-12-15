@@ -121,21 +121,21 @@
         }
     </style>
 
-    {% for dict_item in prodTable %}
+    {% for dict_item in product %}
     <table>
         <!-- table header -->
         <tr>
 
             <th> Name </th>
-            <th> Price </th>
-            <th> Stock </th>
             <th> Color </th>
             <th> Description </th>
+            <!-- <th> Price </th>  -->
+            <!--<th> Stock </th> -->
 
         </tr>
 
-        <!-- table rows -->
-        <tr>
+    <!-- table rows -->
+<tr>
             {% for item in dict_item.items() %}
             {% if item[0] == 'PID' %}
 
