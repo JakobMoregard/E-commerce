@@ -290,7 +290,9 @@ def cart():
 
     sql_items = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
     table = execute(sql_items)
+<<<<<<< HEAD
     return render_template("cart.html", table = table , loginstatus = request.cookies.get('login'))
+>>>>>>> 7a6e6c15ac4c44bcd123fb2d5491cbfce3645359
 
 
 @app.route("/Kenobi")
