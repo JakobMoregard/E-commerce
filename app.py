@@ -358,7 +358,7 @@ def change_cart():
         return redirect("/cart")
 
     if new_amount == 0:
-        pass #remove
+        sql = "DELETE FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
     else:
         sql = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(new_amount, data['form_id'])
         execute(sql, False)
