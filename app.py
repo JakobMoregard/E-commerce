@@ -54,6 +54,8 @@ def parse_product_data(ID, data, keys):
 
 def parse_price_data(ID, data, keys):
 
+    print(data)
+    print(keys)
     data_content = []
     used_keys = []
 
