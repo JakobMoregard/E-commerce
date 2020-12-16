@@ -502,9 +502,9 @@ def adminForm():
             parse_string2 = parse_update_string(form2, price_keys)
 
             sql2 = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string1) + form1[0]) 
+            sql3 = ("UPDATE D0018E.Available SET {} WHERE AvID = ".format(parse_string2) + form2[0])
             res1 = execute(sql2, False)
-            sql2 = ("UPDATE D0018E.Available SET {} WHERE AvID = ".format(parse_string2) + form2[0]) 
-            res2 = execute(sql2, False)
+            res2 = execute(sql3, False)
         except pymysql.err.ProgrammingError:
             print("bad sql query")
 
