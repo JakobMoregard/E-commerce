@@ -526,6 +526,8 @@ def adminForm():
 
     elif req['form_id'] == '3':
 
+        print(req['PID'])
+        
         try:
             sql2 = "DELETE FROM D0018E.Rating WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = '{}');".format(req['PID'])
             execute(sql2)
