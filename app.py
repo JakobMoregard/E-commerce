@@ -360,7 +360,7 @@ def change_cart():
         CaID = execute(sql1)[0]['CaID']
 
         sql2 = "DELETE FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
-        execute(sq2, False)
+        execute(sql2, False)
 
         sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
         table = execute(sql3)
