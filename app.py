@@ -453,7 +453,7 @@ def admin():
     admin = execute(sql)
 
     try:
-        sql2 = "SELECT D0018E.Product.*, D0018.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018.Available.PrID;"
+        sql2 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID;"
         table = execute(sql2)
     except pymysql.err.Error:
         print("bad inner join")
@@ -525,7 +525,7 @@ def adminForm():
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(query3)
     try:
-        sql4 = "SELECT D0018E.Product.*, D0018.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018.Available.PrID;"
+        sql4 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID;"
         table = execute(sql4)
     except pymysql.err.Error:
         print("bad inner join")
