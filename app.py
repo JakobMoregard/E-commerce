@@ -544,11 +544,11 @@ def adminForm():
         except pymysql.err.Error:
             errortext = "Cannot remove from Available"
 
-        try:
-            sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
-            execute(sql)
-        except pymysql.err.Error:
-            errortext = "Cannot remove product"
+        #try:
+        sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
+        execute(sql)
+        #except pymysql.err.Error:
+            #errortext = "Cannot remove product"
 
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
