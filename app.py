@@ -476,7 +476,6 @@ def adminForm():
 
             form1 = parse_product_data(product_ID, req, product_keys)
             form2 = parse_price_data(price_ID, req, price_keys)
-            print(form2)
 
             product_keys = ", ".join(map(str, product_keys))
             price_keys = ", ".join(map(str, price_keys))
@@ -506,8 +505,13 @@ def adminForm():
             parse_string1 = parse_update_string(form1, product_keys)
             parse_string2 = parse_update_string(form2, price_keys)
 
-            sql2 = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string1) + form1[0]) 
-            sql3 = ("UPDATE D0018E.Available SET {} WHERE AvID = ".format(parse_string2) + form2[0])
+            print(parse_string1)
+            print(parse_string2)
+            print(form1[0])
+            print(form2[0])
+
+            sql2 = "UPDATE D0018E.Product SET {0} WHERE PID = ".format(parse_string1, form1[0])
+            sql3 = "UPDATE D0018E.Available SET {0} WHERE AvID = ".format(parse_string2, form2[0])
             print(sql2)
             print(sql3)
             res1 = execute(sql2, False)
