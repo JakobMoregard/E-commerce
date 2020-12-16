@@ -498,7 +498,7 @@ def adminForm():
 
             form1 = parse_product_data(product_ID, req, product_keys)
             form2 = parse_price_data(price_ID, req, price_keys)
-            print(from1)
+            print(form1)
             print(form2)
 
             parse_string1 = parse_update_string(form1, product_keys)
