@@ -54,6 +54,8 @@ def parse_product_data(ID, data, keys):
 
 def parse_price_data(ID, data, keys):
 
+    print(data)
+    print(keys)
     data_content = []
     used_keys = []
 
@@ -477,7 +479,7 @@ def adminForm():
             price_ID = valid_id()
 
             form1 = parse_product_data(product_ID, req, product_keys)
-            form2 = parse_price_data(price_ID, req, price_keys)
+            form2 = parse_price_data(price_ID, req, price_keys[:3])
 
             product_keys = ", ".join(map(str, product_keys))
             price_keys = ", ".join(map(str, price_keys))
