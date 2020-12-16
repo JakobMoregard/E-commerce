@@ -498,6 +498,8 @@ def adminForm():
 
             form1 = parse_product_data(product_ID, req, product_keys)
             form2 = parse_price_data(price_ID, req, price_keys)
+            print(from1)
+            print(form2)
 
             parse_string1 = parse_update_string(form1, product_keys)
             parse_string2 = parse_update_string(form2, price_keys)
@@ -550,9 +552,6 @@ def userForm():
         try:
             data = parse_registered_data(ID, req, keys)
             parse_string = parse_update_string(data, keys)
-            print(data)
-            print(parse_string)
-            print(data[0])
             sql = "UPDATE D0018E.Registered SET {0} WHERE RID ={1};".format(parse_string, data[0])
             print(sql)
             res = execute(sql, False)
