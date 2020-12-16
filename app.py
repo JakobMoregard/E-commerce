@@ -525,11 +525,10 @@ def adminForm():
             print("bad sql query")
 
     elif req['form_id'] == '3':
-
-        print(req['PID'])
         
         sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
-        execute(sql)
+        print(sql)
+        res = execute(sql)
 
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
