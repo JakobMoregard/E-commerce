@@ -528,7 +528,7 @@ def adminForm():
 
         print(req['PID'])
         
-        sql = "DELETE FROM D0018E.Product WHERE PID = '{}';".format(req['PID'])
+        sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
         execute(sql)
 
 
