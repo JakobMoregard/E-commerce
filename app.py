@@ -527,11 +527,16 @@ def adminForm():
     elif req['form_id'] == '3':
 
         try:
-            sql = "DELETE D0018E.Available.*, D0018E.Product.* FROM D0018E.Available INNER JOIN D0018E.Product ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID = '{}';".format(req['PID'])
-            res = execute(sql, False)
-
-        except pymysql.err.IntegrityError:
-            errortext = "Cannot remove product (FK constraint)"
+            sql = "DELETE FROM D0018E.Rating WHERE PrID = {};".format(req['PID'])
+            execute(sql)
+            sql = "DELETE FROM D0018E.Item WHERE PrID = {};".format(req['PID'])
+            execute(sql)
+            sql = "DELETE FROM D0018E.Available WHERE PrID = {};".format(req['PID'])
+            execute(sql)
+            sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
+            execute(sql)
+        except pymysql.err.Error:
+            errortext = "Cannot remove product"
 
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
