@@ -52,7 +52,7 @@ def parse_product_data(ID, data, keys):
     return data_content
 
 
-def parse_price_data(ID, data, keys):
+def parse_price_data(ID, data, keys, fk_ID):
 
     data_content = []
     used_keys = []
@@ -67,6 +67,9 @@ def parse_price_data(ID, data, keys):
         else:
             used_keys.append(keys[i])
             continue
+
+    data_content.append(fk_ID)
+    print(fk_ID)
 
     for j in range(0, len(used_keys)):    
         keys.remove(used_keys[j])
@@ -488,7 +491,6 @@ def adminForm():
     elif req['form_id'] == '2':
         try:
             product_ID = req['PID']
-            print(product_ID)
             try:
                 sql = "SELECT AvID FROM D0018E.Available WHERE PrID = {0};".format(product_ID)
                 res = execute(sql)
@@ -497,7 +499,7 @@ def adminForm():
                 print("this sytax sucks ass")
 
             form1 = parse_product_data(product_ID, req, product_keys)
-            form2 = parse_price_data(price_ID, req, price_keys)
+            form2 = parse_price_data(price_ID, req, price_keys, product_ID)
             print(form1)
             print(form2)
 
