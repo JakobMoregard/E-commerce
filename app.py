@@ -458,7 +458,13 @@ def admin():
     except pymysql.err.Error:
         print("bad inner join")
 
-    return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
+    try:
+        sql2 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product FULL OUTER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID ORDER BY D0018E.Product.PID;"
+        table2 = execute(sql2)
+    except pymysql.err.Error:
+        print("bad outer join")
+
+    return render_template("admin.html", table = table, table2 = table2, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
    
 @app.route("/admin", methods=['POST'])
@@ -530,7 +536,13 @@ def adminForm():
     except pymysql.err.Error:
         print("bad inner join")
 
-    return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
+    try:
+        sql5 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product FULL OUTER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID ORDER BY D0018E.Product.PID;"
+        table2 = execute(sql5)
+    except pymysql.err.Error:
+        print("bad outer join")
+
+    return render_template("admin.html", table = table, table2 = table2, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/user")
 def user():
