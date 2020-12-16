@@ -547,12 +547,12 @@ def adminForm():
             errortext = "Cannot remove from Available"
             return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
-        try:
-            sql = "DELETE FROM D0018E.Product WHERE PID = '{}';".format(req['PID'])
-            execute(sql)
-        except pymysql.err.Error:
-            errortext = "Cannot remove product"
-            return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
+        #try:
+        sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
+        execute(sql)
+        #except pymysql.err.Error:
+            #errortext = "Cannot remove product"
+            #return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
