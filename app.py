@@ -510,8 +510,8 @@ def adminForm():
             print(form1[0])
             print(form2[0])
 
-            sql2 = "UPDATE D0018E.Product SET {0} WHERE PID = ".format(parse_string1, form1[0])
-            sql3 = "UPDATE D0018E.Available SET {0} WHERE AvID = ".format(parse_string2, form2[0])
+            sql2 = "UPDATE D0018E.Product SET {0} WHERE PID = {1}".format(parse_string1, form1[0])
+            sql3 = "UPDATE D0018E.Available SET {0} WHERE AvID = {1}".format(parse_string2, int(form2[0]))
             print(sql2)
             print(sql3)
             res1 = execute(sql2, False)
