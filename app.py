@@ -78,8 +78,6 @@ def parse_price_data(ID, data, keys):
 def parse_update_string(data, keys):
 
     parse_string = ""
-
-
     print(keys)
 
     for i in range(1, len(keys)):
@@ -481,10 +479,8 @@ def adminForm():
             price_keys = ", ".join(map(str, price_keys))
 
             sql1 = "INSERT INTO D0018E.Product ({0}) VALUES {1}".format(product_keys, tuple(form1))
-            print(sql1)
             res = execute(sql1, False)
             sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, {2}, {3}, (SELECT PID FROM D0018E.Product WHERE PID = {4}));".format(price_keys, form2[0], form2[1], form2[2],  product_ID)
-            print(sql2)
             res = execute(sql2, False)
         except pymysql.err.ProgrammingError:
             print("bad sql query")
@@ -495,11 +491,8 @@ def adminForm():
             print(product_ID)
             try:
                 sql = "SELECT AvID FROM D0018E.Available WHERE PrID = {0};".format(product_ID)
-                print(sql)
                 res = execute(sql)
-                print(res)
                 price_ID = res[0]['AvID']
-                print(price_ID)
             except pymysql.err.ProgrammingError:
                 print("this sytax sucks ass")
 
@@ -557,6 +550,9 @@ def userForm():
         try:
             data = parse_registered_data(ID, req, keys)
             parse_string = parse_update_string(data, keys)
+            print(data)
+            print(parse_string)
+            print(data[0])
             sql = ("UPDATE D0018E.Registered SET {} WHERE RID = ".format(parse_string) + data[0])
             print(sql)
             res = execute(sql, False)
