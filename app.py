@@ -327,7 +327,8 @@ def cart():
 
         sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {}".format(CaID)
         PrIDs = execute(sql_check_if_exists)
-
+        print("PrIDs ", PrIDs)
+        print("Cart data ", data)
         if PrIDs and PrIDs[0]['IID'] in data:
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
@@ -356,19 +357,9 @@ def change_cart():
         return redirect("/cart")
 
     if new_amount <= 0:
-        sql1 = "SELECT CaID FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
-        CaID = execute(sql1)[0]['CaID']
-
-        sql2 = "DELETE FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
-        execute(sql2, False)
-
-        sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
-        table = execute(sql3)
-        print("Table ", table)
-        if table!= ():
-            return render_template("cart.html", table = table, login = login_status(), loginstatus = request.cookies.get('login'))
-        else:
-            return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
+        sql = "DELETE FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
+        execute(sql, False)
+        return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
     else:
         sql = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(new_amount, data['form_id'])
         execute(sql, False)
@@ -461,8 +452,11 @@ def admin():
     sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(sql)
 
-    sql2 = "SELECT D0018E.Product.*, D0018.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018.Available.PrID;"
-    table = execute(sql2)
+    try:
+        sql2 = "SELECT D0018E.Product.*, D0018.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018.Available.PrID;"
+        table = execute(sql2)
+    except pymysql.err.Error:
+        print("bad inner join")
 
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
@@ -489,11 +483,8 @@ def adminForm():
 
             sql1 = "INSERT INTO D0018E.Product ({0}) VALUES {1}".format(product_keys, tuple(form1))
             res = execute(sql1, False)
-            try:
-                sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, {2}, {3}, (SELECT PID FROM D0018E.Product WHERE PID = {4}));".format(price_keys, form2[0], form2[1], form2[2],  product_ID)
-                res = execute(sql2, False)
-            except pymysql.err.ProgrammingError:
-                print("bad inner join")
+            sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, {2}, {3}, (SELECT PID FROM D0018E.Product WHERE PID = {4}));".format(price_keys, form2[0], form2[1], form2[2],  product_ID)
+            res = execute(sql2, False)
         except pymysql.err.ProgrammingError:
             print("bad sql query")
 
@@ -534,9 +525,9 @@ def adminForm():
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(query3)
     try:
-        sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, {2}, {3}, (SELECT PID FROM D0018E.Product WHERE PID = {4}));".format(price_keys, form2[0], form2[1], form2[2],  product_ID)
-        res = execute(sql2, False)
-    except pymysql.err.ProgrammingError:
+        sql4 = "SELECT D0018E.Product.*, D0018.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018.Available.PrID;"
+        table = execute(sql4)
+    except pymysql.err.Error:
         print("bad inner join")
 
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
