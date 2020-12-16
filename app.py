@@ -52,7 +52,7 @@ def parse_product_data(ID, data, keys):
     return data_content
 
 
-def parse_price_data(ID, data, keys, fk_ID):
+def parse_price_data(ID, data, keys):
 
     data_content = []
     used_keys = []
@@ -67,9 +67,6 @@ def parse_price_data(ID, data, keys, fk_ID):
         else:
             used_keys.append(keys[i])
             continue
-
-    data_content.append(fk_ID)
-    print(fk_ID)
 
     for j in range(0, len(used_keys)):    
         keys.remove(used_keys[j])
@@ -296,8 +293,6 @@ def customerForm():
     return res
 
 
-
-
 @app.route("/cart")
 def cart():
 
@@ -497,8 +492,10 @@ def adminForm():
             except pymysql.err.ProgrammingError:
                 print("this sytax sucks ass")
 
+            price_keys = ['AvID', 'APrice', 'AStock']
+
             form1 = parse_product_data(product_ID, req, product_keys)
-            form2 = parse_price_data(price_ID, req, price_keys, product_ID)
+            form2 = parse_price_data(price_ID, req, price_keys)
             print(form1)
             print(form2)
 
@@ -511,7 +508,7 @@ def adminForm():
             print(form2[0])
 
             sql2 = "UPDATE D0018E.Product SET {0} WHERE PID = {1}".format(parse_string1, form1[0])
-            sql3 = "UPDATE D0018E.Available SET {0} WHERE AvID = {1}".format(parse_string2, int(form2[0]))
+            sql3 = "UPDATE D0018E.Available SET {0} WHERE AvID = {1}".format(parse_string2, form2[0])
             print(sql2)
             print(sql3)
             res1 = execute(sql2, False)
