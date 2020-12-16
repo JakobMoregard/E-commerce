@@ -453,7 +453,7 @@ def admin():
     sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(sql)
 
-    slq2 = "Select PID, PName from D0018E.Product"
+    sql2 = "Select PID, PName from D0018E.Product"
     table = execute(sql2)
 
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
