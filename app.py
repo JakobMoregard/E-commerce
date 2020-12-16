@@ -529,10 +529,22 @@ def adminForm():
         try:
             sql = "DELETE FROM D0018E.Rating WHERE PrID = {};".format(req['PID'])
             execute(sql)
+        except pymysql.err.Error:
+            errortext = "Cannot remove from Rating"
+
+        try:
             sql = "DELETE FROM D0018E.Item WHERE PrID = {};".format(req['PID'])
             execute(sql)
+        except pymysql.err.Error:
+            errortext = "Cannot remove from Item"
+
+        try:
             sql = "DELETE FROM D0018E.Available WHERE PrID = {};".format(req['PID'])
             execute(sql)
+        except pymysql.err.Error:
+            errortext = "Cannot remove from Available"
+
+        try:
             sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
             execute(sql)
         except pymysql.err.Error:
