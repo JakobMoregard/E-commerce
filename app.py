@@ -483,7 +483,7 @@ def adminForm():
             sql1 = "INSERT INTO D0018E.Product ({0}) VALUES {1}".format(product_keys, tuple(form1))
             print(sql1)
             res = execute(sql1, False)
-            sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, (SELECT PID FROM D0018E.Product WHERE PID = {2}));".format(price_keys, tuple(form2), product_ID)
+            sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, {2}, {3}, (SELECT PID FROM D0018E.Product WHERE PID = {4}));".format(price_keys, form2[0], form2[1], form2[2],  product_ID)
             print(sql2)
             res = execute(sql2, False)
         except pymysql.err.ProgrammingError:
