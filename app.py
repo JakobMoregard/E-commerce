@@ -458,18 +458,13 @@ def admin():
     except pymysql.err.Error:
         print("bad inner join")
 
-    try:
-        sql3 = "SELECT * FROM D0018E.Product LEFT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID UNION ALL SELECT * FROM D0018E.Product RIGHT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID IS NULL;"
-        table2 = execute(sql3)
-    except pymysql.err.Error:
-        print("bad outer join")
-
-    return render_template("admin.html", table = table, table2 = table2, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
+    return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
    
 @app.route("/admin", methods=['POST'])
 def adminForm():
 
+    errortext = ''
     req = request.form
     print(req)
     
@@ -525,11 +520,14 @@ def adminForm():
 
     elif req['form_id'] == '3':
 
-        sql2 = "DELETE FROM D0018E.Available WHERE PrID = '{}'".format(req['PID'])
-        res = execute(sql2, False)
+        try:
+            sql2 = "DELETE FROM D0018E.Available WHERE PrID = '{}'".format(req['PID'])
+            res = execute(sql2, False)
 
-        sql = "DELETE FROM D0018E.Product WHERE PID = '{}'".format(req['PID'])
-        res = execute(sql, False)
+            sql = "DELETE FROM D0018E.Product WHERE PID = '{}'".format(req['PID'])
+            res = execute(sql, False)
+        except pymysql.err.IntegrityError:
+            errortext = "Cannot remove product (FK constraint)"
 
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
@@ -540,13 +538,7 @@ def adminForm():
     except pymysql.err.Error:
         print("bad inner join")
 
-    try:
-        sql5 = "SELECT * FROM D0018E.Product LEFT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID UNION ALL SELECT * FROM D0018E.Product RIGHT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID IS NULL;"
-        table2 = execute(sql5)
-    except pymysql.err.Error:
-        print("bad outer join")
-
-    return render_template("admin.html", table = table, table2 = table2, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
+    return render_template("admin.html", errortext = errortext, table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/user")
 def user():

@@ -140,7 +140,7 @@
         Id*: <input type="number" name="PID">
         <input type="submit">
     </form>
-    <i> Fields marked with * are mandatory </i><br>
+    <output> {{errortext}} </output>
 
     <table style="width:100%">
         <!-- table header -->
@@ -167,30 +167,6 @@
         {% endfor %}
     </table>
 
-    <table style="width:100%">
-        <!-- table header -->
-        <tr>
-
-            <th> PID </th>
-            <th> Name </th>
-            <th> Color </th>
-            <th> Description </th>
-            <th> AvID </th>
-            <th> Price </th>
-            <th> Stock </th>
-            <th> PrID </th>
-
-        </tr>
-
-        <!-- table rows -->
-        {% for dict_item in table2 %}
-        <tr>
-            {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
 
 </body>
 </html>
