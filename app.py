@@ -526,22 +526,22 @@ def adminForm():
 
     elif req['form_id'] == '3':
 
-        #try:
-        sql = "DELETE FROM D0018E.Rating WHERE PrID = (SELECT PrID FROM D0018E.Rating WHERE PrID = {});".format(req['PID'])
-        execute(sql)
-        #except pymysql.err.Error:
-            #errortext = "Cannot remove from Rating"
-            #return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
+        try:
+            sql = "DELETE FROM D0018E.Rating WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = {});".format(req['PID'])
+            execute(sql)
+        except pymysql.err.Error:
+            errortext = "Cannot remove from Rating"
+            return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
         try:
-            sql = "DELETE FROM D0018E.Item WHERE PrID = (SELECT PrID FROM D0018E.Item WHERE PrID = {});".format(req['PID'])
+            sql = "DELETE FROM D0018E.Item WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = {});".format(req['PID'])
             execute(sql)
         except pymysql.err.Error:
             errortext = "Cannot remove from Item"
             return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
         try:
-            sql = "DELETE FROM D0018E.Available WHERE PrID = (SELECT PrID FROM D0018E.Available WHERE PrID = {});".format(req['PID'])
+            sql = "DELETE FROM D0018E.Available WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = {});".format(req['PID'])
             execute(sql)
         except pymysql.err.Error:
             errortext = "Cannot remove from Available"
