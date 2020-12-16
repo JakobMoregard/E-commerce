@@ -528,6 +528,9 @@ def adminForm():
         sql = "DELETE FROM D0018E.Product WHERE PID = '{}'".format(req['PID'])
         res = execute(sql, False)
 
+        sql2 = "DELETE FROM D0018E.Available WHERE PrID = '{}'".format(req['PID'])
+        res = execute(sql2, False)
+
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(query3)
     try:
