@@ -548,7 +548,7 @@ def adminForm():
             return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
         try:
-            sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
+            sql = "DELETE FROM D0018E.Product WHERE PID = '{}';".format(req['PID'])
             execute(sql)
         except pymysql.err.Error:
             errortext = "Cannot remove product"
