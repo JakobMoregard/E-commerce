@@ -356,11 +356,14 @@ def change_cart():
         return redirect("/cart")
 
     if new_amount <= 0:
-        sql = "DELETE FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
-        execute(sql, False)
+        sql1 = "SELECT CaID FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
+        CaID = execute(sql1)[0]['CaID']
 
-        sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
-        table = execute(sql2)
+        sql2 = "DELETE FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
+        execute(sq2, False)
+
+        sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
+        table = execute(sql3)
         print("Table ", table)
         if table!= ():
             return render_template("cart.html", table = table, login = login_status(), loginstatus = request.cookies.get('login'))
