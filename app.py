@@ -458,11 +458,11 @@ def admin():
     except pymysql.err.Error:
         print("bad inner join")
 
-    #try:
-    sql3 = "SELECT * FROM D0018E.Product LEFT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID UNION ALL SELECT * FROM D0018E.Product RIGHT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID IS NULL;"
-    table2 = execute(sql3)
-    #except pymysql.err.Error:
-        #print("bad outer join")
+    try:
+        sql3 = "SELECT * FROM D0018E.Product LEFT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID UNION ALL SELECT * FROM D0018E.Product RIGHT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID IS NULL;"
+        table2 = execute(sql3)
+    except pymysql.err.Error:
+        print("bad outer join")
 
     return render_template("admin.html", table = table, table2 = table2, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
@@ -536,11 +536,11 @@ def adminForm():
     except pymysql.err.Error:
         print("bad inner join")
 
-    #try:
-    sql5 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product FULL JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID"
-    table2 = execute(sql5)
-    #except pymysql.err.Error:
-        #print("bad outer join")
+    try:
+        sql5 = "SELECT * FROM D0018E.Product LEFT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID UNION ALL SELECT * FROM D0018E.Product RIGHT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID IS NULL;"
+        table2 = execute(sql5)
+    except pymysql.err.Error:
+        print("bad outer join")
 
     return render_template("admin.html", table = table, table2 = table2, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
