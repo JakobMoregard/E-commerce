@@ -327,8 +327,7 @@ def cart():
 
         sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {}".format(CaID)
         PrIDs = execute(sql_check_if_exists)
-        print("PrIDs ", PrIDs)
-        print("Cart data ", data)
+
         if PrIDs and PrIDs[0]['IID'] in data:
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
@@ -362,7 +361,7 @@ def change_cart():
 
         sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
         table = execute(sql2)
-        if table:
+        if table[0]['IID'] != '':
             return render_template("cart.html", table = table, login = login_status(), loginstatus = request.cookies.get('login'))
         else:
             return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
