@@ -527,29 +527,29 @@ def adminForm():
     elif req['form_id'] == '3':
 
         try:
-            sql = "DELETE FROM D0018E.Rating WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = {});".format(req['PID'])
-            execute(sql)
+            sql2 = "DELETE FROM D0018E.Rating WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = '{}');".format(req['PID'])
+            execute(sql2)
         except pymysql.err.Error:
             errortext = "Cannot remove from Rating"
             return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
         try:
-            sql = "DELETE FROM D0018E.Item WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = {});".format(req['PID'])
-            execute(sql)
+            sql3 = "DELETE FROM D0018E.Item WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = '{}');".format(req['PID'])
+            execute(sql3)
         except pymysql.err.Error:
             errortext = "Cannot remove from Item"
             return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
         try:
-            sql = "DELETE FROM D0018E.Available WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = {});".format(req['PID'])
-            execute(sql)
+            sql4 = "DELETE FROM D0018E.Available WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PID = '{}');".format(req['PID'])
+            execute(sql4)
         except pymysql.err.Error:
             errortext = "Cannot remove from Available"
             return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
         #try:
-            sql = "DELETE FROM D0018E.Product WHERE PID = {};".format(req['PID'])
-            execute(sql)
+            sql5 = "DELETE FROM D0018E.Product WHERE PID = '{}';".format(req['PID'])
+            execute(sql5)
         #except pymysql.err.Error:
             #errortext = "Cannot remove product"
             #return render_template("admin.html", errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
