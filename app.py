@@ -357,7 +357,7 @@ def change_cart():
     except ValueError:
         return redirect("/cart")
 
-    if new_amount == 0:
+    if new_amount <= 0:
         sql = "DELETE FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
         execute(sql, False)
         return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
