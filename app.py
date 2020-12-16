@@ -498,7 +498,7 @@ def adminForm():
                 print(sql)
                 res = execute(sql)
                 print(res)
-                price_ID = res[1]
+                price_ID = res[0['AvID']]
                 print(price_ID)
             except pymysql.err.ProgrammingError:
                 print("this sytax sucks ass")
