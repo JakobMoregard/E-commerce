@@ -489,8 +489,11 @@ def adminForm():
 
             sql1 = "INSERT INTO D0018E.Product ({0}) VALUES {1}".format(product_keys, tuple(form1))
             res = execute(sql1, False)
-            sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, {2}, {3}, (SELECT PID FROM D0018E.Product WHERE PID = {4}));".format(price_keys, form2[0], form2[1], form2[2],  product_ID)
-            res = execute(sql2, False)
+            try:
+                sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, {2}, {3}, (SELECT PID FROM D0018E.Product WHERE PID = {4}));".format(price_keys, form2[0], form2[1], form2[2],  product_ID)
+                res = execute(sql2, False)
+            except pymysql.err.ProgrammingError:
+                print("bad inner join")
         except pymysql.err.ProgrammingError:
             print("bad sql query")
 
@@ -530,8 +533,12 @@ def adminForm():
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(query3)
-    query2 = "SELECT D0018E.Product.*, D0018.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018.Available.PrID;"
-    table = execute(query2)
+    try:
+        sql2 = "INSERT INTO D0018E.Available ({0}) VALUES ({1}, {2}, {3}, (SELECT PID FROM D0018E.Product WHERE PID = {4}));".format(price_keys, form2[0], form2[1], form2[2],  product_ID)
+        res = execute(sql2, False)
+    except pymysql.err.ProgrammingError:
+        print("bad inner join")
+
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/user")
