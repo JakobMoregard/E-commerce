@@ -553,7 +553,7 @@ def userForm():
             print(data)
             print(parse_string)
             print(data[0])
-            sql = ("UPDATE D0018E.Registered SET {} WHERE RID = ".format(parse_string) + data[0])
+            sql = "UPDATE D0018E.Registered SET {0} WHERE RID ={1};".format(parse_string, data[0])
             print(sql)
             res = execute(sql, False)
         except:
