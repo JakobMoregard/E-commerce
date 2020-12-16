@@ -450,11 +450,11 @@ def signupForm():
 
 @app.route("/admin")
 def admin():
-    query = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
-    admin = execute(query)
+    sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
+    admin = execute(sql)
 
-    query2 = "Select PID, PName from D0018E.Product"
-    table = execute(query2)
+    slq2 = "Select PID, PName from D0018E.Product"
+    table = execute(sql2)
 
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
@@ -489,9 +489,11 @@ def adminForm():
     elif req['form_id'] == '2':
         try:
             product_ID = req['PID']
+            print(product_ID)
             try:
                 sql = "SELECT AvID FROM D0018E.Available WHERE PrID = {0};".format(str(product_ID))
                 price_ID = execute(sql)
+                print(price_ID)
             except pymysql.err.ProgrammingError:
                 print("this sytax sucks ass")
 
@@ -503,6 +505,8 @@ def adminForm():
 
             sql2 = ("UPDATE D0018E.Product SET {} WHERE PID = ".format(parse_string1) + form1[0]) 
             sql3 = ("UPDATE D0018E.Available SET {} WHERE AvID = ".format(parse_string2) + form2[0])
+            print(sql2)
+            print(sql3)
             res1 = execute(sql2, False)
             res2 = execute(sql3, False)
         except pymysql.err.ProgrammingError:
