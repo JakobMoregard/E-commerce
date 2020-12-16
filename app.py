@@ -529,7 +529,7 @@ def adminForm():
         print(req['PID'])
         
         sql = "DELETE FROM D0018E.Product WHERE PID = '{}';".format(req['PID'])
-        execute(sql5)
+        execute(sql)
 
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
