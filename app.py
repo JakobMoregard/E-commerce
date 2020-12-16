@@ -461,7 +461,7 @@ def admin():
     sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(sql)
 
-    sql2 = "Select PID, PName from D0018E.Product"
+    sql2 = "SELECT D0018E.Product.*, D0018.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018.Available.PrID;"
     table = execute(sql2)
 
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
@@ -530,7 +530,7 @@ def adminForm():
 
     query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(query3)
-    query2 = "Select PID, PName from D0018E.Product"
+    query2 = "SELECT D0018E.Product.*, D0018.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018.Available.PrID;"
     table = execute(query2)
     return render_template("admin.html", table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
