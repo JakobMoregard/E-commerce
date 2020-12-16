@@ -361,6 +361,7 @@ def change_cart():
 
         sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
         table = execute(sql2)
+        print("Table ", table)
         if table[0]['IID'] != '':
             return render_template("cart.html", table = table, login = login_status(), loginstatus = request.cookies.get('login'))
         else:
