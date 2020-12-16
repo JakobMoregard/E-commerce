@@ -494,7 +494,7 @@ def adminForm():
             product_ID = req['PID']
             print(product_ID)
             try:
-                sql = "SELECT AvID FROM D0018E.Available WHERE PrID = {0};".format(str(product_ID))
+                sql = "SELECT AvID FROM D0018E.Available WHERE PrID = {0};".format(product_ID)
                 print(sql)
                 price_ID = execute(sql)
                 print(price_ID)
