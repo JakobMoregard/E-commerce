@@ -60,7 +60,7 @@ def parse_price_data(ID, data, keys):
     data_content.append(ID)
     print(ID)
 
-    for i in range(1, len(keys)-1):
+    for i in range(1, len(keys)):
         print(data[keys[i]])
         if data[keys[i]] != '':
             data_content.append(data[keys[i]])
