@@ -495,13 +495,11 @@ def adminForm():
             except pymysql.err.ProgrammingError:
                 print("this sytax sucks ass")
 
-            price_keys = ['AvID', 'APrice', 'AStock']
-
             form1 = parse_product_data(product_ID, req, product_keys)
-            form2 = parse_price_data(price_ID, req, price_keys)
+            form2 = parse_price_data(price_ID, req, price_keys[:3])
 
             parse_string1 = parse_update_string(form1, product_keys)
-            parse_string2 = parse_update_string(form2, price_keys)
+            parse_string2 = parse_update_string(form2, price_keys[:3])
 
             if parse_string1 != '':
                 sql2 = "UPDATE D0018E.Product SET {0} WHERE PID = {1}".format(parse_string1, form1[0])
