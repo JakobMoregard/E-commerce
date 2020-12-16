@@ -527,7 +527,7 @@ def adminForm():
     elif req['form_id'] == '3':
 
         try:
-            sql = "DELETE * FROM D0018E.Product INNER JOIN ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID = '{}'".format(req['PID'])
+            sql = "DELETE D0018E.Product.*, D0018E.Available.* FROM D0018E.Product INNER JOIN ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID = '{}'".format(req['PID'])
             res = execute(sql, False)
 
         except pymysql.err.IntegrityError:
