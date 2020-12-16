@@ -459,7 +459,7 @@ def admin():
         print("bad inner join")
 
     #try:
-    sql2 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product FULL OUTER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID ORDER BY D0018E.Product.PID;"
+    sql2 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product FULL OUTER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID;"
     table2 = execute(sql2)
     #except pymysql.err.Error:
         #print("bad outer join")
@@ -537,7 +537,7 @@ def adminForm():
         print("bad inner join")
 
     #try:
-    sql5 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product FULL OUTER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID ORDER BY D0018E.Product.PID;"
+    sql5 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product FULL OUTER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID"
     table2 = execute(sql5)
     #except pymysql.err.Error:
         #print("bad outer join")
