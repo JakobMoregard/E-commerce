@@ -60,7 +60,7 @@ def parse_price_data(ID, data, keys):
     data_content.append(ID)
     print(ID)
 
-    for i in range(1, len(keys)-1):
+    for i in range(1, len(keys)):
         print(data[keys[i]])
         if data[keys[i]] != '':
             data_content.append(data[keys[i]])
@@ -497,23 +497,18 @@ def adminForm():
 
             form1 = parse_product_data(product_ID, req, product_keys)
             form2 = parse_price_data(price_ID, req, price_keys)
-            print(form1)
-            print(form2)
 
             parse_string1 = parse_update_string(form1, product_keys)
             parse_string2 = parse_update_string(form2, price_keys)
 
-            print(parse_string1)
-            print(parse_string2)
-            print(form1[0])
-            print(form2[0])
+            if parse_string1 != '':
+                sql2 = "UPDATE D0018E.Product SET {0} WHERE PID = {1}".format(parse_string1, form1[0])
+                res1 = execute(sql2, False)
+            
+            elif parse_string2 != '':
+                sql3 = "UPDATE D0018E.Available SET {0} WHERE AvID = {1}".format(parse_string2, form2[0])
+                res2 = execute(sql3, False)
 
-            sql2 = "UPDATE D0018E.Product SET {0} WHERE PID = {1}".format(parse_string1, form1[0])
-            sql3 = "UPDATE D0018E.Available SET {0} WHERE AvID = {1}".format(parse_string2, form2[0])
-            print(sql2)
-            print(sql3)
-            res1 = execute(sql2, False)
-            res2 = execute(sql3, False)
         except pymysql.err.ProgrammingError:
             print("bad sql query")
 
