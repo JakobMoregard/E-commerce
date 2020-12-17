@@ -304,8 +304,6 @@ def customerForm():
 @app.route("/cart")
 def cart():
 
-
-
     CaID = ""
     try:
         if request.cookies.get('login') == 'registered':
@@ -333,8 +331,7 @@ def cart():
 
         sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {}".format(CaID)
         PrIDs = execute(sql_check_if_exists)
-        print("PrIDs ", PrIDs)
-        print("Cart data ", data)
+
         if PrIDs and PrIDs[0]['IID'] in data:
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
