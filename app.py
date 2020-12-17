@@ -286,6 +286,12 @@ def customerForm():
     except pymysql.err.IntegrityError:
         errortext = "Customer is already registered"
         return render_template("customer.html", data = data, errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
+    except pymysql.err.OperationalError:
+        errortext = "Please enter all required fields"
+        return render_template("customer.html", data = data, errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
+    except pymysql.err.DataError:
+        errortext = "Field too long"
+        return render_template("customer.html", data = data, errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
     CaID = valid_id()
     #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
@@ -443,7 +449,7 @@ def signupForm():
         errortext = "Please enter all required fields"
         return render_template("signup.html", registered = registered, errortext = errortext)
     except pymysql.err.DataError:
-        errortext = "Field to long"
+        errortext = "Field too long"
         return render_template("signup.html", registered = registered, errortext = errortext)
 
     res = make_response(redirect("/user"))
