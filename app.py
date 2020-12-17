@@ -439,7 +439,9 @@ def signupForm():
     except pymysql.err.IntegrityError:
         errortext = "Mail is already registered"
         return render_template("signup.html", registered = registered, errortext = errortext)
-
+    except pymysql.err.OperationalError:
+        errortext = "Please enter all required fields"
+        return render_template("signup.html", registered = registered, errortext = errortext)
     res = make_response(redirect("/user"))
     res.set_cookie('SID', str(new_ID), max_age=60*60*24*365*2)
     res.set_cookie('login', 'registered', max_age=60*60*24*365*2)
