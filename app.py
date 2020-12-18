@@ -381,6 +381,24 @@ def change_cart():
     return redirect("/cart")
 
 
+@app.route("/check_out")
+def check_out():
+
+    loginstatus = request.cookies.get('login')
+    CaID = ""
+
+    if login_status == 'None':
+        sql1 = "SELECT CaID FROM D0018E.Item WHERE CuID = {}".format(request.cookies.get('SID'))
+        CaID = execute(sql1)[0]['CaID']
+    elif login_status == 'registered':
+        sql1 = "SELECT CaID FROM D0018E.Item WHERE ReID = {}".format(request.cookies.get('SID'))
+        CaID = execute(sql1)[0]['CaID']
+
+    sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
+    table = execute(sql2)
+
+    return render_template("check_out.html", table = table , loginstatus = loginstatus)
+
 @app.route("/Kenobi")
 def kenobi():
 
