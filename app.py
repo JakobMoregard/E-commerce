@@ -386,7 +386,7 @@ def check_out():
 
     loginstatus = request.cookies.get('login')
     CaID = ""
-
+    print("status ", loginstatus)
     if login_status == 'None':
         sql1 = "SELECT CaID FROM D0018E.Item WHERE CuID = {}".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
@@ -394,7 +394,9 @@ def check_out():
         sql1 = "SELECT CaID FROM D0018E.Item WHERE ReID = {}".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
 
+    print("CaID ", CaID)
     sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
+    print("sql ", sql2)
     table = execute(sql2)
 
     return render_template("check_out.html", table = table , loginstatus = loginstatus)
