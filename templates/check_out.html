@@ -113,13 +113,6 @@
             {% for item in dict_item.items() %}
             <td> {{ item[1] }} </td>
             {% endfor %}
-            <td>
-                <form method="POST">
-                    <input value="{{dict_item['IID']}}" type="hidden" name="form_id">
-                    <input type="number" name="Amount">
-                    <button type="submit">Add or remove to cart</button>
-                </form>
-            </td>
         </tr>
         {% endfor %}
     </table>
