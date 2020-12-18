@@ -387,10 +387,10 @@ def check_out():
     loginstatus = request.cookies.get('login')
     CaID = ""
     print("status ", loginstatus)
-    if login_status == 'None':
+    if loginstatus == 'None':
         sql1 = "SELECT CaID FROM D0018E.Item WHERE CuID = {}".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
-    elif login_status == 'registered':
+    elif loginstatus == 'registered':
         sql1 = "SELECT CaID FROM D0018E.Item WHERE ReID = {}".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
 
