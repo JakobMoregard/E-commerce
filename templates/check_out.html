@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                .topnav a.active {
+                    background-color: #5BB9E1;
+                    color: white;
+                }
+
+            .topnav u {
+                float: right;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+        #cart {
+            float: right;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+            #cart:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+            #cart.active {
+                background-color: #5BB9E1;
+                color: white;
+            }
+    </style>
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        {% if loginstatus == "None" %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" class="active" href="/cart">Cart</a>
+
+        {% elif loginstatus == "registered" %}
+
+        <a href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        <a id="cart" class="active" href="/cart">Cart</a>
+
+        {% endif %}
+
+        <u>{{login}}</u>
+
+    </div>
+</head>
+<body>
+    <img src="https://i.pinimg.com/originals/57/84/8d/57848d08c69b3122c52682887558c0f1.jpg" alt="Trulli" width="500" height="333"><br>
+    
+    <p> {{NoCartID}}</p>
+
+    <style>
+
+        td {
+            width: 150px;
+            text-align: center;
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
+
+            <th> IID </th>
+            <th> Amount </th>
+
+        </tr>
+
+        <!-- table rows -->
+        {% for dict_item in table %}
+        <tr>
+            {% for item in dict_item.items() %}
+            <td> {{ item[1] }} </td>
+            {% endfor %}
+            <td>
+                <form method="POST">
+                    <input value="{{dict_item['IID']}}" type="hidden" name="form_id">
+                    <input type="number" name="Amount">
+                    <button type="submit">Add or remove to cart</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
