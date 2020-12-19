@@ -351,7 +351,7 @@ def change_cart():
     
     data = request.form
     print(data)
-    if data['form_id'] == -1:
+    if data['form_id'] == '-1':
         return redirect("/check_out")
     try:
         amount = int(data["Amount"])
