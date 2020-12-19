@@ -351,6 +351,8 @@ def change_cart():
     
     data = request.form
     print(data)
+    if data['form_id'] == -1:
+        return redirect("/check_out")
     try:
         amount = int(data["Amount"])
         sql = "SELECT IAmount FROM D0018E.Item WHERE IID = " + data['form_id']
@@ -358,7 +360,7 @@ def change_cart():
         new_amount = amount + int(cur_amount[0]['IAmount'])
     except ValueError:
         return redirect("/cart")
-
+    
 
     if new_amount <= 0:
         sql1 = "SELECT CaID FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
