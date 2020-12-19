@@ -359,6 +359,7 @@ def change_cart():
     except ValueError:
         return redirect("/cart")
 
+
     if new_amount <= 0:
         sql1 = "SELECT CaID FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
         CaID = execute(sql1)[0]['CaID']

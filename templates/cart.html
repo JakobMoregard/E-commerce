@@ -121,9 +121,10 @@
         </tr>
         {% endfor %}
     </table>
-
-    <button onclick="location.href='/check_out'" value="button" type="button">
-        Proceed to checkout
-    </button>
+    <form method="POST">
+        <input value="-1" type="hidden" name="form_id">
+        <button type="button">Proceed to checkout</button>
+    </form>
+    
 </body>
 </html>
