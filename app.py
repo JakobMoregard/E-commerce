@@ -443,7 +443,7 @@ def logutForm():
     res = make_response(redirect("/"))
     if request.cookies.get('login') != None:
         res.set_cookie('login', 'None', max_age=60*60*24*365*2)
-        res.set_cookie('SID', valid_id(), max_age=60*60*24*365*2)
+        res.set_cookie('SID', str(valid_id()), max_age=60*60*24*365*2)
 
     return res
 
