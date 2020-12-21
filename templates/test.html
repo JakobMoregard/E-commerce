@@ -87,7 +87,11 @@
             }
 
             #amount {
-                width: 70px;
+                width: 50px;
+                height: 25px;
+            }
+
+            #cart_button {
                 height: 25px;
             }
 
@@ -148,7 +152,7 @@
                         <form method="POST">
                             <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
                             <input id="amount" type="number" name="Amount" min="1">
-                            <button type="submit">Add to cart</button>
+                            <button id="cart_button" type="submit">Add to cart</button>
                         </form>
                     </td>
                 </tr>
