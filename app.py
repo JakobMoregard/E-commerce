@@ -418,7 +418,7 @@ def change_cart():
             return render_template("cart.html", table = table, login = login_status(), loginstatus = request.cookies.get('login'))
         else:
             return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
-    elif valid_amount(str(cur_amount[0]['PrID']) , new_amount):
+    elif valid_amount(str(cur_amount[0]['PrID']) , amount):
         sql = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(new_amount, data['form_id'])
         execute(sql, False)
 
