@@ -200,9 +200,7 @@ def cart_route():
     sql3 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + request.form['form_id']
     stock = execute(sql3)
 
-    print("Amount ", request.form['Amount'], " stock ", stock[0]['AStock'])
-
-    if request.form['Amount'] > stock[0]['AStock']:
+    if int(request.form['Amount']) > stock[0]['AStock']:
         return make_response(redirect("/"))
 
     cookie_id = int(request.cookies.get('SID'))
