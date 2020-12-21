@@ -351,12 +351,10 @@ def cart():
         if request.cookies.get('login') == 'registered':
             sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(request.cookies.get('SID'))
             res = execute(sql1)
-            print(res)
             CaID = res[0]['CaID']
         elif request.cookies.get('login') == 'None':
             sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
             res = execute(sql1)
-            print(res)
             CaID = res[0]['CaID']
     except IndexError:
         return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
@@ -374,16 +372,10 @@ def cart():
         sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {0} and PrID = {1}".format(CaID, data[0])
         PrIDs = execute(sql_check_if_exists)
 
-        print("data ", data, " PrIDs ", PrIDs)
-        print(PrIDs[0]['PrID'] in data)
         if PrIDs and str(PrIDs[0]['PrID']) in data:
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
-            print(temp)
-            if valid_amount(str(PrIDs[0]['PrID']), temp):
-                update = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(temp, int(PrIDs[0]['IID']))
-                execute(update, False)
-            else:
-                return render_template("cart.html", login = login_status(), loginstatus = request.cookies.get('login'))
+            update = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(temp, int(PrIDs[0]['IID']))
+            execute(update, False)
         else:
             sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES ({1}, (SELECT CaID FROM D0018E.Cart WHERE CaID = {2}), (SELECT PID FROM D0018E.Product WHERE PID = {3}), {4})".format(keys, str(IID), CaID, data[0], data[1])
             execute(sql_insert, False)
@@ -402,7 +394,7 @@ def change_cart():
         return redirect("/check_out")
     try:
         amount = int(data["Amount"])
-        sql = "SELECT IAmount FROM D0018E.Item WHERE IID = " + data['form_id']
+        sql = "SELECT IAmount, PrID FROM D0018E.Item WHERE IID = " + data['form_id']
         cur_amount = execute(sql)
         new_amount = amount + int(cur_amount[0]['IAmount'])
     except ValueError:
@@ -423,7 +415,7 @@ def change_cart():
             return render_template("cart.html", table = table, login = login_status(), loginstatus = request.cookies.get('login'))
         else:
             return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
-    else:
+    elif valid_amount(str(cur_amount[0]['PrID']) , new_amount):
         sql = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(new_amount, data['form_id'])
         execute(sql, False)
 
