@@ -4,6 +4,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
+    <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
@@ -121,6 +122,40 @@
         }
     </style>
 
+
+    {% for dict_item in product %}
+    <div class="product">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{dict_item['Pname']}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{dict_item['PColor']}}</td>
+                </tr>
+                <tr>
+                    <td>{{dict_item['APrice']}}</td>
+                    <td>{{dict_item['AStock']}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <form method="POST">
+                            <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
+                            <input type="number" name="Amount">
+                            <button type="submit">Add to cart</button>
+                        </form>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    {% endfor %}
+
+
     {% for dict_item in product %}
     <table>
         <!-- table header -->
@@ -134,8 +169,8 @@
 
         </tr>
 
-    <!-- table rows -->
-<tr>
+        <!-- table rows -->
+        <tr>
             {% for item in dict_item.items() %}
             {% if item[0] == 'PID' %}
 
