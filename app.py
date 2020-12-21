@@ -371,7 +371,7 @@ def cart():
         data = request.args['data'].split(",")
         IID = valid_id()
 
-        sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {0} and PrID = ".format(CaID, data[0])
+        sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {0} and PrID = {1}".format(CaID, data[0])
         PrIDs = execute(sql_check_if_exists)
 
         print("data ", data, " PrIDs ", PrIDs)
