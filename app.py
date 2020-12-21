@@ -129,23 +129,25 @@ def valid_amount(PrID, Amount):
         elif request.cookies.get('login') == 'None':
             sql2 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(id)
             CaID  = execute(sql2)[0]['CaID']
+
+        sql3 = "SELECT IAmount FROM D0018E.Item WHERE PrID = {0} and CaID = {1}".format(PrID, CaID)
+        res = execute(sql3)
+
+        cur_amount = res[0]['IAmount']
+        if len(res) > 1:
+            for i in range(1, len(res)):
+                cur_amount += res[i]['IAmount']
+
+        if Amount + cur_amount > stock:
+            return False
+        else:
+            return True
     except IndexError: #Finns ingen cart
         if Amount > stock:
             return False
         else:
             return True
-    sql3 = "SELECT IAmount FROM D0018E.Item WHERE PrID = {0} and CaID = {1}".format(PrID, CaID)
-    res = execute(sql3)
-
-    cur_amount = res[0]['IAmount']
-    if len(res) > 1:
-        for i in range(1, len(res)):
-            cur_amount += res[i]['IAmount']
-
-    if Amount + cur_amount > stock:
-        return False
-    else:
-        return True
+    
 
 
 
