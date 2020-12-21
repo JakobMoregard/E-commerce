@@ -362,7 +362,8 @@ def cart():
         return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
     print(CaID)
     
-    #data[0] = PID, data[1] = Amount 
+    #data[0] = PID, data[1] = Amount
+    print(request.args) 
     if request.args:
         
         keys = ["IID", "CaID", "PrID", "IAmount"]
