@@ -113,6 +113,40 @@ def parse_registered_data(ID, data, keys):
     print("parse ",  keys)
     return data_content
 
+# Pre PrID string of existing product, Amount int of how many products to be in cart
+def valid_amount(PrID, Amount):
+
+    id = request.cookies.get('SID')
+
+    sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + PrID
+    stock = execute(sql1)[0]['AStock']
+
+    CaID = ""
+    try:
+        if request.cookies.get('login') == 'registered':
+            sql2 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(id)
+            CaID  = execute(sql2)[0]['CaID']
+        elif request.cookies.get('login') == 'None':
+            sql2 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(id)
+            CaID  = execute(sql2)[0]['CaID']
+    except IndexError: #Finns ingen cart
+        if Amount > stock:
+            return False
+        else:
+            return True
+    sql3 = "SELECT IAmount FROM D0018E.Item WHERE PrID = {0} and CaID = {1}".format(PrID, CaID)
+    res = execute(sql3)
+
+    cur_amount = res[0]['IAmount']
+    if len(res) > 1:
+        for i in range(1, len(res)):
+            cur_amount += res[i]['IAmount']
+
+    if Amount + cur_amount > stock:
+        return False
+    else:
+        return True
+
 
 
 #def valid_id(admin_IDs, customer_IDs, registered_IDs):
@@ -197,10 +231,7 @@ def cart_route():
     sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
     IDs = execute(sql2)
 
-    sql3 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + request.form['form_id']
-    stock = execute(sql3)
-
-    if int(request.form['Amount']) > stock[0]['AStock']:
+    if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
         return make_response(redirect("/"))
 
     cookie_id = int(request.cookies.get('SID'))
