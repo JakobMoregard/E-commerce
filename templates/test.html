@@ -63,6 +63,27 @@
                 background-color: #5BB9E1;
                 color: white;
             }
+
+        .product {
+            overflow: hidden;
+            background-color: #CECECE;
+            font-family: sans-serif;
+        }
+
+            .product table {
+                border: 1px solid black;
+                float: Left;
+                padding: 20px;
+            }
+
+            .product thead {
+                font-size: 20px;
+                text-align: left;
+                padding-left: 5px;
+                padding-top: 5px;
+                padding-bottom: 15px;
+            }
+
     </style>
 
     <div class="topnav">
@@ -128,7 +149,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>{{dict_item['Pname']}}</th>
+                    <th>{{dict_item['PName']}}</th>
                 </tr>
             </thead>
             <tbody>
