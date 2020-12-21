@@ -375,6 +375,7 @@ def cart():
         PrIDs = execute(sql_check_if_exists)
 
         print("data ", data, " PrIDs ", PrIDs)
+        print(PrIDs[0]['PrID'] in data)
         if PrIDs and PrIDs[0]['PrID'] in data:
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
