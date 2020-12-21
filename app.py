@@ -197,6 +197,12 @@ def cart_route():
     sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
     IDs = execute(sql2)
 
+    sql3 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + request.form['form_id']
+    stock = execute(sql3)
+
+    if request.form['Amount'] > stock[0]['AStock']:
+        return make_response(redirect("/"))
+
     cookie_id = int(request.cookies.get('SID'))
     print(customers)
     print(request.cookies.get('SID'))
@@ -354,7 +360,7 @@ def change_cart():
     
     data = request.form
     print(data)
-    if data['form_id'] == -1:
+    if data['form_id'] == '-1':
         return redirect("/check_out")
     try:
         amount = int(data["Amount"])
