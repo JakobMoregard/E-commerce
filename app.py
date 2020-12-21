@@ -363,7 +363,6 @@ def cart():
     print(CaID)
     
     #data[0] = PID, data[1] = Amount
-    print(request.args) 
     if request.args:
         
         keys = ["IID", "CaID", "PrID", "IAmount"]
@@ -375,6 +374,7 @@ def cart():
         sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {}".format(CaID)
         PrIDs = execute(sql_check_if_exists)
 
+        print("data ", data, " PrIDs ", PrIDs)
         if PrIDs and PrIDs[0]['IID'] in data:
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
