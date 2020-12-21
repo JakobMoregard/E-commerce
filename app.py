@@ -371,11 +371,11 @@ def cart():
         data = request.args['data'].split(",")
         IID = valid_id()
 
-        sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {}".format(CaID)
+        sql_check_if_exists = "SELECT PrID, IAmount, IID FROM D0018E.Item WHERE CaID = {0} and PrID = ".format(CaID, data[0])
         PrIDs = execute(sql_check_if_exists)
 
         print("data ", data, " PrIDs ", PrIDs)
-        if PrIDs[0] and PrIDs[0]['PrID'] in data:
+        if PrIDs and PrIDs[0]['PrID'] in data:
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
             update = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(temp, int(PrIDs[0]['IID']))
