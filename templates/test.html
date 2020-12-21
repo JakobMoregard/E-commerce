@@ -68,6 +68,7 @@
             overflow: hidden;
             font-family: sans-serif;
             padding: 20px;
+            float: left;
         }
 
             .product table {
@@ -180,42 +181,6 @@
             </tfoot>
         </table>
     </div>
-    {% endfor %}
-
-
-    {% for dict_item in product %}
-    <table>
-        <!-- table header -->
-        <tr>
-
-            <th> Name </th>
-            <th> Color </th>
-            <th> Description </th>
-            <th> Price </th>
-            <th> Stock </th>
-
-        </tr>
-
-        <!-- table rows -->
-        <tr>
-            {% for item in dict_item.items() %}
-            {% if item[0] == 'PID' %}
-
-            {% else %}
-            <td> {{ item[1] }} </td>
-
-            {% endif %}
-            {% endfor %}
-            <td>
-                <form method="POST">
-                    <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
-                    <input type="number" name="Amount">
-                    <button type="submit">Add to cart</button>
-                </form>
-            </td>
-        </tr>
-
-    </table><br>
     {% endfor %}
 
 </body>
