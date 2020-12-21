@@ -68,6 +68,7 @@
             overflow: hidden;
             background-color: #CECECE;
             font-family: sans-serif;
+            padding: 20px;
         }
 
             .product table {
@@ -153,11 +154,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>{{dict_item['PColor']}}</td>
+                    <td id="color">{{dict_item['PColor']}}</td>
                 </tr>
                 <tr>
-                    <td>{{dict_item['APrice']}}</td>
-                    <td>{{dict_item['AStock']}}</td>
+                    <td id="price">Price: {{dict_item['APrice']}}</td>
+                    <td id="stock">{{dict_item['AStock']}} st</td>
                 </tr>
             </tbody>
             <tfoot>
@@ -165,7 +166,7 @@
                     <td>
                         <form method="POST">
                             <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
-                            <input type="number" name="Amount">
+                            <input id="amount" type="number" name="Amount">
                             <button type="submit">Add to cart</button>
                         </form>
                     </td>
