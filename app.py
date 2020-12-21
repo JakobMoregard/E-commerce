@@ -239,7 +239,7 @@ def hello():
     #sql2 = "SELECT AvID, APrice, AStock, PrID FROM D0018E.Available;"
     #price = execute(sql2)
 
-    sql1 = "SELECT Product.PID, Product.PName, Product.PColor, Product.PDescript Available.APrice, Available.AStock FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID)"
+    sql1 = "SELECT Product.PID, Product.PName, Product.PColor, Product.PDescript, Available.APrice, Available.AStock FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID)"
     product = execute(sql1)
 
     res = make_response(render_template("test.html", product = product, login = login_status(), loginstatus = request.cookies.get('login')))
