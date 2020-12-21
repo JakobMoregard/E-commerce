@@ -234,12 +234,15 @@ def cart_route():
 def hello():
     
     app.add_url_rule('/', 'index', hello)
-    sql1 = "SELECT PID, PName, PColor, PDescript FROM D0018E.Product;"
-    product = execute(sql1)
-    sql2 = "SELECT AvID, APrice, AStock, PrID FROM D0018E.Available;"
-    price = execute(sql2)
+    #sql1 = "SELECT PID, PName, PColor, PDescript FROM D0018E.Product;"
+    #product = execute(sql1)
+    #sql2 = "SELECT AvID, APrice, AStock, PrID FROM D0018E.Available;"
+    #price = execute(sql2)
 
-    res = make_response(render_template("test.html", product = product, price = price, login = login_status(), loginstatus = request.cookies.get('login')))
+    sql1 = "SELECT Product.PID, Product.PName, Product.PColor, Available.APrice, Available.AStock FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID)"
+    product = execute(sql1)
+
+    res = make_response(render_template("test.html", product = product, login = login_status(), loginstatus = request.cookies.get('login')))
 
     if not request.cookies.get('SID'):
         #sql = "SELECT AID FROM D0018E.Administrator"
@@ -351,16 +354,15 @@ def change_cart():
     
     data = request.form
     print(data)
-    if data['form_id'] == '-1':
-        res = redirect("/check_out")
-    #try:
-     
-    amount = int(data["Amount"])
-    sql = "SELECT IAmount FROM D0018E.Item WHERE IID = " + data['form_id']
-    cur_amount = execute(sql)
-    new_amount = amount + int(cur_amount[0]['IAmount'])
-#    except ValueError:
- #       return redirect("/cart")
+    if data['form_id'] == -1:
+        return redirect("/check_out")
+    try:
+        amount = int(data["Amount"])
+        sql = "SELECT IAmount FROM D0018E.Item WHERE IID = " + data['form_id']
+        cur_amount = execute(sql)
+        new_amount = amount + int(cur_amount[0]['IAmount'])
+    except ValueError:
+        return redirect("/cart")
     
 
     if new_amount <= 0:
