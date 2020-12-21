@@ -116,6 +116,8 @@ def parse_registered_data(ID, data, keys):
 # Pre PrID string of existing product, Amount int of how many products to be in cart
 def valid_amount(PrID, Amount):
 
+    print(PrID," ", Amount)
+
     id = request.cookies.get('SID')
 
     sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + PrID
@@ -138,6 +140,7 @@ def valid_amount(PrID, Amount):
             for i in range(1, len(res)):
                 cur_amount += res[i]['IAmount']
 
+        print("add ", Amount + cur_amount)
         if Amount + cur_amount > stock:
             return False
         else:
