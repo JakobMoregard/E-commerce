@@ -376,7 +376,7 @@ def cart():
 
         print("data ", data, " PrIDs ", PrIDs)
         print(PrIDs[0]['PrID'] in data)
-        if PrIDs and PrIDs[0]['PrID'] in data:
+        if PrIDs and str(PrIDs[0]['PrID']) in data:
             temp = int(data[1]) + int(PrIDs[0]['IAmount'])
             print(temp)
             update = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(temp, int(PrIDs[0]['IID']))
