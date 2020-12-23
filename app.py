@@ -117,6 +117,7 @@ def parse_registered_data(ID, data, keys):
 def valid_amount(PrID, Amount):
 
     id = request.cookies.get('SID')
+    print("args valid_amount", PrID, " ", Amount)
 
     sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + PrID
     stock = execute(sql1)
