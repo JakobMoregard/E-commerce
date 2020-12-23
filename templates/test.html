@@ -117,12 +117,12 @@
         <a href="/admin"> Admin </a>
         <a href="/logout"> Logout </a>
 
-        <!--{% elif loginstatus == None %}
+        {% else %}
 
-    <a href="/login">Login</a>
-    <a href="/signup">Signup</a>
-    <a id="cart" href="/cart">Cart</a>
-    <a href="/">Broken</a>-->
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+
         {% endif %}
 
         <u>{{login}}</u>
