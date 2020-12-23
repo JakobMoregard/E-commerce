@@ -119,7 +119,9 @@ def valid_amount(PrID, Amount):
     id = request.cookies.get('SID')
 
     sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + PrID
-    stock = execute(sql1)[0]['AStock']
+    stock = execute(sql1)
+    print(stock)
+    stock = [0]['AStock']
 
     CaID = ""
     try:
