@@ -211,7 +211,7 @@ def cart_route():
         if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
             return make_response(redirect("/"))
     else:
-        if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
+        if not valid_amount(data[0], data[1]):
             return make_response(redirect("/"))
 
     if request.cookies.get('login') == 'admin':
