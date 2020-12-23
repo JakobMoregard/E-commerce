@@ -204,10 +204,15 @@ def cart_route():
     if request.args:
         data1 = request.args['data']
         flag2 = True
-
+    print("data1 ", data1)
     data2 = ""
     if not flag2:
         data2 = "{0}, {1}, {2}".format(request.form['form_id'], request.form['Amount'], request.form['price'])
+        if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
+            return make_response(redirect("/"))
+    else:
+        if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
+            return make_response(redirect("/"))
 
     if request.cookies.get('login') == 'admin':
         return make_response(redirect("/"))
@@ -230,13 +235,12 @@ def cart_route():
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
 
-    #sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
-    #IDs = execute(sql2)
+    sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
+    IDs = execute(sql2)
 
     print("gets here")
 
-    if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
-        return make_response(redirect("/"))
+    
 
     print("so far so good")
     cookie_id = int(request.cookies.get('SID'))
