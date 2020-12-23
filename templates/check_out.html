@@ -85,7 +85,7 @@
 </head>
 <body>
     <img src="https://i.pinimg.com/originals/57/84/8d/57848d08c69b3122c52682887558c0f1.jpg" alt="Trulli" width="500" height="333"><br>
-    
+
     <p> {{NoCartID}}</p>
 
     <style>
@@ -109,6 +109,27 @@
 
         <!-- table rows -->
         {% for dict_item in table %}
+        <tr>
+            {% for item in dict_item.items() %}
+            <td> {{ item[1] }} </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p> Previous Orders</p> 
+
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
+
+            <th> IID </th>
+            <th> Amount </th>
+
+        </tr>
+
+        <!-- table rows -->
+        {% for dict_item in old_table %}
         <tr>
             {% for item in dict_item.items() %}
             <td> {{ item[1] }} </td>

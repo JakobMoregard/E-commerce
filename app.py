@@ -124,10 +124,10 @@ def valid_amount(PrID, Amount):
     CaID = ""
     try:
         if request.cookies.get('login') == 'registered':
-            sql2 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(id)
+            sql2 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {} and CBought = 0".format(id)
             CaID  = execute(sql2)[0]['CaID']
         elif request.cookies.get('login') == 'None':
-            sql2 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(id)
+            sql2 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {} and CBought = 0".format(id)
             CaID  = execute(sql2)[0]['CaID']
 
         sql3 = "SELECT IAmount FROM D0018E.Item WHERE PrID = {0} and CaID = {1}".format(PrID, CaID)
@@ -349,11 +349,11 @@ def cart():
     CaID = ""
     try:
         if request.cookies.get('login') == 'registered':
-            sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(request.cookies.get('SID'))
+            sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {} and CBought = 0".format(request.cookies.get('SID'))
             res = execute(sql1)
             CaID = res[0]['CaID']
         elif request.cookies.get('login') == 'None':
-            sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
+            sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {} and CBought = 0".format(request.cookies.get('SID'))
             res = execute(sql1)
             CaID = res[0]['CaID']
     except IndexError:
@@ -378,7 +378,7 @@ def cart():
             update = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(temp, int(PrIDs[0]['IID']))
             execute(update, False)
         else:
-            sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES ({1}, (SELECT CaID FROM D0018E.Cart WHERE CaID = {2}), (SELECT PID FROM D0018E.Product WHERE PID = {3}), {4}, {5})".format(keys, str(IID), CaID, data[0], data[1], data[2])
+            sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES ({1}, (SELECT CaID FROM D0018E.Cart WHERE CaID = {2} and CBought = 0), (SELECT PID FROM D0018E.Product WHERE PID = {3}), {4}, {5})".format(keys, str(IID), CaID, data[0], data[1], data[2])
             execute(sql_insert, False)
 
     sql_items = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
@@ -431,18 +431,24 @@ def check_out():
     CaID = ""
     print("status ", loginstatus)
     if loginstatus == 'None':
-        sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {}".format(request.cookies.get('SID'))
+        sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {} and CBought = 0".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
     elif loginstatus == 'registered':
-        sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {}".format(request.cookies.get('SID'))
+        sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {} and CBought = 0".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
 
     print("CaID ", CaID)
-    sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
-    print("sql ", sql2)
-    table = execute(sql2)
+    sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
+    print("sql ", sql3)
+    table = execute(sql3)
 
-    return render_template("check_out.html", table = table , loginstatus = loginstatus)
+    sql4 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(CaID)
+    old_table = execute(sql4)
+
+    sql5 = "UPDATE D0018E.Cart SET CBought = 1 WHERE CaID = {}".format(CaID)
+    execute(sql5, False)
+
+    return render_template("check_out.html", table = table , old_table = old_table, loginstatus = loginstatus)
 
 @app.route("/Kenobi")
 def kenobi():
