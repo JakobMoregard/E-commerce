@@ -425,7 +425,7 @@ def change_cart():
     elif valid_amount(str(cur_amount[0]['PrID']) , amount):
 
         sql1 = "SELECT APrice FROM D0018E.Available WHERE PrID = {}".format(cur_amount[0]['PrID'])
-        old_price = execute(sql1)[0]['IPrice']
+        old_price = execute(sql1)[0]['APrice']
 
         new_price = (int(old_price) * amount) + int(cur_amount[0]['IPrice'])
 
