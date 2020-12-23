@@ -215,7 +215,7 @@ def cart_route():
             return make_response(redirect("/"))
     else:
         temp = data1.split(",")
-        if not valid_amount(temp[0], temp[1]):
+        if not valid_amount(temp[0], int(temp[1])):
             return make_response(redirect("/"))
 
     if request.cookies.get('login') == 'admin':
