@@ -430,7 +430,7 @@ def change_cart():
         new_price = (int(old_price) * amount) + int(cur_amount[0]['IPrice'])
         print("new things ", new_amount, " ", new_price)
 
-        sql2 = "UPDATE D0018E.Item SET IAmount = {0} AND IPrice = {1} WHERE IID = {2}".format(new_amount, new_price ,data['form_id'])
+        sql2 = "UPDATE D0018E.Item SET IAmount = {0}, IPrice = {1} WHERE IID = {2}".format(new_amount, new_price ,data['form_id'])
         execute(sql2, False)
 
     
