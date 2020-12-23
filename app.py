@@ -401,7 +401,7 @@ def change_cart():
         return redirect("/check_out")
     try:
         amount = int(data["Amount"])
-        sql = "SELECT IAmount, PrID FROM D0018E.Item WHERE IID = " + data['form_id']
+        sql = "SELECT IAmount, PrID, IPrice FROM D0018E.Item WHERE IID = " + data['form_id']
         cur_amount = execute(sql)
         new_amount = amount + int(cur_amount[0]['IAmount'])
     except ValueError:
@@ -415,7 +415,7 @@ def change_cart():
         sql2 = "DELETE FROM D0018E.Item WHERE IID = {}".format(data['form_id'])
         execute(sql2, False)
 
-        sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
+        sql3 = "SELECT IID, IAmount, IPrice FROM D0018E.Item WHERE CaID = {}".format(CaID)
         table = execute(sql3)
         print("Table ", table)
         if table!= ():
@@ -423,8 +423,14 @@ def change_cart():
         else:
             return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
     elif valid_amount(str(cur_amount[0]['PrID']) , amount):
-        sql = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(new_amount, data['form_id'])
-        execute(sql, False)
+
+        sql1 = "SELECT APrice FROM D0018E.Available WHERE PrID = {}".format(cur_amount[0]['PrID'])
+        old_price = execute(sql1)[0]['IPrice']
+
+        new_price = (int(old_price) * amount) + int(cur_amount[0]['IPrice'])
+
+        sql2 = "UPDATE D0018E.Item SET IAmount = {0} AND IPrice = {1} WHERE IID = {2}".format(new_amount, new_price ,data['form_id'])
+        execute(sql2, False)
 
     
     return redirect("/cart")
