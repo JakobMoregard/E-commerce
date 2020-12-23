@@ -120,9 +120,9 @@ def valid_amount(PrID, Amount):
     print("args valid_amount", PrID, " ", Amount)
 
     sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + PrID
-    stock = execute(sql1)
+    stock = execute(sql1)[0]['AStock']
     print(stock)
-    stock = stock[0]['AStock']
+
 
     CaID = ""
     try:
@@ -214,7 +214,8 @@ def cart_route():
         if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
             return make_response(redirect("/"))
     else:
-        if not valid_amount(data1[0], data1[1]):
+        temp = data1.split(",")
+        if not valid_amount(temp[0], temp[1]):
             return make_response(redirect("/"))
 
     if request.cookies.get('login') == 'admin':
