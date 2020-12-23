@@ -207,7 +207,7 @@ def cart_route():
 
     data2 = ""
     if not flag2:
-        data2 = "{0}, {1}".format(request.form['form_id'], request.form['Amount'], request.form['price'])
+        data2 = "{0}, {1}, {2}".format(request.form['form_id'], request.form['Amount'], request.form['price'])
 
     if request.cookies.get('login') == 'admin':
         return make_response(redirect("/"))
