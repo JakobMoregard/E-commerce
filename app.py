@@ -116,8 +116,6 @@ def parse_registered_data(ID, data, keys):
 # Pre PrID string of existing product, Amount int of how many products to be in cart
 def valid_amount(PrID, Amount):
 
-    print(PrID," ", Amount)
-
     id = request.cookies.get('SID')
 
     sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + PrID
@@ -140,7 +138,6 @@ def valid_amount(PrID, Amount):
             for i in range(1, len(res)):
                 cur_amount += res[i]['IAmount']
 
-        print("add ", Amount + cur_amount)
         if Amount + cur_amount > stock:
             return False
         else:
@@ -210,7 +207,7 @@ def cart_route():
 
     data2 = ""
     if not flag2:
-        data2 = "{0}, {1}".format(request.form['form_id'], request.form['Amount'])
+        data2 = "{0}, {1}".format(request.form['form_id'], request.form['Amount'], request.form['price'])
 
     if request.cookies.get('login') == 'admin':
         return make_response(redirect("/"))
@@ -262,10 +259,10 @@ def cart_route():
     CaID = valid_id()
     
     if request.cookies.get('login') == 'registered':
-        sql_insert = "INSERT INTO D0018E.Cart (CaID, ReID) VALUES ({0}, (SELECT RID FROM D0018E.Registered WHERE RID = {1}))".format(CaID, cookie_id)
+        sql_insert = "INSERT INTO D0018E.Cart (CaID, ReID, CBought) VALUES ({0}, (SELECT RID FROM D0018E.Registered WHERE RID = {1}), 0)".format(CaID, cookie_id)
         execute(sql_insert, False)
     elif request.cookies.get('login') == 'None':
-        sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, cookie_id)
+        sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID, CBought) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}), 0)".format(CaID, cookie_id)
         execute(sql_insert, False)
         if flag2:
             res = make_response(redirect(url_for('.cart', data = data1)))
@@ -363,10 +360,10 @@ def cart():
         return render_template("cart.html", NoCartID = "No cart, please add something so I can eat tonight", login = login_status(), loginstatus = request.cookies.get('login'))
     print(CaID)
     
-    #data[0] = PID, data[1] = Amount
+    #data[0] = PID, data[1] = Amount, data[2] = price
     if request.args:
         
-        keys = ["IID", "CaID", "PrID", "IAmount"]
+        keys = ["IID", "CaID", "PrID", "IAmount", "IPrice"]
         keys = ", ".join(map(str, keys))
 
         data = request.args['data'].split(",")
@@ -380,7 +377,7 @@ def cart():
             update = "UPDATE D0018E.Item SET IAmount = {0} WHERE IID = {1}".format(temp, int(PrIDs[0]['IID']))
             execute(update, False)
         else:
-            sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES ({1}, (SELECT CaID FROM D0018E.Cart WHERE CaID = {2}), (SELECT PID FROM D0018E.Product WHERE PID = {3}), {4})".format(keys, str(IID), CaID, data[0], data[1])
+            sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES ({1}, (SELECT CaID FROM D0018E.Cart WHERE CaID = {2}), (SELECT PID FROM D0018E.Product WHERE PID = {3}), {4}, {5})".format(keys, str(IID), CaID, data[0], data[1], data[2])
             execute(sql_insert, False)
 
     sql_items = "SELECT IID, IAmount FROM D0018E.Item WHERE CaID = {}".format(CaID)
