@@ -117,19 +117,19 @@
         {% endfor %}
     </table>
 
-    <p> Previous Orders</p> 
+    <p> Previous Orders</p>
+    {% for old_table in old_tables %}
+        <table style="width:100%">
+            <!-- table header -->
+            <caption> Old Cart</caption>
+            <tr>
 
-    <table style="width:100%">
-        <!-- table header -->
-        <tr>
+                <th> IID </th>
+                <th> Amount </th>
 
-            <th> IID </th>
-            <th> Amount </th>
+            </tr>
 
-        </tr>
-
-        <!-- table rows -->
-        {% for old_table in old_tables %}
+            <!-- table rows -->
             {% for dict_item in old_table %}
 
             <tr>
@@ -140,7 +140,8 @@
             <caption> Old cart </caption>
             {% endfor %}
 
-        {% endfor %}
-    </table>
+
+        </table>
+    {% endfor %}
 </body>
 </html>
