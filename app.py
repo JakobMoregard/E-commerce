@@ -442,32 +442,34 @@ def check_out():
 
     loginstatus = request.cookies.get('login')
     CaID = ""
+    old_tableS = []
+    Old_CaIDs = []
     print("status ", loginstatus)
     if loginstatus == 'None':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {} and CBought = 0".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
-        sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Cart.CuID = {} and CBought = 1)".format(request.cookies.get('SID'))
-        old_table = execute(sql2)
-        print(old_table, " sql ", sql2)
+        sql2 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {} and CBought = 1".format(request.cookies.get('SID'))
+        Old_CaIDs = execute(sql2)
+
     elif loginstatus == 'registered':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {} and CBought = 0".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
-        sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Cart.ReID = {} and CBought = 1)".format(request.cookies.get('SID'))
-        old_table = execute(sql2)
-        print(old_table, " sql ", sql2)
+        sql2 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {} and CBought = 1".format(request.cookies.get('SID'))
+        Old_CaIDs = execute(sql2)
 
-    print("CaID ", CaID)
-    sql3 = "SELECT IID, IAmount, PrID FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
-    print("sql ", sql3)
-    table = execute(sql3)
+    for j in range(len(Old_CaIDs)):
+        sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(CaID)
+        old_table = execute(sql3)
+        old_tableS.append(old_table)
+    print(old_tableS)
+
+    sql4 = "SELECT IID, IAmount, PrID FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
+    table = execute(sql4)
+
+    sql5 = "UPDATE D0018E.Cart SET CBought = 1 WHERE CaID = {}".format(CaID)
+    execute(sql5, False)
 
     
-
-    sql4 = "UPDATE D0018E.Cart SET CBought = 1 WHERE CaID = {}".format(CaID)
-    execute(sql4, False)
-
-    
-
     for i in range(len(table)):
         sql6 = "SELECT AStock FROM D0018E.Available WHERE PrID = {}".format(table[i]['PrID'])
         available = execute(sql6)
@@ -475,7 +477,7 @@ def check_out():
         sql7 = "UPDATE D0018E.Available SET AStock = {0} WHERE PrID = {1}".format(new_price ,table[i]['PrID'])
         execute(sql7, False)
 
-    return render_template("check_out.html", table = table , old_table = old_table, loginstatus = loginstatus)
+    return render_template("check_out.html", table = table , old_tables = old_tableS, loginstatus = loginstatus)
 
 @app.route("/Kenobi")
 def kenobi():
