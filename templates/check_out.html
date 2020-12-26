@@ -130,8 +130,9 @@
 
         <!-- table rows -->
         {% for old_table in old_tables %}
-        <p> Old cart </p>
+
         {% for dict_item in old_table %}
+        <p> Old cart </p>
         <tr>
             {% for item in dict_item.items() %}
             <td> {{ item[1] }} </td>
