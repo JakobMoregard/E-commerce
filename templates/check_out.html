@@ -119,29 +119,29 @@
 
     <p> Previous Orders</p>
     {% for old_table in old_tables %}
-        <table style="width:100%">
-            <!-- table header -->
-            <caption> Old Cart</caption>
-            <tr>
+    <p> Old Order</p>
+    <table style="width:100%">
+        <!-- table header -->
+        <tr>
 
-                <th> IID </th>
-                <th> Amount </th>
+            <th> IID </th>
+            <th> Amount </th>
 
-            </tr>
+        </tr>
 
-            <!-- table rows -->
-            {% for dict_item in old_table %}
+        <!-- table rows -->
+        {% for dict_item in old_table %}
 
-            <tr>
-                {% for item in dict_item.items() %}
-                <td> {{ item[1] }} </td>
-                {% endfor %}
-            </tr>
-            <caption> Old cart </caption>
+        <tr>
+            {% for item in dict_item.items() %}
+            <td> {{ item[1] }} </td>
             {% endfor %}
+        </tr>
+        <caption> Old cart </caption>
+        {% endfor %}
 
 
-        </table>
+    </table>
     {% endfor %}
 </body>
 </html>
