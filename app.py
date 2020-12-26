@@ -448,11 +448,13 @@ def check_out():
         CaID = execute(sql1)[0]['CaID']
         sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Cart.CaID = {} and CBought = 1)".format(CaID)
         old_table = execute(sql2)
+        print(old_table)
     elif loginstatus == 'registered':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {} and CBought = 0".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
         sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Cart.CaID = {} and CBought = 1)".format(CaID)
         old_table = execute(sql2)
+        print(old_table)
 
     print("CaID ", CaID)
     sql3 = "SELECT IID, IAmount, PrID FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
