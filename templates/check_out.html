@@ -130,8 +130,8 @@
 
         <!-- table rows -->
         {% for old_table in old_tables %}
-        <tbody>
-            <p> Old cart</p>
+        <caption> Old cart</caption>
+
             {% for dict_item in old_table %}
 
             <tr>
@@ -140,7 +140,7 @@
                 {% endfor %}
             </tr>
             {% endfor %}
-        </tbody>
+
         {% endfor %}
     </table>
 </body>
