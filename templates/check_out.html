@@ -131,14 +131,14 @@
         <!-- table rows -->
         {% for old_table in old_tables %}
 
-        {% for dict_item in old_table %}
-        <p> Old cart </p>
-        <tr>
-            {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
+            {% for dict_item in old_table %}
+            <p> Old cart </p>
+            <tr>
+                {% for item in dict_item.items() %}
+                <td> {{ item[1] }} </td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}
         {% endfor %}
     </table>
 </body>
