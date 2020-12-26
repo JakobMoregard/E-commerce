@@ -463,7 +463,7 @@ def check_out():
 
     
 
-    for in range(len(table)):
+    for i in range(len(table)):
         sql6 = "SELECT AStock FROM D0018E.Available WHERE PrID = {}".format(table[i]['PrID'])
         available = execute(sql6)
         new_price = int(available[0]['AStock']) - int(table[i]['IAmount'])
