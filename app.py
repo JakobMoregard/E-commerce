@@ -446,20 +446,23 @@ def check_out():
     if loginstatus == 'None':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE CuID = {} and CBought = 0".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
+        sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Cart.CaID = {} and CBought = 1)".format(CaID)
+        old_table = execute(sql2)
     elif loginstatus == 'registered':
         sql1 = "SELECT CaID FROM D0018E.Cart WHERE ReID = {} and CBought = 0".format(request.cookies.get('SID'))
         CaID = execute(sql1)[0]['CaID']
+        sql2 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Cart.CaID = {} and CBought = 1)".format(CaID)
+        old_table = execute(sql2)
 
     print("CaID ", CaID)
     sql3 = "SELECT IID, IAmount, PrID FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
     print("sql ", sql3)
     table = execute(sql3)
 
-    sql4 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(CaID)
-    old_table = execute(sql4)
+    
 
-    sql5 = "UPDATE D0018E.Cart SET CBought = 1 WHERE CaID = {}".format(CaID)
-    execute(sql5, False)
+    sql4 = "UPDATE D0018E.Cart SET CBought = 1 WHERE CaID = {}".format(CaID)
+    execute(sql4, False)
 
     
 
