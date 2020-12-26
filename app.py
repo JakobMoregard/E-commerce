@@ -451,7 +451,7 @@ def check_out():
         CaID = execute(sql1)[0]['CaID']
 
     print("CaID ", CaID)
-    sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
+    sql3 = "SELECT IID, IAmount, PrID FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
     print("sql ", sql3)
     table = execute(sql3)
 
@@ -460,6 +460,15 @@ def check_out():
 
     sql5 = "UPDATE D0018E.Cart SET CBought = 1 WHERE CaID = {}".format(CaID)
     execute(sql5, False)
+
+    
+
+    for in range(len(table)):
+        sql6 = "SELECT AStock FROM D0018E.Available WHERE PrID = {}".format(table[i]['PrID'])
+        available = execute(sql6)
+        new_price = int(available[0]['AStock']) - int(table[i]['IAmount'])
+        sql7 = "UPDATE D0018E.Available SET AStock = {0} WHERE PrID = {1}".format(new_price ,table[i]['PrID'])
+        execute(sql7, False)
 
     return render_template("check_out.html", table = table , old_table = old_table, loginstatus = loginstatus)
 
