@@ -119,13 +119,12 @@ def parse_pid(multidict):
     PNames = execute(sql)
     print(PNames)
     for i in range(len(PNames)):
-        try:
             t = multidict[PNames[i]['PName']]
             return PNames[i]['PName']
 
-        except NameError:
-            continue
-    return ''
+#        except NameError:
+#            continue
+#    return ''
 
 # Pre PrID string of existing product, Amount int of how many products to be in cart
 def valid_amount(PrID, Amount):
