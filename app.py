@@ -120,11 +120,11 @@ def parse_pid(multidict):
     print(PNames)
     for i in range(len(PNames)):
             t = multidict.get(PNames[i]['PName'])
-            return PNames[i]['PName']
+            if t == '':
+                return PNames[i]['PName']
 
-#        except NameError:
-#            continue
-#    return ''
+
+    return ''
 
 # Pre PrID string of existing product, Amount int of how many products to be in cart
 def valid_amount(PrID, Amount):
