@@ -399,7 +399,7 @@ def change_cart():
     print(data)
     if data['form_id'] == '-1':
         SID = request.cookies.get('SID')
-        check_cart = "SELECT IID FROM D0018E.Item WHERE EXISTS (SELECT CaID FROM D0018E.Cart WHERE D0018E.Item.CaID = D0018E.Cart.CaID AND ( ReID = {0} OR CuID = {1}))".format(SID, SID)
+        check_cart = "SELECT IID FROM D0018E.Item WHERE EXISTS (SELECT CaID FROM D0018E.Cart WHERE D0018E.Item.CaID = D0018E.Cart.CaID AND ( ReID = {0} OR CuID = {1}) AND CBought = 0)".format(SID, SID)
         print(check_cart)
         cart = execute(check_cart)
 
