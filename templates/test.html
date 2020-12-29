@@ -141,7 +141,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>{{dict_item['PName']}}</th>
+                    <th><a href="{{ request.route_path('Kenobi', id=dict_item['PName']) }}">{{dict_item['PName']}}</a></th>
                 </tr>
             </thead>
             <tbody>
