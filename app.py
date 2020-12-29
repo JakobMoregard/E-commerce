@@ -735,7 +735,7 @@ def userForm():
 def pp():
     product = parse_pid(request.args) #Finns troligen bättre metoder, oh well
 
-    sql = "SELECT PName, PColor, PDescript FROM D0018E.Product WHERE PName = " + "{}".format(product)
+    sql = "SELECT PName, PColor, PDescript FROM D0018E.Product WHERE PName = " + '"{}"'.format(product)
     print(sql)
     data = execute(sql)
 
