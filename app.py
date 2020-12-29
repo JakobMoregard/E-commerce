@@ -120,7 +120,7 @@ def parse_pid(multidict):
     print(PNames)
     for i in range(len(PNames)):
         try:
-            multidict.get(PNames[i]['PName'])
+            multidict[PNames[i]['PName']])
             return PNames[i]['PName']
 
         except NameError:
