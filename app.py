@@ -119,7 +119,7 @@ def parse_pid(multidict):
     PNames = execute(sql)
     print(PNames)
     for i in range(len(PNames)):
-            t = multidictPNames.get([i]['PName'])
+            t = multidict.get([i]['PName'])
             return PNames[i]['PName']
 
 #        except NameError:
