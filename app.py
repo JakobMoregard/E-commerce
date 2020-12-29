@@ -721,7 +721,7 @@ def userForm():
 
 @app.route("/ProductPage")
 def pp():
-    print(request.args.get(key))
+    print(request.args.iterkeys())
 
     return render_template("ProductPage.html")
 
