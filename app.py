@@ -719,7 +719,11 @@ def userForm():
         res = make_response(redirect("/"))
         return res
 
+@app.route("/ProductPage")
+def pp():
+    print(request.args)
 
+    return render_template("ProductPage.html")
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
