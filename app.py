@@ -117,7 +117,6 @@ def parse_pid(multidict):
 
     sql = "SELECT PName FROM D0018E.Product"
     PNames = execute(sql)
-    print(PNames)
     for i in range(len(PNames)):
             t = multidict.get(PNames[i]['PName'])
             if t == '':
@@ -734,11 +733,12 @@ def userForm():
 
 @app.route("/ProductPage")
 def pp():
-    print(request.args)
     product = parse_pid(request.args) #Finns troligen bättre metoder, oh well
-    print(product)
 
-    return render_template("ProductPage.html")
+    sql = "SELECT PName, PColor, PDescript FROM D0018E.Product WHERE PName = " + product
+    data = execute(sql)
+
+    return render_template("ProductPage.html", data = data)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
