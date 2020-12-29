@@ -398,7 +398,14 @@ def change_cart():
     data = request.form
     print(data)
     if data['form_id'] == '-1':
-        return redirect("/check_out")
+        check_cart = "SELECT IID FROM D0018E.Item WHERE EXISTS (SELECT CaID FROM D0018E.Cart WHERE D0018E.Item.CaID = D0018E.Cart.CaID AND ( ReID = {} OR CuID = {}))".format(request.cookies.get('SID'))
+        print(check_cart)
+        cart = execute(check_cart)
+
+        if cart:
+            return redirect("/check_out")
+        else: 
+            return redirect("/cart")
     try:
         amount = int(data["Amount"])
         sql = "SELECT IAmount, PrID, IPrice FROM D0018E.Item WHERE IID = " + data['form_id']
