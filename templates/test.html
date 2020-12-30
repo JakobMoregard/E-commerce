@@ -96,6 +96,16 @@
                 height: 25px;
             }
 
+            #product_link {
+                color: #121617;
+                text-decoration: none;
+            }
+
+                #product_link:hover {
+                    color: #121617;
+                    text-decoration: none;s
+                }
+
     </style>
 
     <div class="topnav">
@@ -137,7 +147,7 @@
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Win 1 million dollars! </a><br>
 
     {% for dict_item in product %}
-    <a href="{{ ('/ProductPage?%s'%dict_item['PName']|urlencode )}}">
+    <a href="{{ ('/ProductPage?%s'%dict_item['PName']|urlencode )}}" class="product_link">
         <div class="product">
             <table>
                 <thead>
