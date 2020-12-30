@@ -744,7 +744,7 @@ def pp(): #you just had to
 @app.route("/ProductPage", methods=['POST'])
 def cart_route_product():
 
-    
+    print("not working at all")
     data1 = ""
     flag2 = False
     if request.args:
