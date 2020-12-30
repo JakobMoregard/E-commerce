@@ -738,9 +738,9 @@ def pp(): #you just had to
 
     sql = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PName = " + '"{}"'.format(product)
     print(sql)
-    data = execute(sql)
+    product = execute(sql)
 
-    return render_template("ProductPage.html", data = data, login = login_status(), loginstatus = request.cookies.get('login'))
+    return render_template("ProductPage.html", product = product, login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/ProductPage", methods=['POST'])
 def cart_route_product():
