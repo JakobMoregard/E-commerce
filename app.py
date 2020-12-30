@@ -744,12 +744,14 @@ def pp(): #you just had to
 @app.route("/ProductPage", methods=['POST'])
 def cart_route_product():
 
-    print("not working at all")
     data1 = ""
     flag2 = False
+    print("before if")
     if request.args:
+        print("inside if")
         data1 = request.args['data']
         flag2 = True
+    print("after if")
     print("data1 ", data1)
     data2 = ""
     if not flag2:
