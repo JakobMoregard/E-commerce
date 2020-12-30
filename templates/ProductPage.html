@@ -99,11 +99,11 @@
     </div>
 </head>
 <body>
-    <p> {{data[0]['PName']}}</p>
+    <p> {{data[0]['PID']}}</p>
 
     <div class="product_body">
         <h1 id="title">
-            {{data['PName']}}
+            {{data[0]['PName']}}
         </h1>
 
         <img src="" id="product_image" />
@@ -111,13 +111,13 @@
 
     <div class="product_purchase">
         <h1 id="price">
-            {{data['APrice']}}
+            {{data[0]['APrice']}}
         </h1>
 
         <div class="buy_button">
             <form method="POST">
-                <input value="{{data['PID']}}" type="hidden" name="form_id">
-                <input value="{{data['APrice']}}" type="hidden" name="price">
+                <input value="{{data[0]['PID']}}" type="hidden" name="form_id">
+                <input value="{{data[0]['APrice']}}" type="hidden" name="price">
                 <input id="amount" type="number" name="Amount" value="1">
                 <button id="cart_button" type="submit">Add to cart</button>
             </form>
