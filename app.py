@@ -739,6 +739,7 @@ def pp(): #you just had to
     sql = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PName = " + '"{}"'.format(product)
     print(sql)
     product = execute(sql)
+    print(product)
 
     return render_template("ProductPage.html", product = product, login = login_status(), loginstatus = request.cookies.get('login'))
 
@@ -748,7 +749,7 @@ def cart_route_product():
     data1 = ""
     flag2 = False
     print(request.args)
-    print(request.args[0])
+    print(request.args)
     if request.args:
         data1 = request.args
         flag2 = True
