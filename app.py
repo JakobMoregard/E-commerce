@@ -747,7 +747,9 @@ def cart_route_product():
 
     data1 = ""
     flag2 = False
-    if request.args['data']:
+    data3 = request.args
+    data3.pop(data3[0])
+    if data3:
         data1 = request.args['data']
         flag2 = True
     print("after if")
