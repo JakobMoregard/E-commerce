@@ -748,6 +748,7 @@ def cart_route_product():
     data1 = ""
     flag2 = False
     print(request.args)
+    print(request.args[0])
     if request.args:
         data1 = request.args
         flag2 = True
