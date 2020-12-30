@@ -748,7 +748,8 @@ def cart_route_product():
     data1 = ""
     flag2 = False
     data3 = request.args.to_dict()
-    print(data3[0])
+    print(data3)
+    print(list(data3.keys())[0])
     if request.args:
         data1 = request.args['data']
         flag2 = True
