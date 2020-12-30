@@ -746,9 +746,8 @@ def cart_route_product():
 
     data1 = ""
     flag2 = False
-    print("before if")
+    print(request.args)
     if request.args:
-        print("inside if")
         data1 = request.args['data']
         flag2 = True
     print("after if")
