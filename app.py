@@ -732,14 +732,91 @@ def userForm():
         return res
 
 @app.route("/ProductPage")
-def pp():
+def pp(): #you just had to
     product = parse_pid(request.args) #Finns troligen bättre metoder, oh well. Hey du fick det att funka iaf ¯\_(ツ)_/¯ I didn't....
 
-    sql = "SELECT Product.PID, Product.PName, Product.PColor, Product.PDescript, Available.APrice, Available.AStock FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PName = " + '"{}"'.format(product)
+    sql = "SELECT Product.PName, Product.PColor, Product.PDescript, Available.APrice, Available.AStock FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PName = " + '"{}"'.format(product)
     print(sql)
     data = execute(sql)
 
     return render_template("ProductPage.html", data = data, login = login_status(), loginstatus = request.cookies.get('login'))
+
+@app.route("/ProductPage", methods=['POST'])
+def cart_route_product():
+
+    
+    data1 = ""
+    flag2 = False
+    if request.args:
+        data1 = request.args['data']
+        flag2 = True
+    print("data1 ", data1)
+    data2 = ""
+    if not flag2:
+        data2 = "{0}, {1}, {2}".format(request.form['form_id'], request.form['Amount'], request.form['price'])
+        if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
+            return make_response(redirect("/"))
+    else:
+        temp = data1.split(",")
+        if not valid_amount(temp[0], int(temp[1])):
+            return make_response(redirect("/"))
+
+    if request.cookies.get('login') == 'admin':
+        return make_response(redirect("/"))
+    elif flag2:
+        temp = data1.split(",")
+        print("temp: ", temp)
+        if temp == ['']: 
+            return make_response(redirect(""))
+        elif int(temp[1]) <= 0:
+            return make_response(redirect(""))
+    elif not flag2:
+        temp = data2.split(",")
+        print("temp: ", temp)
+        if temp[1] == ' ': 
+            return make_response(redirect(""))
+        elif int(temp[1]) <= 0:
+            return make_response(redirect(""))
+
+
+    sql1 = "SELECT CID from D0018E.Customer"
+    customers = execute(sql1)
+
+    sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
+    IDs = execute(sql2)
+
+    print("gets here")
+
+    
+
+    print("so far so good")
+    cookie_id = int(request.cookies.get('SID'))
+
+    flag = True
+    for i in range(len(customers)):
+        if customers[i]['CID'] == cookie_id:
+            flag = False
+    print("ye that worked")
+    
+    if request.cookies.get('login') == 'None' and flag:
+        res = make_response(redirect(url_for(".customer", data = data2)))
+        return res
+    print("ok")
+
+    res = make_response(redirect(url_for('.cart', data = data2)))
+    CaID = valid_id()
+    
+    print("weird")
+    if request.cookies.get('login') == 'registered':
+        sql_insert = "INSERT INTO D0018E.Cart (CaID, CBought, ReID) SELECT {0}, 0, (SELECT RID FROM D0018E.Registered WHERE RID = {1}) FROM DUAL WHERE NOT EXISTS (SELECT CBought FROM D0018E.Cart WHERE CBought = 0 AND CaID = {0})".format(CaID, cookie_id)
+        execute(sql_insert, False)
+    elif request.cookies.get('login') == 'None':
+        sql_insert = "INSERT INTO D0018E.Cart (CaID, CBought, CuID) SELECT {0}, 0, (SELECT CID FROM D0018E.Customer WHERE CID = {1}) FROM DUAL WHERE NOT EXISTS (SELECT CBought FROM D0018E.Cart WHERE CBought = 0 AND CaID = {0})".format(CaID, cookie_id)
+        execute(sql_insert, False)
+        if flag2:
+            res = make_response(redirect(url_for('.cart', data = data1)))
+    
+    return res
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
