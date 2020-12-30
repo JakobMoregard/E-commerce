@@ -739,7 +739,7 @@ def pp():
     print(sql)
     data = execute(sql)
 
-    return render_template("ProductPage.html", data = data)
+    return render_template("ProductPage.html", data = data, login = login_status(), loginstatus = request.cookies.get('login'))
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
