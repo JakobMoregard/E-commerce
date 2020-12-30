@@ -118,7 +118,7 @@
             <form method="POST">
                 <input value="{{data[0]['PID']}}" type="hidden" name="form_id">
                 <input value="{{data[0]['APrice']}}" type="hidden" name="price">
-                <input id="amount" type="number" name="Amount" value="1">
+                <input id="amount" type="number" name="Amount" min="1" value="1">
                 <button id="cart_button" type="submit">Add to cart</button>
             </form>
         </div>

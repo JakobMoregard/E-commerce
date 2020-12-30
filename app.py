@@ -755,28 +755,28 @@ def cart_route_product():
     if not flag2:
         data2 = "{0}, {1}, {2}".format(request.form['form_id'], request.form['Amount'], request.form['price'])
         if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
-            return make_response(redirect("/"))
+            return make_response(redirect("#top"))
     else:
         temp = data1.split(",")
         if not valid_amount(temp[0], int(temp[1])):
-            return make_response(redirect("/"))
+            return make_response(redirect("#top"))
 
     if request.cookies.get('login') == 'admin':
-        return make_response(redirect("/"))
+        return make_response(redirect("#top"))
     elif flag2:
         temp = data1.split(",")
         print("temp: ", temp)
         if temp == ['']: 
-            return make_response(redirect(""))
+            return make_response(redirect("#top"))
         elif int(temp[1]) <= 0:
-            return make_response(redirect(""))
+            return make_response(redirect("#top"))
     elif not flag2:
         temp = data2.split(",")
         print("temp: ", temp)
         if temp[1] == ' ': 
-            return make_response(redirect(""))
+            return make_response(redirect("#top"))
         elif int(temp[1]) <= 0:
-            return make_response(redirect(""))
+            return make_response(redirect("#top"))
 
 
     sql1 = "SELECT CID from D0018E.Customer"
