@@ -137,36 +137,40 @@
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Win 1 million dollars! </a><br>
 
     {% for dict_item in product %}
-    <div class="product">
-        <table>
-            <thead>
-                <tr>
-                    <th><a href="{{ ('/ProductPage?%s'%dict_item['PName']|urlencode ) }}">{{dict_item['PName']}}</a></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="color">{{dict_item['PColor']}}</td>
-                </tr>
-                <tr>
-                    <td id="price">Pris: {{dict_item['APrice']}} kr</td>
-                    <td id="stock">{{dict_item['AStock']}} st</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td>
-                        <form method="POST">
-                            <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
-                            <input value="{{dict_item['APrice']}}" type="hidden" name="price">
-                            <input id="amount" type="number" name="Amount" min="1">
-                            <button id="cart_button" type="submit">Add to cart</button>
-                        </form>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+    <a href="{{ ('/ProductPage?%s'%dict_item['PName']|urlencode )}}">
+        <div class="product">
+            <table>
+                <thead>
+                    <tr>
+                        <th>{{dict_item['PName']}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="color">{{dict_item['PColor']}}</td>
+                    </tr>
+                    <tr>
+                        <td id="price">Pris: {{dict_item['APrice']}} kr</td>
+                        <td id="stock">{{dict_item['AStock']}} st</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                            <div>
+                                <form method="POST">
+                                    <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
+                                    <input value="{{dict_item['APrice']}}" type="hidden" name="price">
+                                    <input id="amount" type="number" name="Amount" min="1">
+                                    <button id="cart_button" type="submit">Add to cart</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </a>
     {% endfor %}
 
 </body>
