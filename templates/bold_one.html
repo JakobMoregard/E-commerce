@@ -34,8 +34,17 @@
                     color: white;
                 }
 
-            .topnav u {
+            .topnav #login {
                 float: right;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+            .topnav #product_top {
+                float: left;
                 color: #f2f2f2;
                 text-align: center;
                 padding: 14px 16px;
@@ -45,20 +54,19 @@
     </style>
 
     <div class="topnav">
-        {% if loginstatus == "None" %}
         <a href="/">Home</a>
+        <u id="product_top">Product</u>
+        {% if loginstatus == "None" %}
         <a href="/login">Login</a>
         <a href="/signup">Signup</a>
         {% elif loginstatus == "registered" %}
-        <a href="/">Home</a>
         <a href="/user">Account</a>
         <a href="/logout"> Logout </a>
         {% elif loginstatus == "admin" %}
-        <a href="/">Home</a>
         <a href="/admin"> Admin </a>
         <a href="/logout"> Logout </a>
         {% endif %}
-        <u>{{login}}</u>
+        <u id="login">{{login}}</u>
 
     </div>
 </head>

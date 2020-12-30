@@ -35,8 +35,17 @@
                     color: white;
                 }
 
-            .topnav u {
+            .topnav #login {
                 float: right;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+            .topnav #product_top {
+                float: left;
                 color: #f2f2f2;
                 text-align: center;
                 padding: 14px 16px;
@@ -66,9 +75,10 @@
 
     <div class="topnav">
         <a href="/">Home</a>
+        <u id="product_top">Product</u>
         <a class="active" href="/admin"> Admin </a>
         <a href="/logout"> Logout </a>
-        <u>{{login}}</u>
+        <u id="login">{{login}}</u>
 
     </div>
 </head>
