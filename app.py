@@ -733,7 +733,7 @@ def userForm():
 
 @app.route("/ProductPage")
 def pp():
-    product = parse_pid(request.args) #Finns troligen bättre metoder, oh well
+    product = parse_pid(request.args) #Finns troligen bättre metoder, oh well. Hey du fick det att funka iaf ¯\_(ツ)_/¯ I didn't....
 
     sql = "SELECT PName, PColor, PDescript FROM D0018E.Product WHERE PName = " + '"{}"'.format(product)
     print(sql)
