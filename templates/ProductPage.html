@@ -107,12 +107,23 @@
         </h1>
 
         <img src="" id="product_image" />
+
+        <p id="description">
+            {{product[0]['PDescript']}}
+        </p>
+
+        <ul id="facts">
+            <li>{{product[0]['PColor']}}</li>
+        </ul>
     </div>
 
     <div class="product_purchase">
         <h1 id="price">
             {{product[0]['APrice']}}
         </h1>
+        <h2 id="stock">
+            {{product[0]['AStock']}}
+        </h2>
 
         <div class="buy_button">
             <form method="POST">
@@ -122,6 +133,10 @@
                 <button id="cart_button" type="submit">Add to cart</button>
             </form>
         </div>
+    </div>
+
+    <div class="reviews">
+        <a href="{{ ('/Review?%s'%product[0]['PID']|urlencode )}}"
     </div>
 
 
