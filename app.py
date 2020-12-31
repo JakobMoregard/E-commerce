@@ -734,11 +734,8 @@ def userForm():
 
 @app.route("/ProductPage")
 def pp(): #you just had to smh...
-    print(request.args)
     product = parse_pid(request.args) #Finns troligen bättre metoder, oh well. Hey du fick det att funka iaf ¯\_(ツ)_/¯
-    print(product)
     sql = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(product)
-    print(sql)
     product = execute(sql)
 
     return render_template("ProductPage.html", product = product, login = login_status(), loginstatus = request.cookies.get('login'))
@@ -821,6 +818,15 @@ def cart_route_product():
             res = make_response(redirect(url_for('.cart', data = data1)))
     
     return res
+
+@app.route("/Review")
+def review():
+
+    product_id = parse_pid(request.args)
+
+    return render_template("review.html", product_id = product_id, login = login_status(), loginstatus = request.cookies.get('login'))
+
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

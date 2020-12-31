@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
@@ -44,7 +45,7 @@
                 font-size: 17px;
             }
 
-          
+
 
         #cart {
             float: right;
@@ -68,77 +69,23 @@
 
     <div class="topnav">
         <a href="/">Home</a>
-        <a class="active">Product</a>
-        {% if loginstatus == "None" %}
-
+        <a href="{{{{ ('/ProductPage?%s'%product_id|urlencode )}}}}">Product</a>
         <a href="/login">Login</a>
         <a href="/signup">Signup</a>
         <a id="cart" href="/cart">Cart</a>
-
-        {% elif loginstatus == "registered" %}
-
-        <a href="/user">Account</a>
-        <a href="/logout"> Logout </a>
-        <a id="cart" href="/cart">Cart</a>
-
-        {% elif loginstatus == "admin" %}
-
-        <a href="/admin"> Admin </a>
-        <a href="/logout"> Logout </a>
-
-        {% else %}
-
-        <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
-        <a id="cart" href="/cart">Cart</a>
-
-        {% endif %}
-
         <u id="login">{{login}}</u>
 
     </div>
 </head>
 <body>
-    <p>{{product}}</p>
+    <form method="POST">
+        <input value="1" type="hidden" name="data">
+        Score*: <input name="RRating"><br>
+        Review: <input id="review_field" name="RReview"><br>
+        <input type="submit">
+    </form>
+    <i> Fields marked with * are mandatory </i><br>
 
-    <div class="product_body">
-        <h1 id="title">
-            {{product[0]['PName']}}
-        </h1>
-
-        <img src="" id="product_image" />
-
-        <p id="description">
-            {{product[0]['PDescript']}}
-        </p>
-
-        <ul id="facts">
-            <li>{{product[0]['PColor']}}</li>
-        </ul>
-    </div>
-
-    <div class="product_purchase">
-        <h2 id="price">
-            {{product[0]['APrice']}}
-        </h2>
-        <h3 id="stock">
-            {{product[0]['AStock']}}
-        </h3>
-
-        <div class="buy_button">
-            <form method="POST">
-                <input value="{{product[0]['PID']}}" type="hidden" name="form_id">
-                <input value="{{product[0]['APrice']}}" type="hidden" name="price">
-                <input id="amount" type="number" name="Amount" min="1" value="1">
-                <button id="cart_button" type="submit">Lägg till i kundvagnen</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="reviews">
-        <a href="{{('/Review?%s'%product[0]['PID']|urlencode )}}">Skriv en Recension</a>
-    </div>
-
-
+    <output> {{errortext}} </output>
 </body>
 </html>

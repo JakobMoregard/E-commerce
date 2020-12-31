@@ -158,7 +158,7 @@
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Win 1 million dollars! </a><br>
 
     {% for dict_item in product %}
-    <a href="{{ ('/ProductPage?%s'%dict_item['PID']|urlencode )}}" class="product_link">
+    <a href="{{('/ProductPage?%s'%dict_item['PID']|urlencode )}}" class="product_link">
         <div class="product">
             <table>
                 <thead>
@@ -183,7 +183,7 @@
                                     <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
                                     <input value="{{dict_item['APrice']}}" type="hidden" name="price">
                                     <input id="amount" type="hidden" name="Amount" value="1">
-                                    <button id="cart_button" type="submit">Buy</button>
+                                    <button id="cart_button" type="submit">Köp</button>
                                 </form>
                             </div>
                         </td>
