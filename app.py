@@ -118,10 +118,10 @@ def parse_pid(multidict):
     dict = multidict.to_dict()
     sql = "SELECT PID FROM D0018E.Product"
     product = execute(sql)
-    for i in range(len(product)):
+    for item in product:
         print(list(dict.keys())[0])
         #print(list(product['PID'])[i])
-        print(product[i])
+        print(item)
         if product[i]['PID'] == list(dict.keys())[0]:
             return product[i]['PID']
 
