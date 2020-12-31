@@ -121,7 +121,7 @@ def parse_pid(multidict):
     for i in range(len(product)):
         print(list(dict.keys())[0])
         #print(list(product['PID'])[i])
-        print(product[i]['PID'])
+        print(product[i])
         if product[i]['PID'] == list(dict.keys())[0]:
             return product[i]['PID']
 
