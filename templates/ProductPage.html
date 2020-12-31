@@ -118,12 +118,12 @@
     </div>
 
     <div class="product_purchase">
-        <h1 id="price">
+        <h2 id="price">
             {{product[0]['APrice']}}
-        </h1>
-        <h2 id="stock">
-            {{product[0]['AStock']}}
         </h2>
+        <h3 id="stock">
+            {{product[0]['AStock']}}
+        </h3>
 
         <div class="buy_button">
             <form method="POST">
@@ -136,7 +136,7 @@
     </div>
 
     <div class="reviews">
-        <a href="{{ ('/Review?%s'%product[0]['PID']|urlencode )}}"
+        <a href="{{ ('/Review?%s'%product[0]['PID']|urlencode )}}">Skriv en Recension</a>
     </div>
 
 
