@@ -116,12 +116,11 @@ def parse_registered_data(ID, data, keys):
 def parse_pid(multidict):
 
     dict = multidict.to_dict()
-    print(dict)
+    print(list(dict.keys())[0])
     sql = "SELECT PID FROM D0018E.Product"
     product = execute(sql)
     print(product)
     for i in range(len(product)):
-            print(multidict.get(product[i]['PID']))
             t = multidict.get(product[i]['PID'])
             print(t)
             print(product[i]['PID'])
