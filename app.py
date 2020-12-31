@@ -115,12 +115,16 @@ def parse_registered_data(ID, data, keys):
 
 def parse_pid(multidict):
 
+    print(multidict)
     sql = "SELECT PID FROM D0018E.Product"
-    PID = execute(sql)
-    for i in range(len(PID)):
-            t = multidict.get(PID[i]['PID'])
+    product = execute(sql)
+    print(product)
+    for i in range(len(product)):
+            t = multidict.get(product[i]['PID'])
+            print(t)
+            print(product[i]['PID'])
             if t == '':
-                return PID[i]['PID']
+                return product[i]['PID']
 
 
     return ''
@@ -734,9 +738,10 @@ def userForm():
 
 @app.route("/ProductPage")
 def pp(): #you just had to smh...
+    print(request.args)
     product = parse_pid(request.args) #Finns troligen bättre metoder, oh well. Hey du fick det att funka iaf ¯\_(ツ)_/¯
-
-    sql = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE Product.PID = " + '"{}"'.format(product)
+    print(product)
+    sql = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(product)
     print(sql)
     product = execute(sql)
 
