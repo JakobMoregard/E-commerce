@@ -750,13 +750,13 @@ def cart_route_product():
     if data3:
         data1 = request.args['data']
         flag2 = True
-    print("after if")
     print("data1 ", data1)
     data2 = ""
     if not flag2:
         data2 = "{0}, {1}, {2}".format(request.form['form_id'], request.form['Amount'], request.form['price'])
         if not valid_amount(request.form['form_id'], int(request.form['Amount'])):
             return make_response(redirect("#top"))
+
     else:
         temp = data1.split(",")
         if not valid_amount(temp[0], int(temp[1])):
@@ -764,40 +764,36 @@ def cart_route_product():
 
     if request.cookies.get('login') == 'admin':
         return make_response(redirect("#top"))
+
     elif flag2:
         temp = data1.split(",")
         print("temp: ", temp)
         if temp == ['']: 
             return make_response(redirect("#top"))
+
         elif int(temp[1]) <= 0:
             return make_response(redirect("#top"))
+
     elif not flag2:
         temp = data2.split(",")
         print("temp: ", temp)
         if temp[1] == ' ': 
             return make_response(redirect("#top"))
+
         elif int(temp[1]) <= 0:
             return make_response(redirect("#top"))
 
-
     sql1 = "SELECT CID from D0018E.Customer"
     customers = execute(sql1)
-
     sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
     IDs = execute(sql2)
 
-    print("gets here")
-
-    
-
-    print("so far so good")
     cookie_id = int(request.cookies.get('SID'))
 
     flag = True
     for i in range(len(customers)):
         if customers[i]['CID'] == cookie_id:
             flag = False
-    print("ye that worked")
     
     if request.cookies.get('login') == 'None' and flag:
         res = make_response(redirect(url_for(".customer", data = data2)))
@@ -807,7 +803,6 @@ def cart_route_product():
     res = make_response(redirect(url_for('.cart', data = data2)))
     CaID = valid_id()
     
-    print("weird")
     if request.cookies.get('login') == 'registered':
         sql_insert = "INSERT INTO D0018E.Cart (CaID, CBought, ReID) SELECT {0}, 0, (SELECT RID FROM D0018E.Registered WHERE RID = {1}) FROM DUAL WHERE NOT EXISTS (SELECT CBought FROM D0018E.Cart WHERE CBought = 0 AND CaID = {0})".format(CaID, cookie_id)
         execute(sql_insert, False)
@@ -823,10 +818,48 @@ def cart_route_product():
 def review():
 
     product_id = parse_pid(request.args)
+    sql1 = "SELECT RaID, RRating, RReview FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
+    reviews = execute(sql1)
 
-    return render_template("review.html", product_id = product_id, login = login_status(), loginstatus = request.cookies.get('login'))
+
+    return render_template("review.html", product_id = product_id, review = reviews, login = login_status(), loginstatus = request.cookies.get('login'))
 
 
+@app.route("/ProductPage", methods=['POST'])
+def write_review():
+
+    data1 = request.args
+    if request.cookies.get('login') == 'admin':
+        return make_response(redirect(url_for('.ProductPage', data = data1)))
+
+    sql1 = "SELECT CID FROM D0018E.Customer"
+    customers = execute(sql1)
+
+    sql2 = "SELECT CuID, ReID FROM D0018E.Rating"
+    IDs = execute(sql2)
+
+    cookie_id = int(request.cookies.get('SID'))
+
+    flag = True
+    for i in range(len(customers)):
+        if customers[i]['CID'] == cookie_id:
+            flag = False
+    
+    if request.cookies.get('login') == 'None' and flag:
+        res = make_response(redirect(url_for(".customer", data = data1)))
+        return res
+
+    res = make_response(redirect(url_for('.ProductPage', data = data1)))
+    RaID = valid_id()
+    
+    if request.cookies.get('login') == 'registered':
+        sql_insert = "INSERT INTO D0018E.Rating (RaID, RRating, RReview, PrID, ReID) VALUES({0}, {1}, {2}, (SELECT PID FROM D0018E.Product WHERE PID = {3}), (SELECT RID FROM D0018E.Registered WHERE RID = {4}));".format(RaID, request.form['RRating'], request.form['RReview'], data1, cookie_id)
+        execute(sql_insert, False)
+    elif request.cookies.get('login') == 'None':
+        sql_insert = "INSERT INTO D0018E.Rating (RaID, RRating, RReview, PrID, CuID) VALUES({0}, {1}, {2}, (SELECT PID FROM D0018E.Product WHERE PID = {3}), (SELECT CID FROM D0018E.Customer WHERE CID = {4}));".format(RaID, request.form['RRating'], request.form['RReview'], data1, cookie_id)
+        execute(sql_insert, False)
+       
+    return res
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

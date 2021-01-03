@@ -65,6 +65,30 @@
                 background-color: #5BB9E1;
                 color: white;
             }
+
+        .review {
+            overflow: hidden;
+            font-family: sans-serif;
+            width: 80%
+        }
+
+            .review table {
+                background-color: #CECECE;
+                border: 1px solid black;
+                padding: 30px;
+            }
+
+            .review thead {
+                font-size: 28px;
+                text-align: left;
+                padding-bottom: 15px;
+            }
+
+            .review tbody {
+                font-size: 18px;
+                text-align: left;
+            }
+
     </style>
 
     <div class="topnav">
@@ -79,13 +103,29 @@
 </head>
 <body>
     <form method="POST">
-        <input value="1" type="hidden" name="data">
+        <input value="{{product_id}}" type="hidden" name="data">
         Score*: <input name="RRating" type="number" value="1" min="1" max="5"><br>
         Review: <input id="review_field" name="RReview"><br>
         <input type="submit">
     </form>
     <i> Fields marked with * are mandatory </i><br>
 
-    <output> {{errortext}} </output>
+    {% for dict_item in review %}
+    <div class="review">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{dict_item['RRating']}}/5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="color">{{dict_item['RReview']}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+
 </body>
 </html>
