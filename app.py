@@ -746,7 +746,6 @@ def cart_route_product():
     flag2 = False
     print(request.args['data'])
     data1 = request.args['data']
-    data1.pop(list(data1.keys())[0])
     if data1:
         flag2 = True
     print("data1 ", data1)
