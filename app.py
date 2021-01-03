@@ -832,7 +832,7 @@ def write_review():
     data1 = list(data1.keys())[0]
     if request.cookies.get('login') == 'admin':
         print(url_for(".pp", data1))
-        return make_response(redirect(url_for(".pp", data1)))
+        return make_response(redirect(url_for(".pp", var = data1)))
 
     sql1 = "SELECT CID FROM D0018E.Customer"
     customers = execute(sql1)
