@@ -828,7 +828,8 @@ def review():
 @app.route("/Review", methods=['POST'])
 def write_review():
 
-    data1 = request.args
+    data1 = request.args.to_dict()
+    data1 = list(data1.keys())[0]
     if request.cookies.get('login') == 'admin':
         return make_response(redirect(url_for('.pp', data = data1)))
 
