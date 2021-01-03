@@ -732,7 +732,7 @@ def userForm():
 
 @app.route("/ProductPage")
 def pp(): #you just had to smh...
-    print(request.args['data'])
+    print(type(request.args['data']))
     product = parse_pid(request.args['data']) #Finns troligen bättre metoder, oh well. Hey du fick det att funka iaf ¯\_(ツ)_/¯
     sql = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(product)
     print(sql)
