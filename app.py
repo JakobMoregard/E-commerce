@@ -733,7 +733,8 @@ def userForm():
 
 @app.route("/ProductPage")
 def pp(): #you just had to smh...
-  
+
+    product_id = request.args['data']
     sql1 = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(request.args['data'])
     product = execute(sql1)
     sql2 = "SELECT RaID, RRating, RReview FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
