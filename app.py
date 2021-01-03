@@ -831,7 +831,7 @@ def write_review():
     data1 = request.args.to_dict()
     data1 = list(data1.keys())[0]
     if request.cookies.get('login') == 'admin':
-        return make_response(redirect(url_for('.pp', data = data1)))
+        return make_response(redirect(url_for('.pp', data1)))
 
     sql1 = "SELECT CID FROM D0018E.Customer"
     customers = execute(sql1)
@@ -847,7 +847,7 @@ def write_review():
             flag = False
     
     if request.cookies.get('login') == 'None' and flag:
-        res = make_response(redirect(url_for(".customer", data = data1)))
+        res = make_response(redirect(url_for(".customer", data1)))
         return res
 
     res = make_response(redirect(url_for('.pp', data = data1)))
