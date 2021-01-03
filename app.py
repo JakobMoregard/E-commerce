@@ -748,7 +748,7 @@ def cart_route_product():
     print(request.args['data'])
     data1 = request.args['data'].split(",")
     print(data1)
-    data1.pop(data1[0])
+    data1 = data1.pop(data1[0])
     print(data1)
     if data1:
         flag2 = True
