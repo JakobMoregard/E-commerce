@@ -745,12 +745,8 @@ def cart_route_product():
 
     data1 = ""
     flag2 = False
-    print("arg", request.args['data'])
-    print("type", type(request.args['data']))
     data1 = request.args['data'].split(",")
-    print("split", data1)
     del data1[0]
-    print("popped", data1)
     if data1:
         flag2 = True
     print("data1 ", data1)
@@ -824,7 +820,6 @@ def review():
     sql = "SELECT RaID, RRating, RReview FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
     reviews = execute(sql)
 
-
     return render_template("review.html", product_id = product_id, review = reviews, login = login_status(), loginstatus = request.cookies.get('login'))
 
 
@@ -832,7 +827,7 @@ def review():
 def write_review():
 
     data1 = request.args['data']
-    data1 = list(data1.keys())[0]
+    data1 = data1[0]
     if request.cookies.get('login') == 'admin':
         return make_response(redirect(url_for('.pp', data = data1)))
 
