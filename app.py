@@ -734,11 +734,12 @@ def userForm():
 @app.route("/ProductPage")
 def pp(): #you just had to smh...
   
-    sql = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(request.args['data'])
-    print(sql)
-    product = execute(sql)
+    sql1 = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(request.args['data'])
+    product = execute(sql1)
+    sql2 = "SELECT RaID, RRating, RReview FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
+    reviews = execute(sql2)
 
-    return render_template("ProductPage.html", product = product, login = login_status(), loginstatus = request.cookies.get('login'))
+    return render_template("ProductPage.html", review = reviews, product = product, login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/ProductPage", methods=['POST'])
 def cart_route_product():
@@ -817,10 +818,8 @@ def cart_route_product():
 def review():
 
     product_id = request.args['data']
-    sql = "SELECT RaID, RRating, RReview FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
-    reviews = execute(sql)
 
-    return render_template("review.html", product_id = product_id, review = reviews, login = login_status(), loginstatus = request.cookies.get('login'))
+    return render_template("review.html", product_id = product_id, login = login_status(), loginstatus = request.cookies.get('login'))
 
 
 @app.route("/Review", methods=['POST'])

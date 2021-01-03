@@ -110,22 +110,5 @@
     </form>
     <i> Fields marked with * are mandatory </i><br>
 
-    {% for dict_item in review %}
-    <div class="review">
-        <table>
-            <thead>
-                <tr>
-                    <th>{{dict_item['RRating']}}/5</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="color">{{dict_item['RReview']}}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    {% endfor %}
-
 </body>
 </html>
