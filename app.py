@@ -113,14 +113,12 @@ def parse_registered_data(ID, data, keys):
     print("parse ",  keys)
     return data_content
 
-def parse_pid(multidict):
+def parse_pid(ID):
 
-    dict = multidict.to_dict()
-    data = int(list(dict.keys())[0])
     sql = "SELECT PID FROM D0018E.Product"
     product = execute(sql)
     for i in range(len(product)):
-        if product[i]['PID'] == data:
+        if product[i]['PID'] == ID:
             return product[i]['PID']
 
     return ''
@@ -745,7 +743,8 @@ def cart_route_product():
 
     data1 = ""
     flag2 = False
-    data1 = request.args['data'].to_dict()
+    print(request.args['data'])
+    data1 = request.args['data']
     data1.pop(list(data1.keys())[0])
     if data1:
         flag2 = True
@@ -827,7 +826,7 @@ def review():
 @app.route("/Review", methods=['POST'])
 def write_review():
 
-    data1 = request.args['data'].to_dict()
+    data1 = request.args['data']
     data1 = list(data1.keys())[0]
     if request.cookies.get('login') == 'admin':
         return make_response(redirect(url_for('.pp', data = data1)))
