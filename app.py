@@ -332,6 +332,7 @@ def customerForm():
     #registered = execute(query1)
 
     req = request.form
+    print(req)
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
 
     data = req['data']
@@ -745,9 +746,12 @@ def cart_route_product():
     data1 = ""
     flag2 = False
     print(request.args['data'])
-    data1 = request.args['data']
-    #if data1:
-        #flag2 = True
+    data1 = request.args['data'].split(",")
+    print(data1)
+    data1.pop(data1[0])
+    print(data1)
+    if data1:
+        flag2 = True
     print("data1 ", data1)
     data2 = ""
     if not flag2:
