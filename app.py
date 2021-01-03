@@ -734,7 +734,7 @@ def userForm():
 
 @app.route("/ProductPage")
 def pp(): #you just had to smh...
-    product = parse_pid(request.args) #Finns troligen bättre metoder, oh well. Hey du fick det att funka iaf ¯\_(ツ)_/¯
+    product = parse_pid(request.args['data']) #Finns troligen bättre metoder, oh well. Hey du fick det att funka iaf ¯\_(ツ)_/¯
     sql = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(product)
     product = execute(sql)
 
@@ -745,10 +745,9 @@ def cart_route_product():
 
     data1 = ""
     flag2 = False
-    data3 = request.args.to_dict()
-    data3.pop(list(data3.keys())[0])
-    if data3:
-        data1 = request.args['data']
+    data1 = request.args['data'].to_dict()
+    data1.pop(list(data1.keys())[0])
+    if data1:
         flag2 = True
     print("data1 ", data1)
     data2 = ""
@@ -817,7 +816,7 @@ def cart_route_product():
 @app.route("/Review")
 def review():
 
-    product_id = parse_pid(request.args)
+    product_id = parse_pid(request.args['data'])
     sql1 = "SELECT RaID, RRating, RReview FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
     reviews = execute(sql1)
 
@@ -828,10 +827,10 @@ def review():
 @app.route("/Review", methods=['POST'])
 def write_review():
 
-    data1 = request.args.to_dict()
+    data1 = request.args['data'].to_dict()
     data1 = list(data1.keys())[0]
     if request.cookies.get('login') == 'admin':
-        return make_response(redirect('/ProductPage?%s'%data1))
+        return make_response(redirect(url_for('.pp', data = data1)))
 
     sql1 = "SELECT CID FROM D0018E.Customer"
     customers = execute(sql1)
@@ -850,7 +849,7 @@ def write_review():
         res = make_response(redirect(url_for(".customer", data = data1)))
         return res
 
-    res = make_response(redirect('/ProductPage?%s'%data1))
+    res = make_response(redirect(url_for('.pp', data = data1)))
     RaID = valid_id()
     
     if request.cookies.get('login') == 'registered':

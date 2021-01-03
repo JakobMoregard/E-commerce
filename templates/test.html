@@ -158,7 +158,7 @@
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Win 1 million dollars! </a><br>
 
     {% for dict_item in product %}
-    <a href="{{('/ProductPage?%s'%dict_item['PID']|urlencode )}}" class="product_link">
+    <a href="{{('/ProductPage?data=%s'%dict_item['PID']|urlencode )}}" class="product_link">
         <div class="product">
             <table>
                 <thead>
