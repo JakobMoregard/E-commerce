@@ -825,7 +825,7 @@ def review():
     return render_template("review.html", product_id = product_id, review = reviews, login = login_status(), loginstatus = request.cookies.get('login'))
 
 
-@app.route("/ProductPage", methods=['POST'])
+@app.route("/Review", methods=['POST'])
 def write_review():
 
     data1 = request.args
