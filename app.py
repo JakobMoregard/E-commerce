@@ -830,7 +830,7 @@ def write_review():
 
     data1 = request.args
     if request.cookies.get('login') == 'admin':
-        return make_response(redirect(url_for('.ProductPage', data = data1)))
+        return make_response(redirect(url_for('.pp', data = data1)))
 
     sql1 = "SELECT CID FROM D0018E.Customer"
     customers = execute(sql1)
@@ -849,7 +849,7 @@ def write_review():
         res = make_response(redirect(url_for(".customer", data = data1)))
         return res
 
-    res = make_response(redirect(url_for('.ProductPage', data = data1)))
+    res = make_response(redirect(url_for('.pp', data = data1)))
     RaID = valid_id()
     
     if request.cookies.get('login') == 'registered':
