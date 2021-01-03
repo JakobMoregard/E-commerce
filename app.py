@@ -857,7 +857,7 @@ def write_review():
         print(sql_insert)
         execute(sql_insert, False)
     elif request.cookies.get('login') == 'None':
-        sql_insert = "INSERT INTO D0018E.Rating (RaID, RRating, RReview, PrID, CuID) VALUES({0}, {1}, {2}, (SELECT PID FROM D0018E.Product WHERE PID = {3}), (SELECT CID FROM D0018E.Customer WHERE CID = {4}));".format(RaID, request.form['RRating'], request.form['RReview'], int(data1), cookie_id)
+        sql_insert = "INSERT INTO D0018E.Rating (RaID, RRating, RReview, PrID, CuID) VALUES({0}, {1}, {2}, (SELECT PID FROM D0018E.Product WHERE PID = {3}), (SELECT CID FROM D0018E.Customer WHERE CID = {4}));".format(RaID, request.form['RRating'], str(request.form['RReview']), int(data1), cookie_id)
         print(sql_insert)
         execute(sql_insert, False)
        
