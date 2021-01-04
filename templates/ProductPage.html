@@ -74,19 +74,20 @@
                 background-color: #E9E9E9;
                 border: 1px solid black;
                 padding: 30px;
-                width: 80%;
+                width: 60%;
                 margin-left: auto;
                 margin-right: auto;
+                margin-bottom: 30px;
             }
 
             .review thead {
-                font-size: 28px;
+                font-size: 24px;
                 text-align: left;
                 padding-bottom: 15px;
             }
 
             .review tbody {
-                font-size: 18px;
+                font-size: 14px;
                 text-align: left;
             }
 
@@ -132,7 +133,7 @@
             background-color: #E9E9E9;
             color: #121617;
             width: 300px;
-            height: 330px;
+            height: 350px;
             float: left;
             position: relative;
         }
@@ -149,7 +150,7 @@
         .centered_t {
             position: absolute;
             margin: 0;
-            bottom: 60px;
+            bottom: 75px;
             left: 50%;
             -ms-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -178,6 +179,7 @@
             border-radius: 5px;
             border: none;
             margin-bottom: 20px;
+            font-size: 15px;
         }
 
         
@@ -235,12 +237,15 @@
     </div>
 
     <div class="product_purchase">
-        <h2 id="price">
-            {{product[0]['APrice']}}
-        </h2>
+
         <h3 id="stock">
-            {{product[0]['AStock']}}
+            Antal tillgängliga: {{product[0]['AStock']}} st
         </h3>
+
+        <h2 id="price">
+            {{product[0]['APrice']}} kr
+        </h2>
+
 
         <div class="buy_button">
             <form method="POST">
