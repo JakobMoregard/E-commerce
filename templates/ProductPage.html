@@ -71,7 +71,7 @@
         }
 
             .review table {
-                background-color: #CECECE;
+                background-color: #E9E9E9;
                 border: 1px solid black;
                 padding: 30px;
                 width: 80%;
@@ -90,6 +90,38 @@
                 text-align: left;
             }
 
+        .product_body {
+            margin-left: 20%;
+            margin-top: 5%;
+            background-color: #E9E9E9;
+            color: #121617;
+        }
+
+        #product_image {
+            padding-left: 5%;
+            padding-top: 5%;
+            width: 500px;
+            height: 333px;
+        }
+
+        #title {
+            padding-left: 5%;
+            padding-top: 5%;
+            font-size: 32px;
+            float: left;
+        }
+
+        #description {
+            padding-left: 5%;
+            font-size: 20px;
+        }
+
+        #facts {
+            padding-left: 5%;
+            font-size: 18px;
+        }
+
+        
     </style>
 
     <div class="topnav">
@@ -127,11 +159,12 @@
 <body>
 
     <div class="product_body">
+
+        <img src="https://www.bzcomputer.com/wp-content/uploads/2020/10/wp-header-logo-17.png" id="product_image" alt="Not Found" />
+
         <h1 id="title">
             {{product[0]['PName']}}
         </h1>
-
-        <img src="" id="product_image" />
 
         <p id="description">
             {{product[0]['PDescript']}}
