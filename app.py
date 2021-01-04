@@ -163,8 +163,6 @@ def valid_amount(PrID, Amount):
     
 
 
-
-#def valid_id(admin_IDs, customer_IDs, registered_IDs):
 def valid_id():
     id = random.randint(1, 99999999)
 
@@ -188,7 +186,6 @@ def valid_id():
     if id not in admin_IDs or customer_IDs or registered_IDs or product_IDs or available_IDs or rating_IDs  or cart_IDs or item_IDs:
         return id
     else:
-        #return valid_id(admin_IDs, customer_IDs, registered_IDs)
         return valid_id()
 
 def login_status():
@@ -328,9 +325,6 @@ def customer():
 @app.route("/customer", methods=['POST'])
 def customerForm():
 
-    #query1 = "SELECT * FROM D0018E.Customer"
-    #registered = execute(query1)
-
     req = request.form
     print(req)
     keys = ['CID', 'CFName', 'CLName', 'CBAddress', 'CDAddress']
@@ -354,8 +348,6 @@ def customerForm():
         return render_template("customer.html", data = data, errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
     CaID = valid_id()
-    #sql_insert = "INSERT INTO D0018E.Cart (CaID, CuID) VALUES ({0}, (SELECT CID FROM D0018E.Customer WHERE CID = {1}))".format(CaID, request.cookies.get('SID'))
-    #execute(sql_insert, False)
 
     res = make_response(redirect(url_for("index", data = data), code=307))
     return res
