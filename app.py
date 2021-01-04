@@ -56,10 +56,10 @@ def parse_reviews(review_data, keys):
     new_data = []
 
     for i in range(len(review_data)):
-        temp_data = []
+        temp_data = {}
         for j in range(len(review_data[i])):
             if review_data[i][keys[j]] != None:
-                temp_data.append(review_data[i][keys[j]])
+                temp_data[keys[j]] = review_data[i][keys[j]]
         new_data.append(temp_data)
 
     return new_data
@@ -743,7 +743,7 @@ def pp(): #you just had to smh...
     sql1 = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(request.args['data'])
     product = execute(sql1)
     sql2 = "SELECT RaID, RRating, RReview, CuID, ReID FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
-    keys = ['RaID', 'RRating', 'CuID', 'ReID']
+    keys = ['RaID', 'RRating', 'RReview', 'CuID', 'ReID']
     reviews = parse_reviews(execute(sql2), keys)
     print(reviews)
 
