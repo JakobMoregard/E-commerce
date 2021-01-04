@@ -84,10 +84,14 @@
             }
 
             .product thead {
-                font-size: 20px;
-                text-align: left;
-                padding-bottom: 15px;
+                padding-bottom: 20px;
             }
+
+        #name {
+            font-size: 20px;
+            text-align: left;
+            padding-bottom: 15px;
+        }
 
             #amount {
                 width: 50px;
@@ -168,10 +172,13 @@
             <table>
                 <thead>
                     <tr>
-                        <th>{{dict_item['PName']}}</th>
+                        <th><img src="https://www.bzcomputer.com/wp-content/uploads/2020/10/wp-header-logo-17.png" id="product_image" alt="Not Found" width="100" height="100"/></th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <td id="name">{{dict_item['PName']}}</td>
+                    </tr>
                     <tr>
                         <td id="color">{{dict_item['PColor']}}</td>
                     </tr>
