@@ -51,6 +51,19 @@ def parse_product_data(ID, data, keys):
     print("parse ",  keys)
     return data_content
 
+def parse_reviews(review_data, keys):
+
+    new_data = []
+
+    for i in range(len(review_data)):
+        temp_data = []
+        for j in range(len(review_data[i])):
+            if review_data[i][keys[j]] != None:
+                temp_data.append(review_data[i][keys[j]])
+        new_data.append(temp_data)
+
+    return new_data
+
 
 def parse_price_data(ID, data, keys):
 
