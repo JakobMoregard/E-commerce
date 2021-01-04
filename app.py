@@ -58,7 +58,9 @@ def parse_reviews(review_data, keys):
     for i in range(len(review_data)):
         temp_data = {}
         for j in range(len(review_data[i])):
-            if review_data[i][keys[j]] != None:
+            if keys[j] == 'CuID' or keys[j] == 'ReID' and review_data[i][keys[j]] != None:
+                temp_data['ID'] = review_data[i][keys[j]]
+            elif review_data[i][keys[j]] != None:
                 temp_data[keys[j]] = review_data[i][keys[j]]
         new_data.append(temp_data)
 
