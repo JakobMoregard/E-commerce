@@ -58,8 +58,13 @@ def parse_reviews(review_data, keys):
     for i in range(len(review_data)):
         temp_data = {}
         for j in range(len(review_data[i])):
-            if keys[j] == 'CuID' or keys[j] == 'ReID' and review_data[i][keys[j]] != None:
-                temp_data['ID'] = review_data[i][keys[j]]
+            if keys[j] == 'CuID' and review_data[i][keys[j]] != None:
+
+                sql = "SELECT CFName FROM D0018E.Customer WHERE CID = {}".format(review_data[i][keys[j]])
+                temp_data['ID'] = execute(sql)
+            elif keys[j] == 'ReID' and review_data[i][keys[j]] != None:
+                sql = "SELECT RFName FROM D0018E.Registered WHERE RID = {}".format(review_data[i][keys[j]])
+                temp_data['ID'] = execute(sql)
             elif review_data[i][keys[j]] != None:
                 temp_data[keys[j]] = review_data[i][keys[j]]
         new_data.append(temp_data)
@@ -748,6 +753,7 @@ def pp(): #you just had to smh...
     keys = ['RaID', 'RRating', 'RReview', 'CuID', 'ReID']
     reviews = parse_reviews(execute(sql2), keys)
     print(reviews)
+
 
     return render_template("ProductPage.html", review = reviews, product = product, login = login_status(), loginstatus = request.cookies.get('login'))
 
