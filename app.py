@@ -51,6 +51,19 @@ def parse_product_data(ID, data, keys):
     print("parse ",  keys)
     return data_content
 
+def parse_reviews(review_data, keys):
+
+    new_data = []
+
+    for i in range(len(review_data)):
+        temp_data = []
+        for j in range(len(review_data[i])):
+            if review_data[i][keys[j]] != None:
+                temp_data.append(review_data[i][keys[j]])
+        new_data.append(temp_data)
+
+    return new_data
+
 
 def parse_price_data(ID, data, keys):
 
@@ -729,8 +742,9 @@ def pp(): #you just had to smh...
     product_id = request.args['data']
     sql1 = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(request.args['data'])
     product = execute(sql1)
-    sql2 = "SELECT RaID, RRating, RReview FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
+    sql2 = "SELECT RaID, RRating, RReview, CuID, ReID FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
     reviews = execute(sql2)
+    print(reviews)
 
     return render_template("ProductPage.html", review = reviews, product = product, login = login_status(), loginstatus = request.cookies.get('login'))
 
