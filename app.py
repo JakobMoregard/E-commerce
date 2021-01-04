@@ -743,7 +743,7 @@ def pp(): #you just had to smh...
     sql1 = "SELECT * FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID) WHERE PID = " + '"{}"'.format(request.args['data'])
     product = execute(sql1)
     sql2 = "SELECT RaID, RRating, RReview, CuID, ReID FROM D0018E.Rating WHERE PrID = {0}".format(product_id)
-    keys = ['RaID', 'RRating', 'RReview' 'CuID', 'ReID']
+    keys = ['RaID', 'RRating', 'RReview', 'CuID', 'ReID']
     reviews = parse_reviews(execute(sql2), keys)
     print(reviews)
 
