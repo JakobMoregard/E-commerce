@@ -61,10 +61,10 @@ def parse_reviews(review_data, keys):
             if keys[j] == 'CuID' and review_data[i][keys[j]] != None:
 
                 sql = "SELECT CFName FROM D0018E.Customer WHERE CID = {}".format(review_data[i][keys[j]])
-                temp_data['ID'] = execute(sql)
+                temp_data['ID'] = execute(sql)[0]['CFName']
             elif keys[j] == 'ReID' and review_data[i][keys[j]] != None:
                 sql = "SELECT RFName FROM D0018E.Registered WHERE RID = {}".format(review_data[i][keys[j]])
-                temp_data['ID'] = execute(sql)
+                temp_data['ID'] = execute(sql)[0]['RFName']
             elif review_data[i][keys[j]] != None:
                 temp_data[keys[j]] = review_data[i][keys[j]]
         new_data.append(temp_data)
