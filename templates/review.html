@@ -66,6 +66,102 @@
                 color: white;
             }
 
+        .form {
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            position: relative;
+        }
+
+        #review_form {
+            width: 350px;
+            height: 350px;
+            padding: 20px;
+            padding-top: 1px;
+            background-color: #E9E9E9;
+            border: 3px solid #E2E2E2;
+            border-radius: 5px;
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+
+        #legend {
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 18px;
+        }
+
+        .errort {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #error {
+            font-family: sans-serif;
+            font-size: 18px;
+        }
+
+        #score {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 10px;
+            maring-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #score_text {
+            margin-left: 120px;
+        }
+
+        #review {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            width: 344px;
+            height: 150px;
+            resize: none;
+        }
+
+        #review_text {
+            margin-top: 30px;
+            margin-left: 150px;
+        }
+
+        .centered_b {
+            position: absolute;
+            margin: 0;
+            bottom: 10px;
+            left: 50%;
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        #button {
+            background-color: #BDBDBD;
+            color: #242424;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 15px;
+            width: 70px;
+            height: 27px;
+            font-weight: bold;
+        }
+
+        #info {
+            font-style: italic;
+            font-family: sans-serif;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 1px;
+        }
+
     </style>
 
     <div class="topnav">
@@ -79,13 +175,25 @@
     </div>
 </head>
 <body>
-    <form method="POST">
-        <input value="{{product_id}}" type="hidden" name="data">
-        Score*: <input name="RRating" type="number" value="1" min="1" max="5"><br>
-        Review: <input id="review_field" name="RReview"><br>
-        <input type="submit">
-    </form>
-    <i> Fields marked with * are mandatory </i><br>
+    <div class="form">
+        <form method="POST">
+            <fieldset id="review_form">
+                <input value="{{product_id}}" type="hidden" name="data">
+
+                <p id="legend">Review</p>
+
+                <label for="score" id="score_text">Score*: </label>
+                <input name="RRating" id="score" type="number" value="1" min="1" max="5"><br><br>
+
+                <label for="review" id="review_text">Review: </label><br>
+                <textarea name="RReview" form="review_form" id="review" maxlength="512"></textarea>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
 
 </body>
 </html>
