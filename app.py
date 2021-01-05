@@ -434,6 +434,7 @@ def change_cart():
     try:
         amount = int(data["Amount"])
         sql = "SELECT IAmount, PrID, IPrice FROM D0018E.Item WHERE IID = " + data['form_id']
+        print(sql)
         cur_amount = execute(sql)
         new_amount = amount + int(cur_amount[0]['IAmount'])
     except ValueError:
