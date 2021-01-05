@@ -412,7 +412,7 @@ def cart():
             execute(sql_insert, False)
 
     #sql_items = "SELECT IID, IAmount, IPrice FROM D0018E.Item WHERE CaID = {}".format(CaID)
-    sql_items = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID)"
+    sql_items = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE D0018E.Item.CaID = {}".format(CaID)
     table = execute(sql_items)
     return render_template("cart.html", table = table , loginstatus = request.cookies.get('login'))
 
