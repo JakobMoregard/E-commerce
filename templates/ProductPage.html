@@ -76,15 +76,19 @@
 
         }
 
-        a {
+        .link{
+            padding: 30px;
+        }
+
+        .link a {
             color: #121617;
             text-decoration: none;
             font-family: sans-serif;
-            font-size: 17px;
+            font-size: 20px;
         }
 
         #link {
-            margin-left: 20%;
+            margin-left: 25%;
         }
 
             .review table {
@@ -292,7 +296,10 @@
     </div>
 
     <div class="reviews">
-        <a href="{{('/Review?data=%s'%product[0]['PID']|urlencode )}}" id="link">Skriv en Recension</a><br>
+
+        <div class="link">
+            <a href="{{('/Review?data=%s'%product[0]['PID']|urlencode )}}" id="link">Skriv en Recension</a><br>
+        </div>
 
         {% for dict_item in review %}
         <div class="review">
