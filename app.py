@@ -411,7 +411,7 @@ def cart():
             sql_insert = "INSERT INTO D0018E.Item ({0}) VALUES ({1}, (SELECT CaID FROM D0018E.Cart WHERE CaID = {2} and CBought = 0), (SELECT PID FROM D0018E.Product WHERE PID = {3}), {4}, {5})".format(keys, str(IID), CaID, data[0], data[1], int(data[1])* int(data[2]))
             execute(sql_insert, False)
 
-    sql_items = "SELECT IID, IAmount, IPrice FROM D0018E.Item WHERE CaID = {}".format(CaID)
+    sql_items = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount, Item.IID FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE D0018E.Item.CaID = {}".format(CaID)
     table = execute(sql_items)
     return render_template("cart.html", table = table , loginstatus = request.cookies.get('login'))
 
@@ -434,6 +434,7 @@ def change_cart():
     try:
         amount = int(data["Amount"])
         sql = "SELECT IAmount, PrID, IPrice FROM D0018E.Item WHERE IID = " + data['form_id']
+        print(sql)
         cur_amount = execute(sql)
         new_amount = amount + int(cur_amount[0]['IAmount'])
     except ValueError:
@@ -490,12 +491,12 @@ def check_out():
         Old_CaIDs = execute(sql2)
 
     for j in range(len(Old_CaIDs)):
-        sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(Old_CaIDs[j]['CaID'])
+        sql3 = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(Old_CaIDs[j]['CaID'])
         old_table = execute(sql3)
         old_tableS.append(old_table)
-    print(old_tableS)
+    #print(old_tableS)
 
-    sql4 = "SELECT IID, IAmount, PrID FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
+    sql4 = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
     table = execute(sql4)
 
     sql5 = "UPDATE D0018E.Cart SET CBought = 1 WHERE CaID = {}".format(CaID)
@@ -503,10 +504,12 @@ def check_out():
 
     
     for i in range(len(table)):
-        sql6 = "SELECT AStock FROM D0018E.Available WHERE PrID = {}".format(table[i]['PrID'])
+        sql6 = "SELECT AStock FROM D0018E.Available WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PName = '{}' )".format(table[i]['PName'])
         available = execute(sql6)
-        new_price = int(available[0]['AStock']) - int(table[i]['IAmount'])
-        sql7 = "UPDATE D0018E.Available SET AStock = {0} WHERE PrID = {1}".format(new_price ,table[i]['PrID'])
+        print("aval ", available)
+        new_amount = int(available[0]['AStock']) - int(table[i]['IAmount'])
+        sql7 = "UPDATE D0018E.Available SET AStock = {0} WHERE PrID = (SELECT PID FROM D0018E.Product WHERE PName = '{1}' )".format(new_amount ,table[i]['PName'])
+        print("sql ", sql7)
         execute(sql7, False)
 
     return render_template("check_out.html", table = table , old_tables = old_tableS, loginstatus = loginstatus)

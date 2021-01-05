@@ -103,9 +103,11 @@
         <!-- table header -->
         <tr>
 
-            <th> IID </th>
-            <th> Amount </th>
+            <th> Name </th>
+            <th> Color </th>
+            <th> Description </th>
             <th> Price </th>
+            <th> Amount </th>
 
         </tr>
 
@@ -113,7 +115,11 @@
         {% for dict_item in table %}
         <tr>
             {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
+                {% if item[0] != 'IID' %}
+
+                    <td> {{ item[1] }} </td>
+
+                {% endif %}
             {% endfor %}
             <td>
                 <form method="POST">
