@@ -490,12 +490,12 @@ def check_out():
         Old_CaIDs = execute(sql2)
 
     for j in range(len(Old_CaIDs)):
-        sql3 = "SELECT IID, IAmount FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(Old_CaIDs[j]['CaID'])
+        sql3 = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(Old_CaIDs[j]['CaID'])
         old_table = execute(sql3)
         old_tableS.append(old_table)
     print(old_tableS)
 
-    sql4 = "SELECT IID, IAmount, PrID FROM D0018E.Item WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
+    sql4 = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
     table = execute(sql4)
 
     sql5 = "UPDATE D0018E.Cart SET CBought = 1 WHERE CaID = {}".format(CaID)
