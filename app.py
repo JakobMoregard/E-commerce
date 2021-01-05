@@ -493,7 +493,7 @@ def check_out():
         sql3 = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(Old_CaIDs[j]['CaID'])
         old_table = execute(sql3)
         old_tableS.append(old_table)
-    print(old_tableS)
+    #print(old_tableS)
 
     sql4 = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
     table = execute(sql4)
@@ -505,8 +505,10 @@ def check_out():
     for i in range(len(table)):
         sql6 = "SELECT AStock FROM D0018E.Available WHERE PrID = (SELECT PrID FROM D0018E.Product WHERE PName = '{}' )".format(table[i]['PName'])
         available = execute(sql6)
-        new_price = int(available[0]['AStock']) - int(table[i]['IAmount'])
-        sql7 = "UPDATE D0018E.Available SET AStock = {0} WHERE PrID = (SELECT PrID FROM D0018E.Product WHERE PName = '{1}' )".format(new_price ,table[i]['PName'])
+        print("aval ", available)
+        new_amount = int(available[0]['AStock']) - int(table[i]['IAmount'])
+        sql7 = "UPDATE D0018E.Available SET AStock = {0} WHERE PrID = (SELECT PrID FROM D0018E.Product WHERE PName = '{1}' )".format(new_amount ,table[i]['PName'])
+        print("sql ", sql7)
         execute(sql7, False)
 
     return render_template("check_out.html", table = table , old_tables = old_tableS, loginstatus = loginstatus)
