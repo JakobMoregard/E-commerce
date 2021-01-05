@@ -9,6 +9,7 @@
         body {
             margin: 0;
             font-family: sans-serif;
+            background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
         }
 
         .topnav {
@@ -44,7 +45,7 @@
                 font-size: 17px;
             }
 
-            
+
 
         #cart {
             float: right;
@@ -65,22 +66,31 @@
                 color: white;
             }
 
+        .product_placement {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .product {
             overflow: hidden;
             font-family: sans-serif;
             padding: 20px;
+            padding-bottom: 10px;
             float: left;
+            position: relative;
+            width: 160px;
+            height: 225px;
+            border: 3px solid #FFFFFF;
+            border-radius: 5px;
+            background-color: #E9E9E9;
+            margin-left: 40px;
+            margin-top: 30px;
         }
 
             .product table {
-                background-color: #CECECE;
-                border: 1px solid black;
-                float: Left;
-                width: 200px;
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 20px;
-                padding-bottom: 10px;
+                margin-top: 7px;
+                width: 100%;
             }
 
             .product thead {
@@ -89,6 +99,18 @@
                 margin-right: auto;
             }
 
+        .image {
+            width: 140px;
+            height: 100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #product_image {
+            width: 140px;
+            height: 100px;
+        }
+
         #name {
             font-size: 20px;
             text-align: left;
@@ -96,10 +118,10 @@
             font-weight: bold;
         }
 
-            #amount {
-                width: 50px;
-                height: 25px;
-            }
+        #amount {
+            width: 50px;
+            height: 25px;
+        }
 
 
         #cart_button {
@@ -111,10 +133,14 @@
         }
 
         #cart_button {
-            margin-left: auto;
-            margin-right: auto;
             background-color: #33AB33;
             color: #E8E8E8;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 7px;
+            font-size: 15px;
+            width: 70px;
+            height: 27px;
         }
 
         a {
@@ -122,11 +148,20 @@
             text-decoration: none;
         }
 
-                a:hover {
-                    color: #121617;
-                    text-decoration: none;
-                    cursor:pointer
-                }
+            a:hover {
+                color: #121617;
+                text-decoration: none;
+                cursor: pointer
+            }
+
+        .centered_b {
+            position: absolute;
+            margin: 0;
+            bottom: 10px;
+            left: 50%;
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
 
     </style>
 
@@ -169,45 +204,54 @@
     <img src="https://i.kym-cdn.com/photos/images/newsfeed/001/062/257/3b6.png" alt="Trulli" width="500" height="333"><br>
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Win 1 million dollars! </a><br>
 
-    {% for dict_item in product %}
-    <a href="{{('/ProductPage?data=%s'%dict_item['PID']|urlencode )}}" class="product_link">
-        <div class="product">
-            <table>
-                <thead>
-                    <tr>
-                        <th><img src="https://www.bzcomputer.com/wp-content/uploads/2020/10/wp-header-logo-17.png" id="product_image" alt="Not Found" width="140" height="100"/></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td id="name">{{dict_item['PName']}}</td>
-                    </tr>
-                    <tr>
-                        <td id="color">{{dict_item['PColor']}}</td>
-                    </tr>
-                    <tr>
-                        <td id="price">Pris: {{dict_item['APrice']}} kr</td>
-                        <td id="stock">{{dict_item['AStock']}} st</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>
-                            <div class="buy_button">
-                                <form method="POST">
-                                    <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
-                                    <input value="{{dict_item['APrice']}}" type="hidden" name="price">
-                                    <input id="amount" type="hidden" name="Amount" value="1">
-                                    <button id="cart_button" type="submit">Köp</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-    </a>
-    {% endfor %}
+    <div class="product_placement">
 
+
+        {% for dict_item in product %}
+        <a href="{{('/ProductPage?data=%s'%dict_item['PID']|urlencode )}}" class="product_link">
+            <div class="product">
+                <table>
+                    <thead>
+                        <tr>
+                            <div class="image"
+                        		<th><img src="https://www.bzcomputer.com/wp-content/uploads/2020/10/wp-header-logo-17.png" id="product_image" alt="Not Found"/></th>
+                       		</div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="name">{{dict_item['PName']}}</td>
+                        </tr>
+                        <tr>
+                            <td id="color">{{dict_item['PColor']}}</td>
+                        </tr>
+                        <tr>
+                            <td id="price">Pris: {{dict_item['APrice']}} kr</td>
+                            <td id="stock">{{dict_item['AStock']}} st</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <div class="buy_button">
+                                    <form method="POST">
+                                        <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
+                                        <input value="{{dict_item['APrice']}}" type="hidden" name="price">
+                                        <input id="amount" type="hidden" name="Amount" value="1">
+                                        <div class="centered_b">
+                                            <button id="cart_button" type="submit">Köp</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </a>
+        {% endfor %}
+
+
+    </div>
 </body>
 </html>
