@@ -9,6 +9,7 @@
         body {
             margin: 0;
             font-family: sans-serif;
+            background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
         }
 
         .topnav {
@@ -44,7 +45,7 @@
                 font-size: 17px;
             }
 
-            
+
 
         #cart {
             float: right;
@@ -64,6 +65,154 @@
                 background-color: #5BB9E1;
                 color: white;
             }
+
+        .form {
+            width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            position: relative;
+        }
+
+        #signup_form {
+            width: 350px;
+            height: 360px;
+            padding: 20px;
+            padding-top: 1px;
+            background-color: #E9E9E9;
+            border: 3px solid #E2E2E2;
+            border-radius: 5px;
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+
+        #legend {
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 18px;
+        }
+
+        .errort {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #error {
+            font-family: sans-serif;
+            font-size: 18px;
+        }
+
+        #fname {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 50px;
+            maring-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #lname {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 51px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #baddr {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 21px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #daddr {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 5px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #mail {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 81px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #password {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 56px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        .centered_b {
+            position: absolute;
+            margin: 0;
+            bottom: 10px;
+            left: 50%;
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        #button {
+            background-color: #BDBDBD;
+            color: #242424;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 15px;
+            width: 70px;
+            height: 27px;
+            font-weight: bold;
+        }
+
+        #info {
+            font-style: italic;
+            font-family: sans-serif;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 1px;
+        }
+
+        .user_info {
+            float: right;
+        }
+
+        #user_table {
+            margin-top: 5px;
+            font-family: sans-serif;
+            font-size: 16px;
+            background-color: #E9E9E9;
+            width: 200px;
+            border: 3px solid #E2E2E2;
+            border-radius: 5px;
+            padding-top: 95px;
+            padding-bottom: 100px;
+            text-align: center;
+        }
+
+        td {
+            padding-bottom: 40px;
+        }
+
     </style>
 
     <div class="topnav">
@@ -77,18 +226,38 @@
     </div>
 </head>
 <body>
-    <form method="POST">
-        First name*: <input name="RFName"><br>
-        Last name*: <input name="RLName"><br>
-        Billing Address*: <input name="RBAddress"><br>
-        Delivery Address*: <input name="RDAddress"><br>
-        E-Mail*: <input name="RMail"><br>
-        Password*: <input name="RPassword">
-        <input type="submit">
-    </form>
-    <i> Fields marked with * are mandatory </i><br>
 
-    <output> {{errortext}} </output>
+    <div class="form">
+        <form method="POST">
+            <fieldset id="signup_form">
+                <p id="legend">Sign up</p>
+
+                <div class="errort"><output> {{errortext}} </output><br></div><br>
+
+                <label for="fname">First name*: </label>
+                <input name="RFName" id="fname"><br>
+
+                <label for="lname">Last name*: </label>
+                <input name="RLName" id="lname"><br>
+
+                <label for="baddr">Billing Address*: </label>
+                <input name="RBAddress" id="baddr"><br>
+
+                <label for="daddr">Delivery Address*: </label>
+                <input name="RDAddress" id="daddr"><br>
+
+                <label for="mail">E-Mail*: </label>
+                <input name="RMail" id="mail"><br>
+
+                <label for="password">Password*: </label>
+                <input name="RPassword" id="password"><br>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
 
 </body>
 </html>
