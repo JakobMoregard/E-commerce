@@ -76,10 +76,18 @@
 
         }
 
-            a {
-                color: #121617;
-                text-decoration: none;
-            }
+        a {
+            color: #121617;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-size: 17px;
+        }
+
+        #link {
+            margin-left: 40%;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
 
             .review table {
                 background-color: #E9E9E9;
@@ -102,15 +110,18 @@
                 text-align: left;
             }
 
+            #name {
+                text-align: right;
+                font-size: 16px; 
+            }
+
     .not_reviews { 
         width: 100%;
-        height: 800px;
-        border: 1px solid black;
+        height: 700px;
         background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg"); 
     }
 
         .product_body {
-            border: 1px solid black;
             margin-left: 20%;
             margin-top: 5%;
             background-color: #E9E9E9;
@@ -124,7 +135,6 @@
             margin-top: 5%;
             width: 500px;
             height: 350px;
-            border: 1px solid black;
         }
 
         #title {
@@ -147,7 +157,6 @@
         }
 
         .product_purchase {
-            border: 1px solid black;
             margin-left: 2%;
             margin-top: 5%;
             background-color: #E9E9E9;
@@ -159,7 +168,6 @@
         }
 
         .centered_b {
-            border: 1px solid black;
             position: absolute;
             margin: 0;
             bottom: 10px;
@@ -169,7 +177,6 @@
         }
 
         .centered_t {
-            border: 1px solid black;
             position: absolute;
             margin: 0;
             bottom: 75px;
@@ -303,7 +310,7 @@
                         <td id="review">{{dict_item['RReview']}}</td>
                     </tr>
                     <tr>
-                        <td id="name">{{dict_item['ID']}}</td>
+                        <td id="name">Skriven av: {{dict_item['ID']}}</td>
                     </tr>
                 </tbody>
             </table>
