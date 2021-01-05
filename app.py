@@ -585,13 +585,13 @@ def signupForm():
         execute(query, False)
     except pymysql.err.IntegrityError:
         errortext = "Mail is already registered"
-        return render_template("signup.html", registered = registered, errortext = errortext)
+        return render_template("signup.html", registered = registered, errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
     except pymysql.err.OperationalError:
         errortext = "Please enter all required fields"
-        return render_template("signup.html", registered = registered, errortext = errortext)
+        return render_template("signup.html", registered = registered, errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
     except pymysql.err.DataError:
         errortext = "Field too long"
-        return render_template("signup.html", registered = registered, errortext = errortext)
+        return render_template("signup.html", registered = registered, errortext = errortext, login = login_status(), loginstatus = request.cookies.get('login'))
 
     res = make_response(redirect("/user"))
     res.set_cookie('SID', str(new_ID), max_age=60*60*24*365*2)
