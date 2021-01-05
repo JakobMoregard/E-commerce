@@ -115,7 +115,7 @@
         {% for dict_item in table %}
         <tr>
             {% for item in dict_item.items() %}
-                {% if {{ item[0] }} != 'IID' %}
+                {% if {{ item[0] }} != 'IID' -%}
 
                     <td> {{ item[1] }} </td>
 
