@@ -503,7 +503,7 @@ def check_out():
 
     
     for i in range(len(table)):
-        sql6 = "SELECT AStock FROM D0018E.Available WHERE PrID = (SELECT PrID FROM D0018E.Product WHERE PName = {})".format(table[i]['PName'])
+        sql6 = "SELECT AStock FROM D0018E.Available WHERE PrID = (SELECT PrID FROM D0018E.Product WHERE PName = '{}' )".format(table[i]['PName'])
         available = execute(sql6)
         new_price = int(available[0]['AStock']) - int(table[i]['IAmount'])
         sql7 = "UPDATE D0018E.Available SET AStock = {0} WHERE PrID = {1}".format(new_price ,table[i]['PrID'])
