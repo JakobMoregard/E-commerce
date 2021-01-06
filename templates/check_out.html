@@ -125,8 +125,7 @@
 
     <p> Previous Orders</p>
     {% for old_table in old_tables %}
-    {% if loop.index0 != 0 %}
-    <p> Order {{loop.index0}}</p>
+    <p> Order {{loop.index0 + 1}}</p>
     <table style="width:100%">
         <!-- table header -->
         <tr>
@@ -151,7 +150,6 @@
 
 
     </table>
-    {% endif %}
     {% endfor %}
 </body>
 </html>
