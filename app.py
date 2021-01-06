@@ -149,7 +149,7 @@ def valid_amount(PrID, Amount):
     id = request.cookies.get('SID')
     print("args valid_amount", PrID, " ", Amount)
 
-    sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + PrID
+    sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = {}".format(PrID)
     stock = execute(sql1)[0]['AStock']
     print(stock)
 
@@ -428,6 +428,12 @@ def change_cart():
         cart = execute(check_cart)
 
         if cart:
+            for i in range(len(cart)):
+                sql = "SELECT IAmount, PrID FROM D0018E.Item WHERE IID = {}".format(cart[i]['IID'])
+                amount = execute(sql)
+
+                if not valid_amount(amount[0]['PrID'], 0):
+                    return redirect("/cart")
             return redirect("/check_out")
         else: 
             return redirect("/cart")
