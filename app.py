@@ -843,30 +843,25 @@ def review():
 @app.route("/Review", methods=['POST'])
 def write_review():
 
-    print("hm")
     data1 = request.args['data'].split(",")
     data1 = data1[0]
     print(data1)
     if request.cookies.get('login') == 'admin':
         return make_response(redirect(url_for('.pp', data = data1)))
 
-    print("ok")
     sql1 = "SELECT CID FROM D0018E.Customer"
     customers = execute(sql1)
 
     sql2 = "SELECT CuID, ReID FROM D0018E.Rating"
     IDs = execute(sql2)
-    print("kkk")
 
     cookie_id = int(request.cookies.get('SID'))
 
-    print("awda")
     flag = True
     for i in range(len(customers)):
         if customers[i]['CID'] == cookie_id:
             flag = False
     
-    print("YMCA")
     if request.cookies.get('login') == 'None' and flag:
         res = make_response(redirect(url_for(".customer", data = data1)))
         return res
@@ -874,12 +869,13 @@ def write_review():
     res = make_response(redirect(url_for('.pp', data = data1)))
     RaID = valid_id()
     
-    print("well")
     if request.cookies.get('login') == 'registered':
+        print("wat")
         sql_insert = "INSERT INTO D0018E.Rating (RaID, RRating, RReview, PrID, ReID) VALUES({0}, {1}, '{2}', (SELECT PID FROM D0018E.Product WHERE PID = {3}), (SELECT RID FROM D0018E.Registered WHERE RID = {4}));".format(RaID, request.form['RRating'], request.form['RReview'], data1, cookie_id)
         print(sql_insert)
         execute(sql_insert, False)
     elif request.cookies.get('login') == 'None':
+        print("wat")
         sql_insert = "INSERT INTO D0018E.Rating (RaID, RRating, RReview, PrID, CuID) VALUES({0}, {1}, '{2}', (SELECT PID FROM D0018E.Product WHERE PID = {3}), (SELECT CID FROM D0018E.Customer WHERE CID = {4}));".format(RaID, request.form['RRating'], request.form['RReview'], data1, cookie_id)
         print(sql_insert)
         execute(sql_insert, False)
