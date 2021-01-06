@@ -228,7 +228,8 @@ app = Flask(__name__)
 @app.route("/", methods=['POST'])
 def cart_route():
 
-    
+    if request.cookies.get('login') == 'admin':
+        return make_response(redirect("/"))
     data1 = ""
     flag2 = False
     print(request.args)
@@ -246,9 +247,8 @@ def cart_route():
         if not valid_amount(temp[0], int(temp[1])):
             return make_response(redirect("/"))
 
-    if request.cookies.get('login') == 'admin':
-        return make_response(redirect("/"))
-    elif flag2:
+    
+    if flag2:
         temp = data1.split(",")
         print("temp: ", temp)
         if temp == ['']: 
@@ -762,6 +762,8 @@ def pp(): #you just had to smh...
 
 @app.route("/ProductPage", methods=['POST'])
 def cart_route_product():
+    if request.cookies.get('login') == 'admin':
+        return make_response(redirect("#top"))
 
     data1 = ""
     flag2 = False
@@ -781,10 +783,7 @@ def cart_route_product():
         if not valid_amount(temp[0], int(temp[1])):
             return make_response(redirect("#top"))
 
-    if request.cookies.get('login') == 'admin':
-        return make_response(redirect("#top"))
-
-    elif flag2:
+    if flag2:
         temp = data1.split(",")
         print("temp: ", temp)
         if temp == ['']: 
