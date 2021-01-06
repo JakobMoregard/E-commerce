@@ -432,7 +432,7 @@ def change_cart():
                 sql = "SELECT IAmount, PrID FROM D0018E.Item WHERE IID = {}".format(cart[i]['IID'])
                 amount = execute(sql)
 
-                if not valid_amount(amount[0]['PrID'], amount[0]['IAmount']):
+                if not valid_amount(amount[0]['PrID'], 0):
                     return redirect("/cart")
             return redirect("/check_out")
         else: 
