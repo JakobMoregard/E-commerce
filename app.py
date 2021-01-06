@@ -429,7 +429,7 @@ def change_cart():
 
         if cart:
             for i in range(len(cart)):
-                sql = "SELECT IAmount, PrID FROM D0018E.Item WHERE IID = " + cart[i]['IID']
+                sql = "SELECT IAmount, PrID FROM D0018E.Item WHERE IID = {}".format(cart[i]['IID'])
                 amount = execute(sql)
 
                 if not valid_amount(amount[0]['PrID'], amount[0]['IAmount']):
