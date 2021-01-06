@@ -81,7 +81,7 @@
             text-align: center;
         }
 
-        td {
+        .admin_info td {
             padding-bottom: 40px;
         }
 
@@ -249,11 +249,19 @@
             margin-left: auto;
             margin-right: auto;
             margin-bottom: 30px;
-            margin-top: 600px;
+            margin-top: 250px;
         }
 
-        th {
-            padding-bottom: 15px;
+        .product_table th {
+            font-size: 16px;
+            padding-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .product_table td {
+            font-size: 16px;
+            font-weight: normal;
+            padding-bottom: 10px;
         }
 
     </style>
@@ -398,16 +406,16 @@
                 </tr>
             </thead>
             <tbody>
-                {% for dict_item in table %}
+                {% for dict_item in table %}        
                 <tr>
-                    <th> {{dict_item['PID']}} </th>
-                    <th> {{dict_item['AvID']}} </th>
-                    <th> {{dict_item['PrID']}} </th>
-                    <th> {{dict_item['PName']}} </th>
-                    <th> {{dict_item['PColor']}} </th>
-                    <th> {{dict_item['APrice']}} </th>
-                    <th> {{dict_item['AStock']}} </th>
-                </tr>
+                    <td> {{dict_item['PID']}} </td>
+                    <td> {{dict_item['AvID']}} </td>
+                    <td> {{dict_item['PrID']}} </td>
+                    <td> {{dict_item['PName']}} </td>
+                    <td> {{dict_item['PColor']}} </td>
+                    <td> {{dict_item['APrice']}} </td>
+                    <td> {{dict_item['AStock']}} </td>
+                </tr>              
                 {% endfor %}
             </tbody>
         </table>
