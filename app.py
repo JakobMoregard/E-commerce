@@ -387,7 +387,7 @@ def cart():
             res = execute(sql1)
             CaID = res[0]['CaID']
     except IndexError:
-        return render_template("cart.html", empty_flag = True, login = login_status(), loginstatus = request.cookies.get('login'))
+        return render_template("cart.html", empty_flag, login = login_status(), loginstatus = request.cookies.get('login'))
     print(CaID)
     
     #data[0] = PID, data[1] = Amount, data[2] = price
