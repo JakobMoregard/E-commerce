@@ -763,7 +763,7 @@ def pp(): #you just had to smh...
 @app.route("/ProductPage", methods=['POST'])
 def cart_route_product():
     if request.cookies.get('login') == 'admin':
-        return make_response(redirect("/ProductPage"))
+        return make_response(redirect(".ProductPage"))
 
     data1 = ""
     flag2 = False
