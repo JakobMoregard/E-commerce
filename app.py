@@ -387,7 +387,7 @@ def cart():
             res = execute(sql1)
             CaID = res[0]['CaID']
     except IndexError:
-        return render_template("cart.html", login = login_status(), loginstatus = request.cookies.get('login'))
+        return render_template("cart.html", empty = true, login = login_status(), loginstatus = request.cookies.get('login'))
     print(CaID)
     
     #data[0] = PID, data[1] = Amount, data[2] = price
@@ -413,7 +413,7 @@ def cart():
 
     sql_items = "SELECT Product.PName, Item.IPrice, Item.IAmount, Item.IID FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE D0018E.Item.CaID = {}".format(CaID)
     table = execute(sql_items)
-    return render_template("cart.html", table = table, login = login_status(), loginstatus = request.cookies.get('login'))
+    return render_template("cart.html", empty = false, table = table, login = login_status(), loginstatus = request.cookies.get('login'))
 
 
 @app.route("/cart", methods=['POST'])
