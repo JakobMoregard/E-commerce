@@ -518,7 +518,7 @@ def check_out():
         print("sql ", sql7)
         execute(sql7, False)
 
-    return render_template("check_out.html", table = table , old_tables = old_tableS, loginstatus = loginstatus)
+    return render_template("check_out.html", table = table , old_tables = old_tableS, login = login_status(), loginstatus = loginstatus)
 
 @app.route("/Kenobi")
 def kenobi():
