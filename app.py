@@ -149,7 +149,7 @@ def valid_amount(PrID, Amount):
     id = request.cookies.get('SID')
     print("args valid_amount", PrID, " ", Amount)
 
-    sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = " + PrID
+    sql1 = "SELECT AStock FROM D0018E.Available WHERE PrID = {}".format(PrID)
     stock = execute(sql1)[0]['AStock']
     print(stock)
 
