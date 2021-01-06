@@ -307,10 +307,6 @@ def cart_route():
 def hello():
     
     app.add_url_rule('/', 'index', hello)
-    #sql1 = "SELECT PID, PName, PColor, PDescript FROM D0018E.Product;"
-    #product = execute(sql1)
-    #sql2 = "SELECT AvID, APrice, AStock, PrID FROM D0018E.Available;"
-    #price = execute(sql2)
 
     sql1 = "SELECT Product.PID, Product.PName, Product.PColor, Product.PDescript, Available.APrice, Available.AStock FROM (D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID)"
     product = execute(sql1)
@@ -318,14 +314,7 @@ def hello():
     res = make_response(render_template("test.html", product = product, login = login_status(), loginstatus = request.cookies.get('login')))
 
     if not request.cookies.get('SID'):
-        #sql = "SELECT AID FROM D0018E.Administrator"
-        #admins = execute(sql)
-        #sql2 = "SELECT CID FROM D0018E.Customer"
-        #customers = execute(sql2)
-        #sql3 = "SELECT RID FROM D0018E.Registered"
-        #registered = execute(sql3)
-
-        #session = valid_id(admins, customers, registered)
+   
         session = valid_id()
         res.set_cookie('SID', str(session), max_age=60*60*24*365*2)
         res.set_cookie('login', 'None', max_age=60*60*24*365*2)
@@ -387,10 +376,9 @@ def cart():
             res = execute(sql1)
             CaID = res[0]['CaID']
     except IndexError:
-        return render_template("cart.html", empty_flag, login = login_status(), loginstatus = request.cookies.get('login'))
+        return render_template("cart.html", empty_flag = True, login = login_status(), loginstatus = request.cookies.get('login'))
     print(CaID)
-    
-    #data[0] = PID, data[1] = Amount, data[2] = price
+
     if request.args:
         
         keys = ["IID", "CaID", "PrID", "IAmount", "IPrice"]
@@ -500,7 +488,6 @@ def check_out():
         sql3 = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 1)".format(Old_CaIDs[j]['CaID'])
         old_table = execute(sql3)
         old_tableS.append(old_table)
-    #print(old_tableS)
 
     sql4 = "SELECT Product.PName, Product.PColor, Product.PDescript, Item.IPrice, Item.IAmount FROM (D0018E.Product INNER JOIN D0018E.Item ON D0018E.Product.PID = D0018E.Item.PrID) WHERE EXISTS (SELECT CBought FROM D0018E.Cart WHERE Item.CaID = {} and CBought = 0)".format(CaID)
     table = execute(sql4)
