@@ -9,6 +9,7 @@
         body {
             margin: 0;
             font-family: sans-serif;
+            background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
         }
 
         .topnav {
@@ -44,8 +45,6 @@
                 font-size: 17px;
             }
 
-           
-
         #cart {
             float: right;
             color: #f2f2f2;
@@ -64,6 +63,199 @@
                 background-color: #5BB9E1;
                 color: white;
             }
+
+        .admin_info {
+            float: right;
+        }
+
+        #admin_table {
+            margin-top: 5px;
+            font-family: sans-serif;
+            font-size: 16px;
+            background-color: #E9E9E9;
+            width: 200px;
+            border: 3px solid #E2E2E2;
+            border-radius: 5px;
+            padding-top: 95px;
+            padding-bottom: 100px;
+            text-align: center;
+        }
+
+        td {
+            padding-bottom: 40px;
+        }
+
+        .add_form {
+            width: 400px;
+            margin-left: 8%;
+            margin-top: 100px;
+            position: relative;
+            float: left;
+        }
+
+        #add_form {
+            width: 350px;
+            height: 300px;
+            padding: 20px;
+            padding-top: 1px;
+            background-color: #E9E9E9;
+            border: 3px solid #E2E2E2;
+            border-radius: 5px;
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+
+        .update_form {
+            width: 400px;
+            margin-left: 100Px;
+            margin-top: 100px;
+            position: relative;
+            float: left;
+        }
+
+        #update_form {
+            width: 350px;
+            height: 360px;
+            padding: 20px;
+            padding-top: 1px;
+            background-color: #E9E9E9;
+            border: 3px solid #E2E2E2;
+            border-radius: 5px;
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+
+        .remove_form {
+            width: 400px;
+            margin-left: 100px;
+            margin-top: 100px;
+            position: relative;
+            float: left;
+        }
+
+        #remove_form {
+            width: 350px;
+            height: 170px;
+            padding: 20px;
+            padding-top: 1px;
+            background-color: #E9E9E9;
+            border: 3px solid #E2E2E2;
+            border-radius: 5px;
+            font-family: sans-serif;
+            font-size: 16px;
+        }
+
+        #legend {
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 18px;
+        }
+
+        #id {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 85px;
+            maring-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #name {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 59px;
+            maring-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #color {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 63px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #descr {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 21px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #price {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 65px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        #stock {
+            font-family: sans-serif;
+            font-size: 14px;
+            margin-left: 61px;
+            margin-top: 7px;
+            border-radius: 3px;
+            border: 1px solid black;
+            height: 20px;
+        }
+
+        .centered_b {
+            position: absolute;
+            margin: 0;
+            bottom: 10px;
+            left: 50%;
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        #button {
+            background-color: #BDBDBD;
+            color: #242424;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 15px;
+            width: 70px;
+            height: 27px;
+            font-weight: bold;
+        }
+
+        #info {
+            font-style: italic;
+            font-family: sans-serif;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 1px;
+        }
+
+        .product_table table {
+            background-color: #E9E9E9;
+            border: 3px solid #E2E2E2;
+            border-radius: 5px;
+            padding: 20px;
+            width: 75%;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 30px;
+            margin-top: 250px;
+        }
+
+        th {
+            padding-bottom: 15px;
+        }
+
     </style>
 
     <div class="topnav">
@@ -77,123 +269,149 @@
 </head>
 <body>
 
-    <style>
+    <div class="admin_info">
+        <table id="admin_table">
+            <tr>
+                <th> Admin ID: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['AID']}} </td>
+            </tr>
+            <tr>
+                <th> First Name: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['AFName']}} </td>
+            </tr>
+            <tr>
+                <th> Last Name: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['ALName']}} </td>
+            </tr>
+            <tr>
+                <th> Mail: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['AMail']}} </td>
+            </tr>
+            <tr>
+                <th> Password: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['APassword']}} </td>
+            </tr>
+        </table><br>
+    </div>
 
-        td {
-            width: 150px;
-            text-align: center;
-            border: 1px solid black;
-            padding: 5px;
-        }
-    </style>
+    <div class="add_form">
+        <form method="POST">
+            <fieldset id="add_form">
+                <input value="1" type="hidden" name="form_id">
 
-    <table style="width:100%">
-        <!-- table header -->
-        <tr>
+                <p id="legend">Add product</p>
 
-            <th> AID </th>
-            <th> First Name </th>
-            <th> Last Name </th>
-            <th> Mail </th>
+                <label for="name">Name*: </label>
+                <input id="name" name="PName"><br>
 
-        </tr>
+                <label for="color">Color*: </label>
+                <input id="color" name="PColor"><br>
 
-        <!-- table rows -->
-        {% for dict_item in admin %}
-        <tr>
-            {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table><br>
+                <label for="descr">Description*: </label>
+                <input id="descr" name="PDescript"><br>
 
-    <p> Add product</p>
+                <label for="price">Price*: </label>
+                <input id="price" type="number" name="APrice"><br>
 
-    <form method="POST">
-        <input value="1" type="hidden" name="form_id">
-        Name*: <input type="text" name="PName"><br>
-        Color*: <input type="text" name="PColor"><br>
-        Description*: <input type="text" name="PDescript"><br>
-        Price*: <input type="number" name="APrice"><br>
-        Stock*: <input type="number" name="AStock">
-        <input type="submit">
-    </form>
-    <i> Fields marked with * are mandatory </i><br>
+                <label for="stock">Stock*: </label>
+                <input id="stock" type="number" name="AStock"><br>
 
-    <p> Update product</p>
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
 
-    <form method="POST">
-        <input value="2" type="hidden" name="form_id">
-        ID*: <input type="number" name="PID"><br>
-        <i>ID of product to edit</i><br>
-        Name: <input type="text" name="PName"><br>
-        Color: <input type="text" name="PColor"><br>
-        Description: <input type="text" name="PDescript"><br>
-        Price: <input type="number" name="APrice"><br>
-        Stock: <input type="number" name="AStock">
-        <input type="submit">
-    </form>
-    <i> Fields marked with * are mandatory </i><br>
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
 
-    <p> Remove product</p>
+    <div class="update_form">
+        <form method="POST">
+            <fieldset id="update_form">
+                <input value="2" type="hidden" name="form_id">
 
-    <form method="POST">
-        <input value="3" type="hidden" name="form_id">
-        Id*: <input type="number" name="PID">
-        <input type="submit">
-    </form>
-    <output> {{errortext}} </output>
+                <p id="legend">Update product</p>
 
-    <table style="width:100%">
-        <!-- table header -->
-        <tr>
+                <label for="id">ID*: </label>
+                <input id="id" name="PID"><br>
 
-            <th> PID </th>
-            <th> Name </th>
-            <th> Color </th>
-            <th> Description </th>
-            <th> AvID </th>
-            <th> Price </th>
-            <th> Stock </th>
-            <th> PrID </th>
+                <p id="info"> ID of product to edit </p>
 
-        </tr>
+                <label for="name">Name*: </label>
+                <input id="name" name="PName"><br>
 
-        <!-- table rows -->
-        {% for dict_item in table %}
-        <tr>
-            {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+                <label for="color">Color*: </label>
+                <input id="color" name="PColor"><br>
 
-    <table style="width:100%">
-        <!-- table header -->
-        <tr>
+                <label for="descr">Description*: </label>
+                <input id="descr" name="PDescript"><br>
 
-            <th> PID </th>
-            <th> Name </th>
-            <th> Color </th>
-            <th> Description </th>
-            <th> AvID </th>
-            <th> Price </th>
-            <th> Stock </th>
-            <th> PrID </th>
+                <label for="price">Price*: </label>
+                <input id="price" type="number" name="APrice"><br>
 
-        </tr>
+                <label for="stock">Stock*: </label>
+                <input id="stock" type="number" name="AStock"><br>
 
-        <!-- table rows -->
-        {% for dict_item in table2 %}
-        <tr>
-            {% for item in dict_item.items() %}
-            <td> {{ item[1] }} </td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="remove_form">
+        <form method="POST">
+            <fieldset id="remove_form">
+                <input value="3" type="hidden" name="form_id">
+
+                <p id="legend">Remove product</p>
+
+                <label for="id">ID*: </label>
+                <input id="id" name="PID"><br>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="product_table">
+        <table id="product_table">
+            <thead>
+                <tr>
+                    <th> PID </th>
+                    <th> PrID </th>
+                    <th> AvID </th>
+                    <th> Name </th>
+                    <th> Color </th>
+                    <th> Price </th>
+                    <th> Stock </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dict_item in table %}
+                <tr>
+                    <th> {{dict_item['PID']}} </th>
+                    <th> {{dict_item['AvID']}} </th>
+                    <th> {{dict_item['PrID']}} </th>
+                    <th> {{dict_item['PName']}} </th>
+                    <th> {{dict_item['PColor']}} </th>
+                    <th> {{dict_item['APrice']}} </th>
+                    <th> {{dict_item['AStock']}} </th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 </body>
 </html>

@@ -602,7 +602,7 @@ def signupForm():
 
 @app.route("/admin")
 def admin():
-    sql = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
+    sql = "SELECT AID, AFName, ALName, AMail, APassword FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(sql)
 
     try:
@@ -684,7 +684,7 @@ def adminForm():
         res = execute(sql, False)
 
 
-    query3 = "SELECT AID, AFName, ALName, AMail FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
+    query3 = "SELECT AID, AFName, ALName, AMail, APassword FROM D0018E.Administrator WHERE AID = {}".format(request.cookies.get('SID'));
     admin = execute(query3)
     try:
         sql4 = "SELECT D0018E.Product.*, D0018E.Available.* FROM D0018E.Product INNER JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID;"
@@ -692,13 +692,7 @@ def adminForm():
     except pymysql.err.Error:
         print("bad inner join")
 
-    try:
-        sql5 = "SELECT * FROM D0018E.Product LEFT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID UNION ALL SELECT * FROM D0018E.Product RIGHT JOIN D0018E.Available ON D0018E.Product.PID = D0018E.Available.PrID WHERE D0018E.Product.PID IS NULL;"
-        table2 = execute(sql5)
-    except pymysql.err.Error:
-        print("bad outer join")
-
-    return render_template("admin.html", errortext = errortext, table = table, table2 = table2, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
+    return render_template("admin.html", errortext = errortext, table = table, admin = admin, login = login_status(), loginstatus = request.cookies.get('login'))
 
 @app.route("/user")
 def user():
