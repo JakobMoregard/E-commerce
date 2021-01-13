@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="admin.css">
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a>Product</a>
+        <a class="active" href="/admin"> Admin </a>
+        <a href="/logout"> Logout </a>
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+
+    <div class="admin_info">
+        <table id="admin_table">
+            <tr>
+                <th> Admin ID: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['AID']}} </td>
+            </tr>
+            <tr>
+                <th> First Name: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['AFName']}} </td>
+            </tr>
+            <tr>
+                <th> Last Name: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['ALName']}} </td>
+            </tr>
+            <tr>
+                <th> Mail: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['AMail']}} </td>
+            </tr>
+            <tr>
+                <th> Password: </th>
+            </tr>
+            <tr>
+                <td> {{admin[0]['APassword']}} </td>
+            </tr>
+        </table><br>
+    </div>
+
+    <div class="add_form">
+        <form method="POST">
+            <fieldset id="add_form">
+                <input value="1" type="hidden" name="form_id">
+
+                <p id="legend">Add product</p>
+
+                <label for="name">Name*: </label>
+                <input id="name" name="PName"><br>
+
+                <label for="color">Color*: </label>
+                <input id="color" name="PColor"><br>
+
+                <label for="descr">Description*: </label>
+                <input id="descr" name="PDescript"><br>
+
+                <label for="price">Price*: </label>
+                <input id="price" type="number" name="APrice" min="0" max="999999"><br>
+
+                <label for="stock">Stock*: </label>
+                <input id="stock" type="number" name="AStock" min="0"><br>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="update_form">
+        <form method="POST">
+            <fieldset id="update_form">
+                <input value="2" type="hidden" name="form_id">
+
+                <p id="legend">Update product</p>
+
+                <label for="id">ID*: </label>
+                <input id="id" name="PID"><br>
+
+                <p id="info"> ID of product to edit </p>
+
+                <label for="name">Name*: </label>
+                <input id="name" name="PName"><br>
+
+                <label for="color">Color*: </label>
+                <input id="color" name="PColor"><br>
+
+                <label for="descr">Description*: </label>
+                <input id="descr" name="PDescript"><br>
+
+                <label for="price">Price*: </label>
+                <input id="price" type="number" name="APrice" min="0" max="999999"><br>
+
+                <label for="stock">Stock*: </label>
+                <input id="stock" type="number" name="AStock" min="0"><br>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="remove_form">
+        <form method="POST">
+            <fieldset id="remove_form">
+                <input value="3" type="hidden" name="form_id">
+
+                <p id="legend">Remove product</p>
+
+                <label for="id">ID*: </label>
+                <input id="id" name="PID"><br>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
+
+    <div class="product_table">
+        <table id="product_table">
+            <thead>
+                <tr>
+                    <th> PID </th>
+                    <th> PrID </th>
+                    <th> AvID </th>
+                    <th> Name </th>
+                    <th> Color </th>
+                    <th> Price </th>
+                    <th> Stock </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for dict_item in table %}        
+                <tr>
+                    <td> {{dict_item['PID']}} </td>
+                    <td> {{dict_item['PrID']}} </td>
+                    <td> {{dict_item['AvID']}} </td>
+                    <td> {{dict_item['PName']}} </td>
+                    <td> {{dict_item['PColor']}} </td>
+                    <td> {{dict_item['APrice']}} </td>
+                    <td> {{dict_item['AStock']}} </td>
+                </tr>              
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

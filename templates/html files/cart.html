@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="cart.css">
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a>Product</a>
+        {% if loginstatus == "None" %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" class="active" href="/cart">Cart</a>
+
+        {% elif loginstatus == "registered" %}
+
+        <a href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        <a id="cart" class="active" href="/cart">Cart</a>
+
+        {% endif %}
+
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+
+    {% if empty_flag == True %}
+    <div class="empty">
+        <img src="https://i.kym-cdn.com/photos/images/newsfeed/001/062/257/3b6.png" alt="Trulli" width="500" height="333">
+    </div>
+    {% endif %}
+
+    <div class="items">
+        {% for dict_item in table %}
+        <div class="item">
+            <div class="item_image">
+                <img src="https://www.bzcomputer.com/wp-content/uploads/2020/10/wp-header-logo-17.png" id="product_image" alt="Not Found" />
+            </div>
+            <div class="item_table">
+                <table>
+                    <tr>
+                        <th id="name">{{dict_item['PName']}}</th>
+                        <th id="price">{{dict_item['IPrice']}} kr</th>
+                    </tr>
+                    <tr>
+                        <td id="amount_td">{{dict_item['IAmount']}} st</td>
+                        <td id="change">
+                            <div class="change">
+                                <form id="form" method="POST" display="inline">
+                                    <input value="{{dict_item['IID']}}" type="hidden" name="form_id">
+                                    <input id="amount" type="number" name="Amount">
+                                    <button id="change_button" type="submit">Ändra mängd</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="checkout">
+        <form method="POST">
+            <input value="-1" type="hidden" name="form_id">
+            <div class="checkout_button">
+                <button id="checkout_button" type="submit">Fortsätt till köp</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="login.css">
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a>Product</a>
+        <a class="active" href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+    <div class="form">
+        <form method="POST">
+            <fieldset id="signup_form">
+                <p id="legend">Login</p>
+
+                <label for="mail">E-Mail*: </label>
+                <input name="Mail" id="mail"><br>
+
+                <label for="password">Password*: </label>
+                <input name="Password" id="password"><br>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

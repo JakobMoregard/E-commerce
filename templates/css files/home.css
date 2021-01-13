@@ -1,0 +1,107 @@
+﻿body {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
+}
+
+.product_placement {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.product {
+    overflow: hidden;
+    font-family: sans-serif;
+    padding: 20px;
+    padding-bottom: 10px;
+    float: left;
+    position: relative;
+    width: 160px;
+    height: 225px;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    background-color: #E9E9E9;
+    margin-left: 40px;
+    margin-top: 30px;
+}
+
+    .product table {
+        margin-top: 7px;
+        width: 100%;
+    }
+
+    .product thead {
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+.image {
+    width: 140px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#product_image {
+    width: 140px;
+    height: 100px;
+}
+
+#name {
+    font-size: 20px;
+    text-align: left;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#amount {
+    width: 50px;
+    height: 25px;
+}
+
+tfoot {
+    text-align: center;
+}
+
+#cart_button {
+    background-color: #33AB33;
+    color: #E8E8E8;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 7px;
+    font-size: 15px;
+    width: 70px;
+    height: 27px;
+    font-weight: bold;
+}
+
+a {
+    color: #121617;
+    text-decoration: none;
+}
+
+    a:hover {
+        color: #121617;
+        text-decoration: none;
+        cursor: pointer
+    }
+
+.centered_b {
+    position: absolute;
+    margin: 0;
+    bottom: 10px;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.kenobi {
+    width: 1000px;
+    height: 333px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}

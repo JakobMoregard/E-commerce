@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="product.css">
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a class="active">Product</a>
+        {% if loginstatus == "None" %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% elif loginstatus == "registered" %}
+
+        <a href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% elif loginstatus == "admin" %}
+
+        <a href="/admin"> Admin </a>
+        <a href="/logout"> Logout </a>
+
+        {% else %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% endif %}
+
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+    <div class="not_reviews">
+
+        <div class="product_body">
+
+            <div class="product_display">
+
+                <img src="https://www.bzcomputer.com/wp-content/uploads/2020/10/wp-header-logo-17.png" id="product_image" alt="Not Found" />
+
+                <h1 id="title">
+                    {{product[0]['PName']}}
+                </h1>
+
+                <p id="description">
+                    {{product[0]['PDescript']}}
+                </p>
+
+                <ul id="facts">
+                    <li>{{product[0]['PColor']}}</li>
+                </ul>
+            </div>
+
+            <div class="product_purchase">
+
+                <h3 id="stock">
+                    Antal tillgängliga: {{product[0]['AStock']}} st
+                </h3>
+
+                <h2 id="price">
+                    {{product[0]['APrice']}} kr
+                </h2>
+
+
+                <div class="buy_button">
+                    <form method="POST">
+                        <input value="{{product[0]['PID']}}" type="hidden" name="form_id">
+                        <input value="{{product[0]['APrice']}}" type="hidden" name="price">
+                        <div class="centered_t">
+                            <input id="amount" type="number" name="Amount" min="1" value="1">
+                        </div>
+                        <div class="centered_b">
+                            <button id="cart_button" type="submit">Lägg till i kundvagnen</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="reviews">
+
+        <div class="link">
+            <a href="{{('/Review?data=%s'%product[0]['PID']|urlencode )}}" id="link">Skriv en Recension</a><br>
+        </div>
+
+        {% for dict_item in review %}
+        <div class="review">
+            <table>
+                <thead>
+                    <tr>
+                        <th id="score">{{dict_item['RRating']}}/5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td id="review">{{dict_item['RReview']}}</td>
+                    </tr>
+                    <tr>
+                        <td id="name">Skriven av: {{dict_item['ID']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endfor %}
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="review.css">
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="{{ ('/ProductPage?data=%s'%product_id|urlencode )}}">Product</a>
+        {% if loginstatus == "None" %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% elif loginstatus == "registered" %}
+
+        <a href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% else %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% endif %}
+
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+    <div class="form">
+        <form method="POST">
+            <fieldset id="review_form">
+                <input value="{{product_id}}" type="hidden" name="data">
+
+                <p id="legend">Review</p>
+
+                <label for="score" id="score_text">Score*: </label>
+                <input name="RRating" id="score" type="number" value="1" min="1" max="5"><br><br>
+
+                <label for="review" id="review_text">Review: </label><br>
+                <input name="RReview" id="review" maxlength="512">
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>

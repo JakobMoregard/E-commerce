@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="easter_egg.css">
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a>Product</a>
+        {% if loginstatus == "None" %}
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        {% elif loginstatus == "registered" %}
+        <a href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        {% elif loginstatus == "admin" %}
+        <a href="/admin"> Admin </a>
+        <a href="/logout"> Logout </a>
+        {% endif %}
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+
+    <div class="kenobi">
+        <img src="https://i.redd.it/o1rtb0yg5s961.jpg" alt="uncivilized" width="1900" height="800">
+    </div>
+
+</body>
+</html>

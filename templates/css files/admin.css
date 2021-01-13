@@ -1,0 +1,207 @@
+﻿body {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
+}
+
+.admin_info {
+    float: right;
+}
+
+#admin_table {
+    margin-top: 5px;
+    font-family: sans-serif;
+    font-size: 16px;
+    background-color: #E9E9E9;
+    width: 200px;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    padding-top: 95px;
+    padding-bottom: 100px;
+    text-align: center;
+}
+
+.admin_info td {
+    padding-bottom: 40px;
+}
+
+.add_form {
+    width: 400px;
+    margin-left: 8%;
+    margin-top: 100px;
+    position: relative;
+    float: left;
+}
+
+#add_form {
+    width: 350px;
+    height: 300px;
+    padding: 20px;
+    padding-top: 1px;
+    background-color: #E9E9E9;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.update_form {
+    width: 400px;
+    margin-left: 100Px;
+    margin-top: 100px;
+    position: relative;
+    float: left;
+}
+
+#update_form {
+    width: 350px;
+    height: 360px;
+    padding: 20px;
+    padding-top: 1px;
+    background-color: #E9E9E9;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+.remove_form {
+    width: 400px;
+    margin-left: 100px;
+    margin-top: 100px;
+    position: relative;
+    float: left;
+}
+
+#remove_form {
+    width: 350px;
+    height: 170px;
+    padding: 20px;
+    padding-top: 1px;
+    background-color: #E9E9E9;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+#legend {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+#id {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-left: 85px;
+    maring-top: 7px;
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 20px;
+}
+
+#name {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-left: 59px;
+    maring-top: 7px;
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 20px;
+}
+
+#color {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-left: 63px;
+    margin-top: 7px;
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 20px;
+}
+
+#descr {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-left: 21px;
+    margin-top: 7px;
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 20px;
+}
+
+#price {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-left: 65px;
+    margin-top: 7px;
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 20px;
+}
+
+#stock {
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-left: 61px;
+    margin-top: 7px;
+    border-radius: 3px;
+    border: 1px solid black;
+    height: 20px;
+}
+
+.centered_b {
+    position: absolute;
+    margin: 0;
+    bottom: 10px;
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+#button {
+    background-color: #BDBDBD;
+    color: #242424;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 15px;
+    width: 70px;
+    height: 27px;
+    font-weight: bold;
+}
+
+#info {
+    font-style: italic;
+    font-family: sans-serif;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 1px;
+}
+
+.product_table table {
+    background-color: #E9E9E9;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    padding: 20px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 30px;
+    margin-top: 600px;
+}
+
+.product_table th {
+    font-size: 16px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.product_table td {
+    font-size: 16px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    text-align: center;
+}

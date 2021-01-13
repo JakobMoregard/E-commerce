@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="user.css">
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a>Product</a>
+        <a class="active" href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        <a id="cart" href="/cart">Cart</a>
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+
+    <div class="user_info">
+        <table id="user_table">
+            <tr>
+                <th> First Name: </th>
+            </tr>
+            <tr>
+                <td> {{user[0]['RFName']}} </td>
+            </tr>
+            <tr>
+                <th> Last Name: </th>
+            </tr>
+            <tr>
+                <td> {{user[0]['RLName']}} </td>
+            </tr>
+            <tr>
+                <th> Billing Address: </th>
+            </tr>
+            <tr>
+                <td> {{user[0]['RBAddress']}} </td>
+            </tr>
+            <tr>
+                <th> Delivery Address: </th>
+            </tr>
+            <tr>
+                <td> {{user[0]['RDAddress']}} </td>
+            </tr>
+            <tr>
+                <th> Mail: </th>
+            </tr>
+            <tr>
+                <td> {{user[0]['RMail']}} </td>
+            </tr>
+            <tr>
+                <th> Password: </th>
+            </tr>
+            <tr>
+                <td> {{user[0]['RPassword']}} </td>
+            </tr>
+        </table><br>
+    </div>
+
+
+    <div class="form">
+        <form method="POST">
+            <fieldset id="update_form">
+                <p id="legend">Update your information</p>
+
+                <div class="errort"><output> {{errortext}} </output><br></div><br>
+
+                <label for="fname">First name: </label>
+                <input name="RFName" id="fname"><br>
+
+                <label for="lname">Last name: </label>
+                <input name="RLName" id="lname"><br>
+
+                <label for="baddr">Billing Address: </label>
+                <input name="RBAddress" id="baddr"><br>
+
+                <label for="daddr">Delivery Address: </label>
+                <input name="RDAddress" id="daddr"><br>
+
+                <label for="mail">E-Mail: </label>
+                <input name="RMail" id="mail"><br>
+
+                <label for="password">Password: </label>
+                <input name="RPassword" id="password"><br>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>

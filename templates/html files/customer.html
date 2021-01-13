@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="customer.css">
+
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a>Product</a>
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+
+    <div class="form">
+        <form method="POST">
+            <fieldset id="customer_form">
+                <input value="{{data}}" type="hidden" name="data">
+
+                <p id="legend">Submit info</p>
+
+                <div class="errort"><output> {{errortext}} </output><br></div><br>
+
+                <label for="fname">First name*: </label>
+                <input name="CFName" id="fname"><br>
+
+                <label for="lname">Last name*: </label>
+                <input name="CLName" id="lname"><br>
+
+                <label for="baddr">Billing Address*: </label>
+                <input name="CBAddress" id="baddr"><br>
+
+                <label for="daddr">Delivery Address*: </label>
+                <input name="CDAddress" id="daddr"><br>
+
+                <div class="centered_b"><button id="button" type="submit">Submit</button></div><br>
+
+                <p id="info"> Fields marked with * are mandatory </p>
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>

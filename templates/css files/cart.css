@@ -1,0 +1,127 @@
+﻿body {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
+}
+
+.items {
+    margin-left: 15%;
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+.item {
+    width: 70%;
+    height: 195px;
+    margin-left: 50px;
+    background-color: #E9E9E9;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    color: #121617;
+    margin-top: 30px;
+}
+
+.item_image {
+    width: 200px;
+    height: 150px;
+    margin-top: 20px;
+    margin-left: 50px;
+    float: left;
+}
+
+#product_image {
+    width: 200pX;
+    height: 150px;
+}
+
+.item_table {
+    margin-top: 30px;
+    margin-left: 20px;
+    float: left;
+}
+
+    .item_table th {
+        padding-bottom: 70px;
+        font-size: 32px;
+    }
+
+.change {
+    position: relative;
+    width: 182px;
+    height: 30px;
+}
+
+    .change form {
+        display: inline;
+    }
+
+#price {
+    font-weight: normal;
+    padding-left: 500px;
+    font-size: 24px;
+}
+
+#amount_td {
+    font-size: 18px;
+    padding-left: 30px;
+}
+
+#change {
+    padding-left: 0px;
+}
+
+#amount {
+    width: 40px;
+    height: 20px;
+    border-radius: 3px;
+    border: 1px solid black;
+    font-size: 16px;
+    padding-left: 8px;
+}
+
+.checkout {
+    width: 100%;
+    height: 80px;
+    position: relative;
+}
+
+.checkout_button {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+#checkout_button {
+    background-color: #33AB33;
+    color: #E8E8E8;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 24px;
+    width: 200px;
+    height: 40px;
+    font-weight: bold;
+}
+
+#change_button {
+    background-color: #BDBDBD;
+    color: #242424;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 15px;
+    width: 125px;
+    height: 27px;
+    font-weight: bold;
+}
+
+.empty {
+    width: 500px;
+    height: 333px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}

@@ -1,0 +1,96 @@
+﻿body {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_1017-17580.jpg?size=626&ext=jpg");
+}
+
+.container {
+    width: 100%;
+    height: 300px;
+}
+
+.image {
+    width: 500px;
+    height: 333px;
+    margin-left: 200px;
+    ;
+    margin-top: 50px;
+    float: left;
+}
+
+.curr_order {
+    width: 500px;
+    margin-left: 250px;
+    margin-top: 50px;
+    float: left;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    background-color: #E9E9E9;
+}
+
+#clegend {
+    text-align: center;
+    color: #121617;
+    text-decoration: none;
+}
+
+.curr_order_table table {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#cname {
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+#camount {
+    font-size: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+}
+
+#cprice {
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+
+.prev_order {
+    width: 800px;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 200px;
+    border: 3px solid #E2E2E2;
+    border-radius: 5px;
+    background-color: #E9E9E9;
+}
+
+#prev_order_head {
+    text-align: center;
+    font-size: 20px;
+}
+
+#order_number {
+    padding-left: 50px;
+    font-size: 18px;
+}
+
+.prev_order_table table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#prev_head {
+    font-size: 18px;
+}
+
+#pamount {
+    padding-left: 30px;
+    padding-right: 30px;
+}

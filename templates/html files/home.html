@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="home.css">
+
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a>Product</a>
+        {% if loginstatus == "None" %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% elif loginstatus == "registered" %}
+
+        <a href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% elif loginstatus == "admin" %}
+
+        <a href="/admin"> Admin </a>
+        <a href="/logout"> Logout </a>
+
+        {% else %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" href="/cart">Cart</a>
+
+        {% endif %}
+
+        <u id="login">{{login}}</u>
+
+    </div>
+
+</head>
+<body>
+    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Win 1 million dollars! </a>
+
+    <div class="kenobi">
+        <a href="/Kenobi"> <img src="https://i.kym-cdn.com/photos/images/facebook/001/475/422/473.jpg" alt="Trulli" width="1000" height="333"> </a>
+    </div>
+
+
+    <div class="product_placement">
+
+
+        {% for dict_item in product %}
+        <a href="{{('/ProductPage?data=%s'%dict_item['PID']|urlencode )}}" class="product_link">
+            <div class="product">
+                <table>
+                    <thead>
+                        <tr>
+                            <div class="image"
+                        		<th><img src="https://www.bzcomputer.com/wp-content/uploads/2020/10/wp-header-logo-17.png" id="product_image" alt="Not Found"/></th>
+                       		</div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="name">{{dict_item['PName']}}</td>
+                        </tr>
+                        <tr>
+                            <td id="color">{{dict_item['PColor']}}</td>
+                        </tr>
+                        <tr>
+                            <td id="price">Pris: {{dict_item['APrice']}} kr</td>
+                            <td id="stock">{{dict_item['AStock']}} st</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <div class="buy_button">
+                                    <form method="POST">
+                                        <input value="{{dict_item['PID']}}" type="hidden" name="form_id">
+                                        <input value="{{dict_item['APrice']}}" type="hidden" name="price">
+                                        <input id="amount" type="hidden" name="Amount" value="1">
+                                        <div class="centered_b">
+                                            <button id="cart_button" type="submit">Köp</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </a>
+        {% endfor %}
+
+
+    </div>
+</body>
+</html>

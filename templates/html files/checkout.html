@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link rel="stylesheet" href="topnav.css">
+    <link rel="stylesheet" href="checkout.css">
+  
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a>Product</a>
+        {% if loginstatus == "None" %}
+
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+        <a id="cart" class="active" href="/cart">Cart</a>
+
+        {% elif loginstatus == "registered" %}
+
+        <a href="/user">Account</a>
+        <a href="/logout"> Logout </a>
+        <a id="cart" class="active" href="/cart">Cart</a>
+
+        {% endif %}
+
+        <u id="login">{{login}}</u>
+
+    </div>
+</head>
+<body>
+
+    <div class="container">
+        <div class="image">
+            <img src="https://i.pinimg.com/originals/57/84/8d/57848d08c69b3122c52682887558c0f1.jpg" alt="Not very nice!" width="500" height="333">
+        </div>
+
+        <div class="curr_order">
+            <h1 id="clegend">Tack för din order!</h1>
+            <div class="curr_order_table">
+                <table>
+                    {% for dict_item in table %}
+                    <tr>
+                        <td id="cname"> {{dict_item['PName']}} </td>
+                        <td id="camount"> {{dict_item['IAmount']}} st </td>
+                        <td id="cprice"> {{dict_item['IPrice']}} kr </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+        <div class="prev_order">
+            <h3 id="prev_order_head"> Previous Orders</h3>
+            {% for old_table in old_tables %}
+            <h3 id="order_number"> Order {{loop.index0 + 1}}: </h3>
+            <div class="prev_order_table">
+                <table>
+                    <tr>
+                        <td id="prev_head"> Namn </td>
+                        <td id="prev_head"> Pris </td>
+                        <td id="prev_head"> Mängd </td>
+                    </tr>
+                    {% for dict_item in old_table %}
+                    <tr>
+                        <td id="pname"> {{ dict_item['PName'] }} </td>
+                        <td id="pamount"> {{ dict_item['IPrice'] }} kr</td>
+                        <td id="pprice"> {{ dict_item['IAmount'] }} st</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+
+</body>
+</html>
