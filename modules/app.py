@@ -79,12 +79,6 @@ def cart_route():
 
     sql2 = "SELECT CuID, ReID FROM D0018E.Cart"
     IDs = execute(sql2)
-
-    print("gets here")
-
-    
-
-    print("so far so good")
     cookie_id = int(request.cookies.get('SID'))
 
     flag = True
